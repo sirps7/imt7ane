@@ -1,180 +1,31 @@
-[
+ [
     {
-      "subject": {
-        "name": "العلوم",
-        "id": 1,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
+      "name": "فصل اول",
+      "chapter": [
+        {
+          "name": "متسعات"
         }
-      },
-      "quiz_count": 3
+      ],
+      "q_num": 32,
+      "timer": "15",
+      "id": 1
     },
     {
-      "subject": {
-        "name": "الرياضيات",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
+      "name": "شامل",
+      "chapter": [
+        {
+          "name": "متسعات"
+        },
+        {
+          "name": "كهرباء الثابته"
+        },
+        {
+          "name": "كهرباء الغير ثابته"
         }
-      },
-      "quiz_count": 0
-    },
-    {
-      "subject": {
-        "name": "الفيزياء",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 7
-    },
-    {
-      "subject": {
-        "name": "العربي",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 6
-    },
-    {
-      "subject": {
-        "name": "الاحياء",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 4
-    },
-    {
-      "subject": {
-        "name": "الكيمياء",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 3
-    },
-    {
-      "subject": {
-        "name": "الإنكليزي",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 1
-    },
-  
-    {
-      "subject": {
-        "name": "الجغرافيا",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 4
-    },
-    {
-      "subject": {
-        "name": "الاسلاميه",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 1
-    },
-    {
-      "subject": {
-        "name": "الادب والنصوص",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 3
-    },
-    {
-      "subject": {
-        "name": "الاجتماعيات",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 5
-    },
-    {
-      "subject": {
-        "name": "التاريخ",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 6
-    },
-    {
-      "subject": {
-        "name": "علم الاجتماع",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 3
-    },
-    {
-      "subject": {
-        "name": "الاقتصاد",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 2
-    },
-    {
-      "subject": {
-        "name": "الفلسفه وعلم النفس",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 8
-    },
-    {
-      "subject": {
-        "name": "النقد الادبي",
-        "id": 2,
-        "stage": {
-          "stages": "اول ابتدائي",
-          "type": "لا يوجد"
-        }
-      },
-      "quiz_count": 2
+      ],
+      "q_num": 100,
+      "timer": "60",
+      "id": 2
     }
-  ]
+  ] 
   

@@ -1,13 +1,20 @@
+import 'dart:convert';
+
 import 'package:amti7ane_unicoding/controllers/choiceController.dart';
+import 'package:amti7ane_unicoding/models/networking/deffult_quizes.dart';
+import 'package:amti7ane_unicoding/models/networking/server_variable.dart';
 import 'package:amti7ane_unicoding/models/question_circle.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Response;
+import 'package:dio/dio.dart';
 
 class QuizController extends GetxController {
+  RxBool getDeffultQuizesDone = false.obs;
+  Dio dio = Dio();
   Rx<int> circleNumber = 0.obs;
   RxInt index = 0.obs;
   int noOfQuestions = 10;
   final List<QuestionCircle> circles = [];
-  ChoiceController choiceController = Get.put(ChoiceController());
+  ChoiceController choiceController = Get.find();
 
   @override
   void onInit() {
@@ -40,5 +47,14 @@ class QuizController extends GetxController {
     index.value = 0;
     circles[index.value].isSelected.value = true;
     choiceController.selectedChoice.value = '';
+  }
+
+  Future<void> getDeffultQuizes() async {
+    Response response = await dio.get(
+      Server.baseUrl + Server.getDeffultQuizesPath,
+      queryParameters: {'sub': 1},
+    );
+    Quizes.fromJson(jsonDecode(response.toString()));
+    getDeffultQuizesDone.value = true;
   }
 }

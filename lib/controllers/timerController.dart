@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 
 class TimerController extends GetxController {
-  static int givenMinutes = 05;
+  static int givenMinutes = 00;
   static int givenHours = 00;
   static int givenSeconds = 00;
   Timer? timer;

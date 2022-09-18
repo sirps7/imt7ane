@@ -1,12 +1,22 @@
 import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart';
 import 'package:amti7ane_unicoding/controllers/controller_main.dart';
+import 'package:amti7ane_unicoding/controllers/timerController.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/purple_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Lecture extends StatelessWidget {
-  const Lecture({super.key});
+  const Lecture(
+      {super.key,
+      required this.lecture,
+      required this.lectureTitle,
+      required this.time,
+      required this.questionNo});
+  final String lecture;
+  final String lectureTitle;
+  final int time;
+  final int questionNo;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +26,7 @@ class Lecture extends StatelessWidget {
       onTap: () {
         navController.index.value = 1;
         mainController.inQuiz.value = true;
+        TimerController.givenMinutes = time;
       },
       child: SizedBox(
         height: 75,
@@ -25,23 +36,23 @@ class Lecture extends StatelessWidget {
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Expanded(
                   child: MyText(
-                    myText: 'متسعات',
+                    myText: lectureTitle,
                     mysize: 17,
                     family: 'SFMarwa',
                   ),
                 ),
                 Expanded(
                   child: MyText(
-                    myText: '12 Questions',
+                    myText: '$questionNo Questions',
                     mysize: 15,
                   ),
                 ),
                 Expanded(
                   child: MyText(
-                    myText: '12 Mins',
+                    myText: '$time Mins',
                     mysize: 15,
                   ),
                 ),
@@ -50,12 +61,12 @@ class Lecture extends StatelessWidget {
             const SizedBox(
               width: 20,
             ),
-            const PurpleContainer(
+            PurpleContainer(
               withShadow: false,
               H: 75,
               W: 150,
               child: MyText(
-                myText: ' الفصل الاول',
+                myText: lecture,
                 mysize: 23,
                 mycolor: Colors.white,
                 family: 'SFMarwa',

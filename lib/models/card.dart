@@ -1,5 +1,7 @@
 import 'package:amti7ane_unicoding/controllers/controller_main.dart';
+import 'package:amti7ane_unicoding/controllers/subjects_controllers.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
+import 'package:amti7ane_unicoding/views/home/subjects_lectures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,19 +12,26 @@ class MyCard extends StatelessWidget {
     required this.firstText,
     required this.secondText,
     required this.subjectIcon,
+    required this.subNo,
+    required this.subject,
   });
   final String firstText;
   final String secondText;
   final AssetImage subjectIcon;
+  final int subNo;
+  final String subject;
 
   @override
   Widget build(BuildContext context) {
     final MainController mainController = Get.find();
+    final SubjectsControllers subjectsControllers = Get.find();
     // double scrrenWidth = MediaQuery.of(context).size.width;
 
     return GestureDetector(
       onTap: () {
         mainController.insub.value = true;
+        SubjectLectures.subIcon = subjectIcon;
+        SubjectLectures.subName = subject;
       },
       child: Column(
         children: [

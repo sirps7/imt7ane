@@ -38,7 +38,7 @@ class QuizQuestons extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  MyText(
+                  const MyText(
                     myText: 'TIMER',
                     mysize: 20,
                     family: MyFont.poppinsMedium,
@@ -55,7 +55,7 @@ class QuizQuestons extends StatelessWidget {
               ), //!score
               //! questions
               Column(
-                children: [
+                children: const [
                   MyText(
                     myText: 'فيزياء',
                     mysize: 23,
@@ -73,7 +73,7 @@ class QuizQuestons extends StatelessWidget {
               //! score
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: const [
                   MyText(
                     myText: 'Score',
                     mysize: 20,

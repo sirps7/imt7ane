@@ -2,7 +2,6 @@ import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart'
 import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
 import 'package:amti7ane_unicoding/controllers/subjects_controllers.dart';
 import 'package:amti7ane_unicoding/controllers/timerController.dart';
-import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/models/loading.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/views/home/home_screen.dart';
@@ -14,7 +13,6 @@ import 'package:amti7ane_unicoding/views/quiz/quiz_solutions.dart';
 import 'package:amti7ane_unicoding/views/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class MainController extends GetxController {
   RxBool insub = false.obs;
@@ -42,8 +40,14 @@ class MainController extends GetxController {
   ];
 
   Widget whichScreen() {
-    if (!subjectsControllers.getSubjectsDone.value) {
+    if (!subjectsControllers.getSubjectsDone.value &&
+        navController.index.value == 0) {
       subjectsControllers.getDeffultSubjects();
+    }
+    if (!quizController.getDeffultQuizesDone.value &&
+        navController.index.value == 0 &&
+        insub.value) {
+      quizController.getDeffultQuizes();
     }
     if (navController.index.value == 0) {
       if (!insub.value) {
@@ -53,7 +57,11 @@ class MainController extends GetxController {
           return const MyLoading();
         }
       } else {
-        return screens[0][1];
+        if (quizController.getDeffultQuizesDone.value) {
+          return screens[0][1];
+        } else {
+          return const MyLoading();
+        }
       }
     } else if (navController.index.value == 1) {
       if (inQuiz.value) {

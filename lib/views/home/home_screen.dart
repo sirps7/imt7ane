@@ -92,15 +92,15 @@ class HomeScreen extends StatelessWidget {
                           children: Subjects.deffultsubjects
                               .map(
                                 (e) => MyCard(
+                                  subject: e.name,
+                                  subNo: e.id,
                                   firstText: e.name,
                                   secondText: e.quizCount.toString(),
                                   subjectIcon: AssetImage(
                                       subController.subImage[e.name]!),
                                 ),
                               )
-                              .toList()
-                          // MyCard(firstText: e.name, secondText: e.quizCount.toString(), subjectIcon: AssetImage(subController.subImage[e.name]!));
-                          ),
+                              .toList()),
                     ),
                   ),
                 ),

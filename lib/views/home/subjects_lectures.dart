@@ -1,9 +1,18 @@
+import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
 import 'package:amti7ane_unicoding/models/lecture.dart';
+import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
+import 'package:amti7ane_unicoding/models/networking/deffult_quizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SubjectLectures extends StatelessWidget {
   const SubjectLectures({super.key});
+
+  static AssetImage? subIcon;
+  static String? subName;
+  static int? time = Quizes.finalQuiz.time;
+  static int? questionNo = Quizes.finalQuiz.questionNo;
 
   @override
   Widget build(BuildContext context) {
@@ -59,17 +68,21 @@ class SubjectLectures extends StatelessWidget {
                         Flexible(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                               Image(
-                                image: AssetImage(
-                                    'assets/images/subjects_icons/pysics_sub.png'),
+                                image: subIcon!,
                                 height: 50,
                                 width: 50,
                               ),
-                              MyText(
-                                myText: 'الفيزياء',
-                                mysize: 20,
-                                family: 'SFMarwa',
+                              Expanded(
+                                child: MyText(
+                                  myText: subName!.length > 15
+                                      ? subName!
+                                          .substring(0, subName!.length - 11)
+                                      : subName!,
+                                  mysize: 20,
+                                  family: MyFont.arabic,
+                                ),
                               )
                             ],
                           ),
@@ -77,21 +90,23 @@ class SubjectLectures extends StatelessWidget {
                         Flexible(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              MyText(
+                            children: [
+                              const MyText(
                                 myText: 'الامتحان الشامل',
                                 mysize: 15,
                                 family: 'SFMarwa',
                               ),
                               MyText(
-                                myText: 'الوقت: 120 دقيقة',
+                                myText: ' الوقت :' '$time' ' دقيقة  ',
                                 mysize: 15,
-                                family: 'SFMarwa',
+                                family: MyFont.arabic,
                               ),
                               MyText(
-                                myText: 'عدد الاسئلة : 100',
+                                myText: ' $questionNo :عدد الاسئلة',
                                 mysize: 15,
-                                family: 'SFMarwa',
+                                family: MyFont.arabic,
+                                defflutDirection: false,
+                                direction: TextDirection.ltr,
                               ),
                             ],
                           ),
@@ -108,7 +123,7 @@ class SubjectLectures extends StatelessWidget {
             const MyText(
               myText: 'الفصول',
               mysize: 50,
-              family: 'SFMarwa',
+              family: MyFont.arabic,
             ),
             const SizedBox(
               height: 20,
@@ -117,14 +132,19 @@ class SubjectLectures extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: 15,
+              itemCount: Quizes.deffultQuizes.length,
               separatorBuilder: (context, index) {
                 return const SizedBox(
                   height: 25,
                 );
               },
               itemBuilder: (context, index) {
-                return const Lecture();
+                return Lecture(
+                  lecture: Quizes.deffultQuizes[index].name,
+                  lectureTitle: Quizes.deffultQuizes[index].chapterName!,
+                  questionNo: Quizes.deffultQuizes[index].questionNo,
+                  time: Quizes.deffultQuizes[index].time,
+                );
               },
             ),
             const SizedBox(

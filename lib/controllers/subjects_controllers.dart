@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:amti7ane_unicoding/models/networking/deffult_subjects.dart';
+import 'package:amti7ane_unicoding/models/networking/server_variable.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
 
@@ -29,11 +30,9 @@ class SubjectsControllers extends GetxController {
   };
 
   void getDeffultSubjects() async {
-    Response response = await dio.get(
-        'https://2135c43d-3381-469a-ba16-53687fa88f1a.mock.pstmn.io/api/subjects/get_defualt_subjects');
+    Response response =
+        await dio.get('${Server.baseUrl}${Server.getDeffultSubjectsPath}');
     Subjects.fromJson(jsonDecode(response.toString()));
-    print(response.statusCode);
-    print(Subjects.deffultsubjects[0].name);
     getSubjectsDone.value = true;
   }
 }

@@ -12,6 +12,8 @@ class MyText extends StatelessWidget {
     this.height = 0,
     this.lines = 2,
     this.align = TextAlign.center,
+    this.direction,
+    this.defflutDirection = true,
   });
 
   final String myText;
@@ -19,15 +21,20 @@ class MyText extends StatelessWidget {
   final double? height;
   final Color? mycolor;
   final bool isbold;
+  final bool defflutDirection;
   final String family;
   final int lines;
   final TextAlign? align;
+  final TextDirection? direction;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      textDirection:
-          family == MyFont.arabic ? TextDirection.rtl : TextDirection.ltr,
+      textDirection: defflutDirection
+          ? family == MyFont.arabic
+              ? TextDirection.rtl
+              : TextDirection.ltr
+          : direction,
       myText,
       style: TextStyle(
         fontWeight: isbold ? FontWeight.w400 : FontWeight.normal,
