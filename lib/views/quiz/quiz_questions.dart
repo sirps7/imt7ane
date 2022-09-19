@@ -16,6 +16,7 @@ class QuizQuestons extends StatelessWidget {
   final QuizController quizController = Get.find();
   final ChoiceController choiceController = Get.find();
   final TimerController timerController = Get.find();
+  static String? subjectName;
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +56,14 @@ class QuizQuestons extends StatelessWidget {
               ), //!score
               //! questions
               Column(
-                children: const [
+                children: [
                   MyText(
-                    myText: 'فيزياء',
+                    myText: subjectName!, //todo
                     mysize: 23,
                     family: MyFont.arabic,
                     isbold: true,
                   ),
-                  MyText(
+                  const MyText(
                     myText: 'Questions',
                     mysize: 27,
                     family: MyFont.poppins,

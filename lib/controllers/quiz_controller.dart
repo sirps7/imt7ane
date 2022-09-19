@@ -13,14 +13,8 @@ class QuizController extends GetxController {
   Rx<int> circleNumber = 0.obs;
   RxInt index = 0.obs;
   int noOfQuestions = 10;
-  final List<QuestionCircle> circles = [];
+  List<QuestionCircle> circles = [];
   ChoiceController choiceController = Get.find();
-
-  @override
-  void onInit() {
-    super.onInit();
-    addCircles();
-  }
 
   void addCircles() {
     for (int i = 1; i <= noOfQuestions; i++) {
@@ -49,10 +43,10 @@ class QuizController extends GetxController {
     choiceController.selectedChoice.value = '';
   }
 
-  Future<void> getDeffultQuizes() async {
+  void getDeffultQuizes() async {
     Response response = await dio.get(
       Server.baseUrl + Server.getDeffultQuizesPath,
-      queryParameters: {'sub': 1},
+      queryParameters: {'sub': 2},
     );
     Quizes.fromJson(jsonDecode(response.toString()));
     getDeffultQuizesDone.value = true;

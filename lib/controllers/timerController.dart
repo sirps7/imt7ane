@@ -41,8 +41,15 @@ class TimerController extends GetxController {
   void stopTimer() {
     timer!.cancel();
     duration = Duration(hours: givenHours, minutes: givenMinutes);
-    seconds = towDigit(givenSeconds).obs;
-    minutes = towDigit(givenMinutes).obs;
-    hours = towDigit(givenHours).obs;
+    seconds.value = towDigit(givenSeconds);
+    minutes.value = towDigit(givenMinutes);
+    hours.value = towDigit(givenHours);
+  }
+
+  void refreshTimer() {
+    duration = Duration(hours: givenHours, minutes: givenMinutes);
+    seconds.value = towDigit(givenSeconds);
+    minutes.value = towDigit(givenMinutes);
+    hours.value = towDigit(givenHours);
   }
 }

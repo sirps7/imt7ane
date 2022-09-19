@@ -1,4 +1,5 @@
 import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart';
+import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
 import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
 import 'package:amti7ane_unicoding/controllers/subjects_controllers.dart';
 import 'package:amti7ane_unicoding/controllers/timerController.dart';
@@ -21,7 +22,7 @@ class MainController extends GetxController {
 
   BottomNavigationController navController = Get.find();
   SubjectsControllers subjectsControllers = Get.find();
-
+  DropdownButtonController dropdownButtonController = Get.find();
   QuizController quizController = Get.find();
   TimerController timerController = Get.find();
 
@@ -43,6 +44,7 @@ class MainController extends GetxController {
     if (!subjectsControllers.getSubjectsDone.value &&
         navController.index.value == 0) {
       subjectsControllers.getDeffultSubjects();
+      dropdownButtonController.getStages();
     }
     if (!quizController.getDeffultQuizesDone.value &&
         navController.index.value == 0 &&
@@ -99,10 +101,12 @@ class MainController extends GetxController {
           onPressed: () {
             if (inQuiz.value) {
               inQuiz.value = false;
+              navController.index.value = 0;
               quizController.resetQuestion();
               timerController.stopTimer();
               timerController.firstTime = true;
               quizController.circleNumber.value = 0;
+              quizController.circles = [];
             } else {
               showSolutions.value = false;
             }

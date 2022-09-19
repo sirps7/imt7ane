@@ -40,7 +40,7 @@ class MyStage extends StatelessWidget {
                         size: 20,
                       ),
                       dropdownColor: const Color(0xffC4C4C4),
-                      value: dropController.selectedItem2.value,
+                      value: dropController.selectedItem.value,
                       borderRadius: BorderRadius.circular(10),
                       elevation: 0,
                       items: dropController.stageList
@@ -57,7 +57,7 @@ class MyStage extends StatelessWidget {
                           )
                           .toList(),
                       onChanged: (value) {
-                        dropController.selectedItem2.value = value!;
+                        dropController.selectedItem.value = value!;
                       },
                     );
                   }),

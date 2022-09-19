@@ -103,7 +103,7 @@ class SettingsScreen extends StatelessWidget {
                               ),
                             ),
                             dropdownColor: Colors.white,
-                            value: dropController.selectedItem2.value,
+                            value: dropController.selectedItem.value,
                             borderRadius: BorderRadius.circular(10),
                             items: dropController.stageList
                                 .map(
@@ -119,7 +119,7 @@ class SettingsScreen extends StatelessWidget {
                                 )
                                 .toList(),
                             onChanged: (value) {
-                              dropController.selectedItem2.value = value!;
+                              dropController.selectedItem.value = value!;
                             },
                           );
                         }),

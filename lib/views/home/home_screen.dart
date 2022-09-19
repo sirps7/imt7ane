@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         dropdownColor: MyColor.mainColor,
-                        value: dropController.selectedItem2.value,
+                        value: dropController.selectedItem.value,
                         borderRadius: BorderRadius.circular(10),
                         items: dropController.stageList
                             .map(
@@ -63,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                             )
                             .toList(),
                         onChanged: (value) {
-                          dropController.selectedItem2.value = value!;
+                          dropController.selectedItem.value = value!;
                         },
                       );
                     }),

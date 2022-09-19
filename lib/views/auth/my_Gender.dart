@@ -43,17 +43,19 @@ class MyGender extends StatelessWidget {
                       value: dropController.selectedItem1.value,
                       borderRadius: BorderRadius.circular(10),
                       elevation: 0,
-                      items: dropController.GanderList.map(
-                        (item) => DropdownMenuItem(
-                          value: item,
-                          child: MyText(
-                            family: 'Poppins',
-                            myText: item,
-                            mysize: 15,
-                            mycolor: const Color(0xff555555),
-                          ),
-                        ),
-                      ).toList(),
+                      items: dropController.ganderList
+                          .map(
+                            (item) => DropdownMenuItem(
+                              value: item,
+                              child: MyText(
+                                family: 'Poppins',
+                                myText: item,
+                                mysize: 15,
+                                mycolor: const Color(0xff555555),
+                              ),
+                            ),
+                          )
+                          .toList(),
                       onChanged: (value) {
                         dropController.selectedItem1.value = value!;
                       },

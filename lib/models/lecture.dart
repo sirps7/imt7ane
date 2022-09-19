@@ -1,8 +1,10 @@
 import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart';
 import 'package:amti7ane_unicoding/controllers/controller_main.dart';
+import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
 import 'package:amti7ane_unicoding/controllers/timerController.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/purple_container.dart';
+import 'package:amti7ane_unicoding/views/quiz/quiz_questions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,21 +14,29 @@ class Lecture extends StatelessWidget {
       required this.lecture,
       required this.lectureTitle,
       required this.time,
-      required this.questionNo});
+      required this.questionNo,
+      required this.subName});
   final String lecture;
   final String lectureTitle;
   final int time;
   final int questionNo;
+  final String subName;
 
   @override
   Widget build(BuildContext context) {
     MainController mainController = Get.find();
     BottomNavigationController navController = Get.find();
+    TimerController timerController = Get.find();
+    QuizController quizController = Get.find();
     return GestureDetector(
       onTap: () {
         navController.index.value = 1;
         mainController.inQuiz.value = true;
         TimerController.givenMinutes = time;
+        timerController.refreshTimer();
+        quizController.noOfQuestions = questionNo;
+        quizController.addCircles();
+        QuizQuestons.subjectName = subName;
       },
       child: SizedBox(
         height: 75,

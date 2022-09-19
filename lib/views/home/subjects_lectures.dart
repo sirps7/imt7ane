@@ -1,8 +1,12 @@
+import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart';
+import 'package:amti7ane_unicoding/controllers/controller_main.dart';
 import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
+import 'package:amti7ane_unicoding/controllers/timerController.dart';
 import 'package:amti7ane_unicoding/models/lecture.dart';
 import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_quizes.dart';
+import 'package:amti7ane_unicoding/views/quiz/quiz_questions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +20,10 @@ class SubjectLectures extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MainController mainController = Get.find();
+    BottomNavigationController navController = Get.find();
+    QuizController quizController = Get.find();
+    TimerController timerController = Get.find();
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 20,
@@ -44,74 +52,85 @@ class SubjectLectures extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  width: 250,
-                  height: 105,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.horizontal(
-                        left: Radius.elliptical(20, 10),
-                        right: Radius.elliptical(20, 10)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 10,
-                        spreadRadius: 3,
-                      )
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Flexible(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image(
-                                image: subIcon!,
-                                height: 50,
-                                width: 50,
-                              ),
-                              Expanded(
-                                child: MyText(
-                                  myText: subName!.length > 15
-                                      ? subName!
-                                          .substring(0, subName!.length - 11)
-                                      : subName!,
-                                  mysize: 20,
-                                  family: MyFont.arabic,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Flexible(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const MyText(
-                                myText: 'الامتحان الشامل',
-                                mysize: 15,
-                                family: 'SFMarwa',
-                              ),
-                              MyText(
-                                myText: ' الوقت :' '$time' ' دقيقة  ',
-                                mysize: 15,
-                                family: MyFont.arabic,
-                              ),
-                              MyText(
-                                myText: ' $questionNo :عدد الاسئلة',
-                                mysize: 15,
-                                family: MyFont.arabic,
-                                defflutDirection: false,
-                                direction: TextDirection.ltr,
-                              ),
-                            ],
-                          ),
+                GestureDetector(
+                  onTap: () {
+                    TimerController.givenMinutes = Quizes.finalQuiz.time;
+                    timerController.refreshTimer();
+                    navController.index.value = 1;
+                    mainController.inQuiz.value = true;
+                    quizController.noOfQuestions = Quizes.finalQuiz.questionNo;
+                    quizController.addCircles();
+                    QuizQuestons.subjectName = subName;
+                  },
+                  child: Container(
+                    width: 250,
+                    height: 105,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.horizontal(
+                          left: Radius.elliptical(20, 10),
+                          right: Radius.elliptical(20, 10)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 10,
+                          spreadRadius: 3,
                         )
                       ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Flexible(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image(
+                                  image: subIcon!,
+                                  height: 50,
+                                  width: 50,
+                                ),
+                                Expanded(
+                                  child: MyText(
+                                    myText: subName!.length > 15
+                                        ? subName!
+                                            .substring(0, subName!.length - 11)
+                                        : subName!,
+                                    mysize: 20,
+                                    family: MyFont.arabic,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Flexible(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const MyText(
+                                  myText: 'الامتحان الشامل',
+                                  mysize: 15,
+                                  family: 'SFMarwa',
+                                ),
+                                MyText(
+                                  myText: ' الوقت :' '$time' ' دقيقة  ',
+                                  mysize: 15,
+                                  family: MyFont.arabic,
+                                ),
+                                MyText(
+                                  myText: ' $questionNo :عدد الاسئلة',
+                                  mysize: 15,
+                                  family: MyFont.arabic,
+                                  defflutDirection: false,
+                                  direction: TextDirection.ltr,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 )
@@ -144,6 +163,7 @@ class SubjectLectures extends StatelessWidget {
                   lectureTitle: Quizes.deffultQuizes[index].chapterName!,
                   questionNo: Quizes.deffultQuizes[index].questionNo,
                   time: Quizes.deffultQuizes[index].time,
+                  subName: subName!,
                 );
               },
             ),
