@@ -1,32 +1,42 @@
 import 'package:amti7ane_unicoding/controllers/choiceController.dart';
 import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Choice extends StatelessWidget {
-  Choice({super.key, required this.choiceBody, this.inSolution = false});
+  Choice({
+    super.key,
+    required this.choiceBody,
+    this.inSolution = false,
+    required this.questionNo,
+  });
   final ChoiceController choiceController = Get.find();
 
   final String choiceBody;
   final bool inSolution;
+  final int questionNo;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         if (!inSolution) {
-          choiceController.selectedChoice.value = choiceBody;
+          NetQuiz.quizquestions[questionNo - 1][questionNo]!.selectedChioce
+              .value = choiceBody;
         }
       },
       child: Row(
         children: [
-          GetX<ChoiceController>(builder: (choiceController) {
+          Obx(() {
             return Container(
               width: 20,
               height: 20,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: !(choiceController.selectedChoice.value == choiceBody)
+                color: !(NetQuiz.quizquestions[questionNo - 1][questionNo]!
+                            .selectedChioce.value ==
+                        choiceBody)
                     ? Colors.white
                     : Colors.blue,
                 border: Border.all(
@@ -45,7 +55,9 @@ class Choice extends StatelessWidget {
             family: MyFont.arabic,
             mycolor: inSolution
                 ? inSolution &&
-                        choiceController.selectedChoice.value == choiceBody
+                        NetQuiz.quizquestions[questionNo - 1][questionNo]!
+                                .selectedChioce.value ==
+                            choiceBody
                     ? Colors.green
                     : Colors.red
                 : Colors.black,

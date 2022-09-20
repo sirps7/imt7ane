@@ -4,4 +4,5 @@ class Server {
   static String getDeffultSubjectsPath = '/api/subjects/get_defualt_subjects';
   static String getDeffultQuizesPath = '/api/Quiz/get_quiz_list';
   static String getStagesPath = '/api/subjects/get_stages';
+  static String getQuizPath = '/api/Quiz/get_quiz';
 }

@@ -67,7 +67,11 @@ class MainController extends GetxController {
       }
     } else if (navController.index.value == 1) {
       if (inQuiz.value) {
-        return screens[1][0];
+        if (quizController.getQuizDone.value) {
+          return screens[1][0];
+        } else {
+          return const MyLoading();
+        }
       } else if (showSolutions.value) {
         return screens[1][2];
       } else {
@@ -107,6 +111,7 @@ class MainController extends GetxController {
               timerController.firstTime = true;
               quizController.circleNumber.value = 0;
               quizController.circles = [];
+              quizController.currentQuestionIndecator.value = 1;
             } else {
               showSolutions.value = false;
             }
@@ -127,11 +132,11 @@ class MainController extends GetxController {
   Widget whichTitle() {
     return Padding(
       padding: navController.buttomNavIcons[navController.index.value] == 'Home'
-          ? insub.value == true
+          ? insub.value
               ? const EdgeInsets.only(right: 56)
               : EdgeInsets.zero
           : navController.buttomNavIcons[navController.index.value] == 'Quiz'
-              ? showSolutions.value == true
+              ? showSolutions.value || inQuiz.value
                   ? const EdgeInsets.only(right: 56)
                   : EdgeInsets.zero
               : EdgeInsets.zero,

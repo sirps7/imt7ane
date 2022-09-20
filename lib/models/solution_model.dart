@@ -71,6 +71,7 @@ class QuizSolution extends StatelessWidget {
                     },
                     itemBuilder: (BuildContext context, int index) {
                       return Choice(
+                        questionNo: 1, //todo
                         choiceBody: choiceController.choices[index],
                         inSolution: true,
                       );

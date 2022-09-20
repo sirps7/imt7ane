@@ -37,6 +37,7 @@ class Lecture extends StatelessWidget {
         quizController.noOfQuestions = questionNo;
         quizController.addCircles();
         QuizQuestons.subjectName = subName;
+        quizController.getQuiz();
       },
       child: SizedBox(
         height: 75,

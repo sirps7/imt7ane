@@ -1,9 +1,10 @@
 import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Question extends StatelessWidget {
-  const Question(
+  Question(
       {super.key,
       required this.questionNo,
       required this.questionBody,
@@ -11,6 +12,7 @@ class Question extends StatelessWidget {
   final String questionBody;
   final int questionNo;
   final bool isSolution;
+  final RxString selectedChoice = ''.obs;
 
   @override
   Widget build(BuildContext context) {

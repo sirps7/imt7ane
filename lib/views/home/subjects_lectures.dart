@@ -61,6 +61,7 @@ class SubjectLectures extends StatelessWidget {
                     quizController.noOfQuestions = Quizes.finalQuiz.questionNo;
                     quizController.addCircles();
                     QuizQuestons.subjectName = subName;
+                    quizController.getQuiz();
                   },
                   child: Container(
                     width: 250,

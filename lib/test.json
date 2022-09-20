@@ -1,31 +1,106 @@
- [
+{
+  "quiz": [
     {
-      "name": "فصل اول",
-      "chapter": [
+      "Questions": {
+        "questionBody": "سؤال 3",
+        "isProblem": false,
+        "image": null
+      },
+      "Choices": [
         {
-          "name": "متسعات"
+          "choiceBody": "2",
+          "isCorrect": false
+        },
+        {
+          "choiceBody": "3",
+          "isCorrect": true
+        },
+        {
+          "choiceBody": "1",
+          "isCorrect": false
+        },
+        {
+          "choiceBody": "4",
+          "isCorrect": false
         }
-      ],
-      "q_num": 32,
-      "timer": "15",
-      "id": 1
+      ]
     },
     {
-      "name": "شامل",
-      "chapter": [
+      "Questions": {
+        "questionBody": "ما علاقه المقاومه بلتيار ؟",
+        "isProblem": false,
+        "image": null
+      },
+      "Choices": [
         {
-          "name": "متسعات"
+          "choiceBody": "خيار اثنين",
+          "isCorrect": false
         },
         {
-          "name": "كهرباء الثابته"
+          "choiceBody": "خيار اربعه",
+          "isCorrect": false
         },
         {
-          "name": "كهرباء الغير ثابته"
+          "choiceBody": "خيار ثلاثه",
+          "isCorrect": false
+        },
+        {
+          "choiceBody": "خيار واحد",
+          "isCorrect": true
         }
-      ],
-      "q_num": 100,
-      "timer": "60",
-      "id": 2
+      ]
+    },
+    {
+      "Questions": {
+        "questionBody": "سؤال اثنين",
+        "isProblem": false,
+        "image": null
+      },
+      "Choices": [
+        {
+          "choiceBody": "خيار اربعه",
+          "isCorrect": false
+        },
+        {
+          "choiceBody": "خيار ثلاثه",
+          "isCorrect": false
+        },
+        {
+          "choiceBody": "خيار واحد",
+          "isCorrect": false
+        },
+        {
+          "choiceBody": "خيار اثنين",
+          "isCorrect": true
+        }
+      ]
+    },
+    {
+      "Questions": {
+        "questionBody": "سؤال اربعه",
+        "isProblem": false,
+        "image": null
+      },
+      "Choices": [
+        {
+          "choiceBody": "4",
+          "isCorrect": true
+        },
+        {
+          "choiceBody": "1",
+          "isCorrect": false
+        },
+        {
+          "choiceBody": "2",
+          "isCorrect": false
+        },
+        {
+          "choiceBody": "3",
+          "isCorrect": false
+        }
+      ]
     }
-  ] 
-  
+  ],
+  "timer": "60",
+  "q_num": 4
+}

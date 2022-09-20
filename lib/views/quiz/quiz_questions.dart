@@ -5,6 +5,7 @@ import 'package:amti7ane_unicoding/models/choice.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz.dart';
 import 'package:amti7ane_unicoding/models/purple_container.dart';
 import 'package:amti7ane_unicoding/models/question.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,7 @@ class QuizQuestons extends StatelessWidget {
               Column(
                 children: [
                   MyText(
-                    myText: subjectName!, //todo
+                    myText: subjectName!,
                     mysize: 23,
                     family: MyFont.arabic,
                     isbold: true,
@@ -101,38 +102,50 @@ class QuizQuestons extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: 40,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ListView.separated(
-                            physics: const NeverScrollableScrollPhysics(),
-                            controller: scrollController,
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            itemCount: quizController.circles.length,
-                            separatorBuilder: (context, index) {
-                              return const SizedBox(
-                                width: 15,
-                              );
-                            },
-                            itemBuilder: (context, index) {
-                              return quizController.circles[index];
-                            },
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            child: ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              controller: scrollController,
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: quizController.circles.length,
+                              separatorBuilder: (context, index) {
+                                return const SizedBox(
+                                  width: 15,
+                                );
+                              },
+                              itemBuilder: (context, index) {
+                                return quizController.circles[index];
+                              },
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(
                     height: 30,
                   ),
                   //!question
-
-                  const Question(
-                      questionBody:
-                          'من هو العالم الذي قام باكتشاف الجاذب الجاذبيه الارضيه ؟',
-                      questionNo: 1),
-
+                  GetX<QuizController>(
+                    builder: (quizController) => Question(
+                        questionBody: NetQuiz
+                            .quizquestions[
+                                quizController.currentQuestionIndecator.value -
+                                    1]
+                                [quizController.currentQuestionIndecator.value]!
+                            .questionBody,
+                        questionNo: NetQuiz
+                            .quizquestions[
+                                quizController.currentQuestionIndecator.value -
+                                    1]
+                                [quizController.currentQuestionIndecator.value]!
+                            .questionNo),
+                  ),
                   const SizedBox(
                     height: 30,
                   ),
@@ -172,7 +185,7 @@ class QuizQuestons extends StatelessWidget {
                           ListView.separated(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            itemCount: choiceController.choices.length,
+                            itemCount: quizController.circles.length,
                             separatorBuilder:
                                 (BuildContext context, int index) {
                               return const SizedBox(
@@ -180,8 +193,28 @@ class QuizQuestons extends StatelessWidget {
                               );
                             },
                             itemBuilder: (BuildContext context, int index) {
-                              return Choice(
-                                choiceBody: choiceController.choices[index],
+                              return GetX<QuizController>(
+                                builder: (quizController) => Choice(
+                                  questionNo: NetQuiz
+                                      .quizquestions[
+                                          quizController
+                                                  .currentQuestionIndecator
+                                                  .value -
+                                              1][
+                                          quizController
+                                              .currentQuestionIndecator.value]!
+                                      .questionNo,
+                                  choiceBody: NetQuiz
+                                      .quizquestions[
+                                          quizController
+                                                  .currentQuestionIndecator
+                                                  .value -
+                                              1][
+                                          quizController
+                                              .currentQuestionIndecator.value]!
+                                      .choices[index]
+                                      .choiceBody,
+                                ),
                               );
                             },
                           ),
@@ -196,6 +229,10 @@ class QuizQuestons extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       quizController.nextQuestion();
+                      if (quizController.circleNumber.value <
+                          quizController.circles.length - 1) {
+                        quizController.currentQuestionIndecator.value++;
+                      }
                       quizController.circleNumber.value++;
                       if (quizController.circleNumber.value <
                               quizController.circles.length - 3 &&
