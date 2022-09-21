@@ -11,11 +11,13 @@ class DropdownButtonController extends GetxController {
   Dio dio = Dio();
 
   RxList<String> stageList = <String>[].obs;
-  // List<String> stageList = ['اول متوسط', 'ثاني متوسط', 'ثالث متوسط'];
   RxString selectedItem = 'اول ابتدائي'.obs;
 
   Future<void> getStages() async {
-    Response response = await dio.get(Server.baseUrl + Server.getStagesPath);
-    Stages.fromJson(jsonDecode(response.toString()));
+    Response response = await dio.get(
+      Server.baseUrl1 + Server.getStagesPath,
+      options: Server.token,
+    );
+    Stages.fromJson(response.data);
   }
 }

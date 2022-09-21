@@ -1,11 +1,9 @@
-import 'dart:convert';
 import 'package:amti7ane_unicoding/models/networking/deffult_subjects.dart';
 import 'package:amti7ane_unicoding/models/networking/server_variable.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
 
 class SubjectsControllers extends GetxController {
-  Dio dio = Dio();
   RxBool getSubjectsDone = false.obs;
 
 //! Subjects images
@@ -28,11 +26,12 @@ class SubjectsControllers extends GetxController {
     'الفلسفه وعلم النفس': 'assets/images/subjects_icons/Psychology.png',
     'النقد الادبي': 'assets/images/subjects_icons/Literary criticism.png',
   };
-
   void getDeffultSubjects() async {
-    Response response =
-        await dio.get('${Server.baseUrl}${Server.getDeffultSubjectsPath}');
-    Subjects.fromJson(jsonDecode(response.toString()));
+    Response response = await Server.dio.get(
+      Server.baseUrl1 + Server.getDeffultSubjectsPath,
+      options: Server.token,
+    );
+    Subjects.fromJson(response.data);
     getSubjectsDone.value = true;
   }
 }

@@ -5,6 +5,7 @@ import 'package:amti7ane_unicoding/controllers/subjects_controllers.dart';
 import 'package:amti7ane_unicoding/controllers/timerController.dart';
 import 'package:amti7ane_unicoding/models/loading.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
+import 'package:amti7ane_unicoding/models/networking/deffult_quizes.dart';
 import 'package:amti7ane_unicoding/views/home/home_screen.dart';
 import 'package:amti7ane_unicoding/views/home/subjects_lectures.dart';
 import 'package:amti7ane_unicoding/views/profile/profile_screen.dart';
@@ -46,11 +47,7 @@ class MainController extends GetxController {
       subjectsControllers.getDeffultSubjects();
       dropdownButtonController.getStages();
     }
-    if (!quizController.getDeffultQuizesDone.value &&
-        navController.index.value == 0 &&
-        insub.value) {
-      quizController.getDeffultQuizes();
-    }
+
     if (navController.index.value == 0) {
       if (!insub.value) {
         if (subjectsControllers.getSubjectsDone.value) {
@@ -87,7 +84,10 @@ class MainController extends GetxController {
       if (insub.value == true &&
           navController.buttomNavIcons[navController.index.value] == 'Home') {
         return IconButton(
-          onPressed: () => insub.value = false,
+          onPressed: () {
+            insub.value = false;
+            Quizes.deffultQuizes = [];
+          },
           icon: const Icon(
             Icons.keyboard_arrow_left,
             color: Colors.white,

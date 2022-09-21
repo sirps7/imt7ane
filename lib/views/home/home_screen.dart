@@ -86,7 +86,7 @@ class HomeScreen extends StatelessWidget {
                     child: SizedBox(
                       width: 700,
                       child: Wrap(
-                          alignment: WrapAlignment.center,
+                          alignment: WrapAlignment.end,
                           spacing: 37,
                           runSpacing: 37,
                           children: Subjects.deffultsubjects

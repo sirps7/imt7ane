@@ -1,4 +1,5 @@
 import 'package:amti7ane_unicoding/controllers/controller_main.dart';
+import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
 import 'package:amti7ane_unicoding/controllers/subjects_controllers.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/views/home/subjects_lectures.dart';
@@ -24,7 +25,7 @@ class MyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MainController mainController = Get.find();
-    final SubjectsControllers subjectsControllers = Get.find();
+    final QuizController quizController = Get.find();
     // double scrrenWidth = MediaQuery.of(context).size.width;
 
     return GestureDetector(
@@ -32,6 +33,8 @@ class MyCard extends StatelessWidget {
         mainController.insub.value = true;
         SubjectLectures.subIcon = subjectIcon;
         SubjectLectures.subName = subject;
+        quizController.quizSubjectNO!.value = subNo;
+        quizController.getDeffultQuizes();
       },
       child: Column(
         children: [

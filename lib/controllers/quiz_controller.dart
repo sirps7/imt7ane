@@ -8,10 +8,10 @@ import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
 
 class QuizController extends GetxController {
+  RxInt? quizSubjectNO = 0.obs;
   RxInt currentQuestionIndecator = 1.obs;
   RxBool getDeffultQuizesDone = false.obs;
   RxBool getQuizDone = false.obs;
-  Dio dio = Dio();
   Rx<int> circleNumber = 0.obs;
   RxInt index = 0.obs;
   int noOfQuestions = 0;
@@ -47,23 +47,21 @@ class QuizController extends GetxController {
 
 //! lecture quizes not actual quizes
   Future<void> getDeffultQuizes() async {
-    Response response = await dio.get(
-      Server.baseUrl + Server.getDeffultQuizesPath,
-      queryParameters: {'sub': 2},
-    );
-    Quizes.fromJson(jsonDecode(response.toString()));
+    getDeffultQuizesDone.value = false;
+    Response response = await Server.dio.post(
+        Server.baseUrl1 + Server.getDeffultQuizesPath,
+        queryParameters: {'sub': quizSubjectNO!.value},
+        options: Server.token);
+    Quizes.fromJson(response.data);
     getDeffultQuizesDone.value = true;
   }
 
 //! get actual quiz questions with choices
   Future<void> getQuiz() async {
     if (!getQuizDone.value) {
-      Response response = await dio
+      Response response = await Server.dio
           .get(Server.baseUrl + Server.getQuizPath, queryParameters: {'id': 1});
       NetQuiz.fromJson(jsonDecode(response.toString()));
-      print(NetQuiz.quizquestions.length);
-      print(NetQuiz.quizquestions[0][1]!.choices[0].choiceBody);
-
       getQuizDone.value = true;
     }
   }

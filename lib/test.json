@@ -1,106 +1,13 @@
-{
-  "quiz": [
-    {
-      "Questions": {
-        "questionBody": "سؤال 3",
-        "isProblem": false,
-        "image": null
+[
+  {
+      "subject": {
+          "name": "علوم",
+          "id": 1,
+          "stage": {
+              "stages": "اول ابتدائي",
+              "type": "لا يوجد"
+          }
       },
-      "Choices": [
-        {
-          "choiceBody": "2",
-          "isCorrect": false
-        },
-        {
-          "choiceBody": "3",
-          "isCorrect": true
-        },
-        {
-          "choiceBody": "1",
-          "isCorrect": false
-        },
-        {
-          "choiceBody": "4",
-          "isCorrect": false
-        }
-      ]
-    },
-    {
-      "Questions": {
-        "questionBody": "ما علاقه المقاومه بلتيار ؟",
-        "isProblem": false,
-        "image": null
-      },
-      "Choices": [
-        {
-          "choiceBody": "خيار اثنين",
-          "isCorrect": false
-        },
-        {
-          "choiceBody": "خيار اربعه",
-          "isCorrect": false
-        },
-        {
-          "choiceBody": "خيار ثلاثه",
-          "isCorrect": false
-        },
-        {
-          "choiceBody": "خيار واحد",
-          "isCorrect": true
-        }
-      ]
-    },
-    {
-      "Questions": {
-        "questionBody": "سؤال اثنين",
-        "isProblem": false,
-        "image": null
-      },
-      "Choices": [
-        {
-          "choiceBody": "خيار اربعه",
-          "isCorrect": false
-        },
-        {
-          "choiceBody": "خيار ثلاثه",
-          "isCorrect": false
-        },
-        {
-          "choiceBody": "خيار واحد",
-          "isCorrect": false
-        },
-        {
-          "choiceBody": "خيار اثنين",
-          "isCorrect": true
-        }
-      ]
-    },
-    {
-      "Questions": {
-        "questionBody": "سؤال اربعه",
-        "isProblem": false,
-        "image": null
-      },
-      "Choices": [
-        {
-          "choiceBody": "4",
-          "isCorrect": true
-        },
-        {
-          "choiceBody": "1",
-          "isCorrect": false
-        },
-        {
-          "choiceBody": "2",
-          "isCorrect": false
-        },
-        {
-          "choiceBody": "3",
-          "isCorrect": false
-        }
-      ]
-    }
-  ],
-  "timer": "60",
-  "q_num": 4
-}
+      "quiz_count": 2
+  }
+]

@@ -9,13 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Lecture extends StatelessWidget {
-  const Lecture(
-      {super.key,
-      required this.lecture,
-      required this.lectureTitle,
-      required this.time,
-      required this.questionNo,
-      required this.subName});
+  const Lecture({
+    super.key,
+    required this.lecture,
+    required this.lectureTitle,
+    required this.time,
+    required this.questionNo,
+    required this.subName,
+  });
   final String lecture;
   final String lectureTitle;
   final int time;
