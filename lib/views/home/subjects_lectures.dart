@@ -160,6 +160,7 @@ class SubjectLectures extends StatelessWidget {
               },
               itemBuilder: (context, index) {
                 return Lecture(
+                  quizId: Quizes.deffultQuizes[index].id,
                   lecture: Quizes.deffultQuizes[index].name,
                   lectureTitle: Quizes.deffultQuizes[index].chapterName!,
                   questionNo: Quizes.deffultQuizes[index].questionNo,

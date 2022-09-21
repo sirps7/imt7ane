@@ -28,7 +28,7 @@ class SubjectsControllers extends GetxController {
   };
   void getDeffultSubjects() async {
     Response response = await Server.dio.get(
-      Server.baseUrl1 + Server.getDeffultSubjectsPath,
+      Server.baseUrl + Server.getDeffultSubjectsPath,
       options: Server.token,
     );
     Subjects.fromJson(response.data);

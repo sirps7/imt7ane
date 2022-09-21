@@ -15,7 +15,7 @@ class DropdownButtonController extends GetxController {
 
   Future<void> getStages() async {
     Response response = await dio.get(
-      Server.baseUrl1 + Server.getStagesPath,
+      Server.baseUrl + Server.getStagesPath,
       options: Server.token,
     );
     Stages.fromJson(response.data);

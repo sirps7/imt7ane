@@ -185,7 +185,14 @@ class QuizQuestons extends StatelessWidget {
                           ListView.separated(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            itemCount: quizController.circles.length,
+                            itemCount: NetQuiz
+                                .quizquestions[quizController
+                                            .currentQuestionIndecator.value -
+                                        1][
+                                    quizController
+                                        .currentQuestionIndecator.value]!
+                                .choices
+                                .length,
                             separatorBuilder:
                                 (BuildContext context, int index) {
                               return const SizedBox(

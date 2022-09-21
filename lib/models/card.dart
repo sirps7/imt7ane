@@ -33,7 +33,7 @@ class MyCard extends StatelessWidget {
         mainController.insub.value = true;
         SubjectLectures.subIcon = subjectIcon;
         SubjectLectures.subName = subject;
-        quizController.quizSubjectNO!.value = subNo;
+        quizController.quizSubjectNO = subNo;
         quizController.getDeffultQuizes();
       },
       child: Column(

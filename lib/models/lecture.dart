@@ -3,6 +3,7 @@ import 'package:amti7ane_unicoding/controllers/controller_main.dart';
 import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
 import 'package:amti7ane_unicoding/controllers/timerController.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz.dart';
 import 'package:amti7ane_unicoding/models/purple_container.dart';
 import 'package:amti7ane_unicoding/views/quiz/quiz_questions.dart';
 import 'package:flutter/material.dart';
@@ -16,29 +17,36 @@ class Lecture extends StatelessWidget {
     required this.time,
     required this.questionNo,
     required this.subName,
+    required this.quizId,
   });
   final String lecture;
   final String lectureTitle;
   final int time;
   final int questionNo;
   final String subName;
+  final int quizId;
 
   @override
   Widget build(BuildContext context) {
+    bool firstTime = true;
     MainController mainController = Get.find();
     BottomNavigationController navController = Get.find();
     TimerController timerController = Get.find();
     QuizController quizController = Get.find();
     return GestureDetector(
-      onTap: () {
-        navController.index.value = 1;
-        mainController.inQuiz.value = true;
-        TimerController.givenMinutes = time;
-        timerController.refreshTimer();
-        quizController.noOfQuestions = questionNo;
-        quizController.addCircles();
-        QuizQuestons.subjectName = subName;
-        quizController.getQuiz();
+      onTap: () async {
+        if (firstTime) {
+          quizController.quizId = quizId;
+          await quizController.getQuiz();
+          navController.index.value = 1;
+          mainController.inQuiz.value = true;
+          TimerController.givenMinutes = time;
+          timerController.refreshTimer();
+          QuizQuestons.subjectName = subName;
+          quizController.noOfQuestions = NetQuiz.quizquestions.length;
+          quizController.addCircles();
+          firstTime = false;
+        }
       },
       child: SizedBox(
         height: 75,

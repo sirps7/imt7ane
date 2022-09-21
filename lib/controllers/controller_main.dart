@@ -6,6 +6,7 @@ import 'package:amti7ane_unicoding/controllers/timerController.dart';
 import 'package:amti7ane_unicoding/models/loading.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_quizes.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz.dart';
 import 'package:amti7ane_unicoding/views/home/home_screen.dart';
 import 'package:amti7ane_unicoding/views/home/subjects_lectures.dart';
 import 'package:amti7ane_unicoding/views/profile/profile_screen.dart';
@@ -112,6 +113,7 @@ class MainController extends GetxController {
               quizController.circleNumber.value = 0;
               quizController.circles = [];
               quizController.currentQuestionIndecator.value = 1;
+              NetQuiz.quizquestions = [];
             } else {
               showSolutions.value = false;
             }

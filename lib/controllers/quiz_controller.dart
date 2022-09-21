@@ -8,7 +8,9 @@ import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
 
 class QuizController extends GetxController {
-  RxInt? quizSubjectNO = 0.obs;
+  int quizSubjectNO = 0;
+  int quizId = 0;
+
   RxInt currentQuestionIndecator = 1.obs;
   RxBool getDeffultQuizesDone = false.obs;
   RxBool getQuizDone = false.obs;
@@ -17,6 +19,12 @@ class QuizController extends GetxController {
   int noOfQuestions = 0;
   List<QuestionCircle> circles = [];
   ChoiceController choiceController = Get.find();
+
+  // @override
+  // void onInit() {
+  //   testQuiz();
+  //   super.onInit();
+  // }
 
   void addCircles() {
     for (int i = 1; i <= noOfQuestions; i++) {
@@ -49,8 +57,8 @@ class QuizController extends GetxController {
   Future<void> getDeffultQuizes() async {
     getDeffultQuizesDone.value = false;
     Response response = await Server.dio.post(
-        Server.baseUrl1 + Server.getDeffultQuizesPath,
-        queryParameters: {'sub': quizSubjectNO!.value},
+        Server.baseUrl + Server.getDeffultQuizesPath,
+        queryParameters: {'sub': quizSubjectNO},
         options: Server.token);
     Quizes.fromJson(response.data);
     getDeffultQuizesDone.value = true;
@@ -58,11 +66,19 @@ class QuizController extends GetxController {
 
 //! get actual quiz questions with choices
   Future<void> getQuiz() async {
-    if (!getQuizDone.value) {
-      Response response = await Server.dio
-          .get(Server.baseUrl + Server.getQuizPath, queryParameters: {'id': 1});
-      NetQuiz.fromJson(jsonDecode(response.toString()));
-      getQuizDone.value = true;
-    }
+    getQuizDone.value = false;
+    Response response = await Server.dio.get(
+        Server.baseUrl + Server.getQuizPath,
+        queryParameters: {'quizid': quizId},
+        options: Server.token);
+    NetQuiz.fromJson(response.data);
+    getQuizDone.value = true;
   }
+
+  // Future<void> testQuiz() async {
+  //   Response response = await Server.dio.get(
+  //       Server.baseUrl1 + Server.getQuizPath,
+  //       queryParameters: {'quizid': quizId},
+  //       options: Server.token);
+  // }
 }
