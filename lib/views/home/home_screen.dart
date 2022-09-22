@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                     color: MyColor.mainColor,
                   ),
                   height: 35,
-                  width: 150,
+                  width: 165,
                   padding: const EdgeInsets.only(
                     left: 20,
                     right: 10,
@@ -39,12 +39,11 @@ class HomeScreen extends StatelessWidget {
                     child: GetX<DropdownButtonController>(
                         builder: (dropController) {
                       return DropdownButton<String>(
-                        icon: const Expanded(
-                          child: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.white,
-                            size: 25,
-                          ),
+                        menuMaxHeight: 300,
+                        icon: const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.white,
+                          size: 25,
                         ),
                         dropdownColor: MyColor.mainColor,
                         value: dropController.selectedItem.value,

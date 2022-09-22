@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:amti7ane_unicoding/controllers/choiceController.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_quizes.dart';
 import 'package:amti7ane_unicoding/models/networking/quiz.dart';
@@ -23,7 +22,8 @@ class QuizController extends GetxController {
 
   // @override
   // void onInit() {
-  //   testQuiz();
+  //   print(jsonEncode("اول ابتدائي"));
+  //   // testQuiz();
   //   super.onInit();
   // }
 
@@ -78,8 +78,9 @@ class QuizController extends GetxController {
 
   // Future<void> testQuiz() async {
   //   Response response = await Server.dio.get(
-  //       Server.baseUrl1 + Server.getQuizPath,
+  //       Server.baseUrl + Server.getProfileInfoPath,
   //       queryParameters: {'quizid': quizId},
   //       options: Server.token);
+  //   ProfileInfo.fromjason(response.data);
   // }
 }

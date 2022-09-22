@@ -1,5 +1,5 @@
 import 'package:amti7ane_unicoding/models/colors.dart';
-import 'package:amti7ane_unicoding/models/init_dependency.dart';
+import 'package:amti7ane_unicoding/controllers/init_dependency.dart';
 import 'package:amti7ane_unicoding/views/main/main_screen.dart';
 import 'package:amti7ane_unicoding/views/opening/logoMain.dart';
 import 'package:flutter/material.dart';

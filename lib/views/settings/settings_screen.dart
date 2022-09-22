@@ -2,8 +2,11 @@ import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart'
 import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
 import 'package:amti7ane_unicoding/controllers/setting_controller.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
+import 'package:amti7ane_unicoding/models/loading.dart';
 import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
+import 'package:amti7ane_unicoding/models/networking/profileInfo.dart';
+import 'package:amti7ane_unicoding/models/networking/stages.dart';
 import 'package:amti7ane_unicoding/models/purple_container.dart';
 import 'package:amti7ane_unicoding/models/settings_button.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +15,13 @@ import 'package:get/get.dart';
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
   final SettingController settingController = Get.find();
-  final TextEditingController mycntroller = TextEditingController();
+  final BottomNavigationController bottomNavigationController = Get.find();
+  final DropdownButtonController dropController = Get.find();
+  final TextEditingController mycontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    mycntroller.text = 'محمد صالح';
-
+    mycontroller.text = ProfileInfo.studentName!;
     return SizedBox(
       width: double.infinity,
 
@@ -32,12 +36,17 @@ class SettingsScreen extends StatelessWidget {
               height: 230,
               color: MyColor.profileBackColor,
               width: double.infinity,
-              child: const Image(
-                image: AssetImage(
-                  'assets/images/profile_image.png',
-                ),
-                fit: BoxFit.cover,
-              ),
+              child: GetX<BottomNavigationController>(
+                  builder: (buttomNavController) {
+                return Image(
+                  image: AssetImage(
+                    buttomNavController.genderSelectedItem.value == 'Male'
+                        ? 'assets/images/profile_image.png'
+                        : 'assets/images/girl_image.png',
+                  ),
+                  fit: BoxFit.cover,
+                );
+              }),
             ),
             const SizedBox(
               height: 20.0,
@@ -61,7 +70,7 @@ class SettingsScreen extends StatelessWidget {
                     family: 'PoppinsMedium',
                   ),
                   TextFormField(
-                    controller: mycntroller,
+                    controller: mycontroller,
                     textDirection: TextDirection.rtl,
                     style: const TextStyle(fontFamily: 'SFMarwa', fontSize: 25),
                   ),
@@ -86,7 +95,7 @@ class SettingsScreen extends StatelessWidget {
                         border: Border.all(color: Colors.grey),
                       ),
                       height: 35,
-                      width: 150,
+                      width: 165,
                       padding: const EdgeInsets.only(
                         left: 15,
                         right: 10,
@@ -95,6 +104,7 @@ class SettingsScreen extends StatelessWidget {
                         child: GetX<DropdownButtonController>(
                             builder: (dropController) {
                           return DropdownButton<String>(
+                            menuMaxHeight: 300,
                             icon: const Expanded(
                               child: Icon(
                                 Icons.keyboard_arrow_down,
@@ -103,7 +113,7 @@ class SettingsScreen extends StatelessWidget {
                               ),
                             ),
                             dropdownColor: Colors.white,
-                            value: dropController.selectedItem.value,
+                            value: dropController.settingSelectedItem.value,
                             borderRadius: BorderRadius.circular(10),
                             items: dropController.stageList
                                 .map(
@@ -119,7 +129,7 @@ class SettingsScreen extends StatelessWidget {
                                 )
                                 .toList(),
                             onChanged: (value) {
-                              dropController.selectedItem.value = value!;
+                              dropController.settingSelectedItem.value = value!;
                             },
                           );
                         }),
@@ -150,7 +160,7 @@ class SettingsScreen extends StatelessWidget {
                         left: 30,
                       ),
                       height: 35,
-                      width: 150,
+                      width: 165,
                       child: GetX<BottomNavigationController>(
                           builder: (bottomNavController) {
                         return DropdownButtonHideUnderline(
@@ -188,17 +198,32 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   Center(
                     child: GestureDetector(
-                      child: PurpleContainer(
-                        color: const Color.fromARGB(255, 129, 133, 241),
-                        H: 50,
-                        W: 120,
-                        child: MyText(
-                          myText: 'Save',
-                          mysize: 20,
-                          mycolor: Colors.white,
-                          family: MyFont.poppinsMedium,
-                        ),
-                      ),
+                      onTap: () {
+                        settingController.sendSettingChange(
+                          mycontroller.text,
+                          bottomNavigationController.genderSelectedItem.value,
+                          (Stages.stagesMap.firstWhere((e) => e.containsKey(
+                                  dropController.settingSelectedItem.value)))[
+                              dropController.settingSelectedItem.value]!,
+                          dropController.settingSelectedItem.value,
+                        );
+                      },
+                      child:
+                          GetX<SettingController>(builder: (settingController) {
+                        return PurpleContainer(
+                          color: const Color.fromARGB(255, 129, 133, 241),
+                          H: 50,
+                          W: 120,
+                          child: settingController.updateProfileDone.value
+                              ? const MyText(
+                                  myText: 'Save',
+                                  mysize: 20,
+                                  mycolor: Colors.white,
+                                  family: MyFont.poppinsMedium,
+                                )
+                              : const MyLoading(mycolor: Colors.white),
+                        );
+                      }),
                     ),
                   )
                 ],

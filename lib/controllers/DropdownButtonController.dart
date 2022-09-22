@@ -12,6 +12,7 @@ class DropdownButtonController extends GetxController {
 
   RxList<String> stageList = <String>[].obs;
   RxString selectedItem = 'اول ابتدائي'.obs;
+  RxString settingSelectedItem = 'ثاني ابتدائي'.obs;
 
   Future<void> getStages() async {
     Response response = await dio.get(

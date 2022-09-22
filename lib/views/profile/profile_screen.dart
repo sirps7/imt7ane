@@ -1,7 +1,9 @@
+import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/quiz_history.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -19,12 +21,17 @@ class ProfileScreen extends StatelessWidget {
             height: 230,
             color: MyColor.profileBackColor,
             width: double.infinity,
-            child: const Image(
-              image: AssetImage(
-                'assets/images/reading_image.png',
-              ),
-              fit: BoxFit.cover,
-            ),
+            child: GetX<BottomNavigationController>(
+                builder: (buttomNavController) {
+              return Image(
+                image: AssetImage(
+                  buttomNavController.genderSelectedItem.value == 'Male'
+                      ? 'assets/images/profile_image.png'
+                      : 'assets/images/girl_image.png',
+                ),
+                fit: BoxFit.cover,
+              );
+            }),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),

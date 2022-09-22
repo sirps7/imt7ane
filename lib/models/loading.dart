@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class MyLoading extends StatelessWidget {
-  const MyLoading({super.key});
+  const MyLoading({super.key, this.mycolor = MyColor.mainColor});
+  final Color mycolor;
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
         child: SpinKitThreeBounce(
-      color: MyColor.mainColor,
+      color: mycolor,
       size: 25,
     ));
   }

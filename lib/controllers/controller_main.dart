@@ -24,7 +24,6 @@ class MainController extends GetxController {
 
   BottomNavigationController navController = Get.find();
   SubjectsControllers subjectsControllers = Get.find();
-  DropdownButtonController dropdownButtonController = Get.find();
   QuizController quizController = Get.find();
   TimerController timerController = Get.find();
 
@@ -46,7 +45,6 @@ class MainController extends GetxController {
     if (!subjectsControllers.getSubjectsDone.value &&
         navController.index.value == 0) {
       subjectsControllers.getDeffultSubjects();
-      dropdownButtonController.getStages();
     }
 
     if (navController.index.value == 0) {

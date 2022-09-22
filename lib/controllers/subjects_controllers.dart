@@ -1,3 +1,4 @@
+import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_subjects.dart';
 import 'package:amti7ane_unicoding/models/networking/server_variable.dart';
 import 'package:get/get.dart' hide Response;
@@ -5,6 +6,7 @@ import 'package:dio/dio.dart';
 
 class SubjectsControllers extends GetxController {
   RxBool getSubjectsDone = false.obs;
+  DropdownButtonController dropdownButtonController = Get.find();
 
 //! Subjects images
   Map<String, String> subImage = {
@@ -31,6 +33,7 @@ class SubjectsControllers extends GetxController {
       Server.baseUrl + Server.getDeffultSubjectsPath,
       options: Server.token,
     );
+    await dropdownButtonController.getStages();
     Subjects.fromJson(response.data);
     getSubjectsDone.value = true;
   }
