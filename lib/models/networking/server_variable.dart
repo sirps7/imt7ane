@@ -11,7 +11,7 @@ class Server {
     responseType: ResponseType.json,
     headers: {
       'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNyIsInVzZXJfZW1haWwiOiJBbGlfd2F0aGlrX3FrMzJAeWFob28uY29tIn0.ybx59HHbFvfLrmdGBErRGOGp7pkPvgj8La3WgBZEbtE',
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMiIsInVzZXJfZW1haWwiOiJ1c2VyMTJAZ21haWwuY29tLmNvbSJ9.rFsBS1TFHDRfJg2TW8ocqlD_KVTJwlaxrMUmMhpBQBI',
       'accept': 'application/json;charset=utf-8',
     },
   );

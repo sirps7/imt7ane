@@ -6,6 +6,7 @@ import 'package:amti7ane_unicoding/models/lecture.dart';
 import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_quizes.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz.dart';
 import 'package:amti7ane_unicoding/views/quiz/quiz_questions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,8 +16,8 @@ class SubjectLectures extends StatelessWidget {
 
   static AssetImage? subIcon;
   static String? subName;
-  static int? time = Quizes.finalQuiz.time;
-  static int? questionNo = Quizes.finalQuiz.questionNo;
+  static int time = Quizes.finalQuiz.time;
+  static int questionNo = Quizes.finalQuiz.questionNo;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,7 @@ class SubjectLectures extends StatelessWidget {
     BottomNavigationController navController = Get.find();
     QuizController quizController = Get.find();
     TimerController timerController = Get.find();
+    quizController.firstTime = true;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 20,
@@ -53,15 +55,21 @@ class SubjectLectures extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    TimerController.givenMinutes = Quizes.finalQuiz.time;
-                    timerController.refreshTimer();
-                    navController.index.value = 1;
-                    mainController.inQuiz.value = true;
-                    quizController.noOfQuestions = Quizes.finalQuiz.questionNo;
-                    quizController.addCircles();
-                    QuizQuestons.subjectName = subName;
-                    quizController.getQuiz();
+                  onTap: () async {
+                    if (quizController.firstTime) {
+                      navController.index.value = 1;
+                      mainController.inQuiz.value = true;
+                      quizController.quizId = Quizes.finalQuiz.id;
+                      await quizController.getQuiz();
+                      TimerController.givenMinutes = Quizes.finalQuiz.time;
+                      timerController.refreshTimer();
+
+                      quizController.noOfQuestions =
+                          NetQuiz.quizquestions.length;
+                      quizController.addCircles();
+                      QuizQuestons.subjectName = subName;
+                      quizController.firstTime = false;
+                    }
                   },
                   child: Container(
                     width: 250,

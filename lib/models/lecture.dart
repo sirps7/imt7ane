@@ -28,24 +28,24 @@ class Lecture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool firstTime = true;
     MainController mainController = Get.find();
     BottomNavigationController navController = Get.find();
     TimerController timerController = Get.find();
     QuizController quizController = Get.find();
+    quizController.firstTime = true;
     return GestureDetector(
       onTap: () async {
-        if (firstTime) {
-          quizController.quizId = quizId;
-          await quizController.getQuiz();
+        if (quizController.firstTime) {
           navController.index.value = 1;
           mainController.inQuiz.value = true;
+          quizController.quizId = quizId;
+          await quizController.getQuiz();
           TimerController.givenMinutes = time;
           timerController.refreshTimer();
           QuizQuestons.subjectName = subName;
           quizController.noOfQuestions = NetQuiz.quizquestions.length;
           quizController.addCircles();
-          firstTime = false;
+          quizController.firstTime = false;
         }
       },
       child: SizedBox(

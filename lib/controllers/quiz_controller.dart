@@ -10,6 +10,7 @@ import 'package:dio/dio.dart';
 class QuizController extends GetxController {
   int quizSubjectNO = 0;
   int quizId = 0;
+  bool firstTime = true;
 
   RxInt currentQuestionIndecator = 1.obs;
   RxBool getDeffultQuizesDone = false.obs;
