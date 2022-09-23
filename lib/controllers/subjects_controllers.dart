@@ -1,11 +1,14 @@
 import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_subjects.dart';
 import 'package:amti7ane_unicoding/models/networking/server_variable.dart';
+import 'package:amti7ane_unicoding/models/networking/stages.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
 
 class SubjectsControllers extends GetxController {
   RxBool getSubjectsDone = false.obs;
+  RxBool getSubjectsWithIdDone = true.obs;
+
   DropdownButtonController dropdownButtonController = Get.find();
 
 //! Subjects images
@@ -33,8 +36,23 @@ class SubjectsControllers extends GetxController {
       Server.baseUrl + Server.getDeffultSubjectsPath,
       options: Server.token,
     );
-    await dropdownButtonController.getStages();
     Subjects.fromJson(response.data);
     getSubjectsDone.value = true;
+  }
+
+  void getSubjectsWithStageId() async {
+    getSubjectsWithIdDone.value = false;
+    Response response = await Server.dio.get(
+      Server.baseUrl + Server.getSubjectsWithStageId,
+      options: Server.token,
+      queryParameters: {
+        'stage_id': (Stages.stagesMap.firstWhere((e) =>
+                e.containsKey(dropdownButtonController.selectedItem.value)))[
+            dropdownButtonController.selectedItem.value]!,
+      },
+    );
+    Subjects.deffultsubjects = [];
+    Subjects.fromJson(response.data);
+    getSubjectsWithIdDone.value = true;
   }
 }

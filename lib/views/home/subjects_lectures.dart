@@ -160,7 +160,7 @@ class SubjectLectures extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: Quizes.deffultQuizes.length,
+              itemCount: Quizes.quizesList.length,
               separatorBuilder: (context, index) {
                 return const SizedBox(
                   height: 25,
@@ -168,11 +168,11 @@ class SubjectLectures extends StatelessWidget {
               },
               itemBuilder: (context, index) {
                 return Lecture(
-                  quizId: Quizes.deffultQuizes[index].id,
-                  lecture: Quizes.deffultQuizes[index].name,
-                  lectureTitle: Quizes.deffultQuizes[index].chapterName!,
-                  questionNo: Quizes.deffultQuizes[index].questionNo,
-                  time: Quizes.deffultQuizes[index].time,
+                  quizId: Quizes.quizesList[index].id,
+                  lecture: Quizes.quizesList[index].name,
+                  lectureTitle: Quizes.quizesList[index].chapterName!,
+                  questionNo: Quizes.quizesList[index].questionNo,
+                  time: Quizes.quizesList[index].time,
                   subName: subName!,
                 );
               },

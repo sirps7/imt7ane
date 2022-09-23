@@ -40,7 +40,7 @@ class QuizQuastion {
   final String? image;
   final String questionBody;
   final int questionNo;
-  List choices;
+  final List choices;
 }
 
 class QuizChoice {

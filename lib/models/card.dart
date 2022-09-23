@@ -29,12 +29,16 @@ class MyCard extends StatelessWidget {
     // double scrrenWidth = MediaQuery.of(context).size.width;
 
     return GestureDetector(
-      onTap: () {
-        mainController.insub.value = true;
+      onTap: () async {
+        quizController.quizSubjectNO = subNo;
         SubjectLectures.subIcon = subjectIcon;
         SubjectLectures.subName = subject;
-        quizController.quizSubjectNO = subNo;
-        quizController.getDeffultQuizes();
+        if (quizController.deffult) {
+          quizController.getDeffultQuizes();
+        } else {
+          quizController.getQuizesWithId();
+        }
+        mainController.insub.value = true;
       },
       child: Column(
         children: [

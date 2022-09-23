@@ -1,12 +1,17 @@
+import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
 import 'package:amti7ane_unicoding/controllers/choiceController.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_quizes.dart';
 import 'package:amti7ane_unicoding/models/networking/quiz.dart';
 import 'package:amti7ane_unicoding/models/networking/server_variable.dart';
+import 'package:amti7ane_unicoding/models/networking/stages.dart';
 import 'package:amti7ane_unicoding/models/question_circle.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
 
 class QuizController extends GetxController {
+  RxInt score = 0.obs;
+  int lastQuizscore = 0;
+  bool deffult = true;
   int quizSubjectNO = 0;
   int quizId = 0;
   bool firstTime = true;
@@ -19,13 +24,18 @@ class QuizController extends GetxController {
   int noOfQuestions = 0;
   List<QuestionCircle> circles = [];
   ChoiceController choiceController = Get.find();
+  DropdownButtonController dropController = Get.find();
 
-  // @override
-  // void onInit() {
-  //   print(jsonEncode("اول ابتدائي"));
-  //   // testQuiz();
-  //   super.onInit();
-  // }
+  @override
+  void onInit() {
+    getQuizesHistory();
+    // print(DateTime.now());
+    super.onInit();
+  }
+
+  void saveLastQuizScore() {
+    lastQuizscore = score.value;
+  }
 
   void addCircles() {
     for (int i = 1; i <= noOfQuestions; i++) {
@@ -65,6 +75,21 @@ class QuizController extends GetxController {
     getDeffultQuizesDone.value = true;
   }
 
+  Future<void> getQuizesWithId() async {
+    getDeffultQuizesDone.value = false;
+    Response response =
+        await Server.dio.post(Server.baseUrl + Server.getQuizesPath,
+            queryParameters: {
+              'sub': quizSubjectNO,
+              'stage': (Stages.stagesMap.firstWhere(
+                      (e) => e.containsKey(dropController.selectedItem.value)))[
+                  dropController.selectedItem.value]!
+            },
+            options: Server.token);
+    Quizes.fromJson(response.data);
+    getDeffultQuizesDone.value = true;
+  }
+
 //! get actual quiz questions with choices
   Future<void> getQuiz() async {
     getQuizDone.value = false;
@@ -76,11 +101,23 @@ class QuizController extends GetxController {
     getQuizDone.value = true;
   }
 
-  // Future<void> testQuiz() async {
-  //   Response response = await Server.dio.get(
-  //       Server.baseUrl + Server.getProfileInfoPath,
-  //       queryParameters: {'quizid': quizId},
-  //       options: Server.token);
-  //   ProfileInfo.fromjason(response.data);
-  // }
+  Future<void> sendQuiz() async {
+    await Server.dio.post(
+      Server.baseUrl + Server.sendQuizpath,
+      options: Server.token,
+      data: {
+        "quiz_id": quizId,
+        "created": DateTime.now().toString(),
+        "score": score.value,
+      },
+    );
+  }
+
+  Future<void> getQuizesHistory() async {
+    Response response = await Server.dio.get(
+      Server.baseUrl + Server.getQuizesHistoryPath,
+      options: Server.token,
+    );
+    print(response.data);
+  }
 }

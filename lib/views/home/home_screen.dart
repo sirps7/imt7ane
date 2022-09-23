@@ -1,7 +1,9 @@
 import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
+import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
 import 'package:amti7ane_unicoding/controllers/subjects_controllers.dart';
 import 'package:amti7ane_unicoding/models/card.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
+import 'package:amti7ane_unicoding/models/loading.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_subjects.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   final DropdownButtonController dropController = Get.find();
   final SubjectsControllers subController = Get.find();
+  final QuizController quizController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +65,9 @@ class HomeScreen extends StatelessWidget {
                             )
                             .toList(),
                         onChanged: (value) {
+                          quizController.deffult = false;
                           dropController.selectedItem.value = value!;
+                          subController.getSubjectsWithStageId();
                         },
                       );
                     }),
@@ -84,23 +89,38 @@ class HomeScreen extends StatelessWidget {
                   child: Center(
                     child: SizedBox(
                       width: 700,
-                      child: Wrap(
-                          alignment: WrapAlignment.end,
-                          spacing: 37,
-                          runSpacing: 37,
-                          children: Subjects.deffultsubjects
-                              .map(
-                                (e) => MyCard(
-                                  subject: e.name,
-                                  subNo: e.id,
-                                  firstText: e.name,
-                                  secondText: e.quizCount.toString(),
-                                  subjectIcon: AssetImage(
-                                      subController.subImage[e.name]!),
-                                ),
-                              )
-                              .toList()),
+                      child: GetX<SubjectsControllers>(
+                          builder: (subjectsControllers) {
+                        return subjectsControllers.getSubjectsWithIdDone.value
+                            ? Wrap(
+                                alignment: WrapAlignment.end,
+                                spacing: 37,
+                                runSpacing: 37,
+                                children: Subjects.deffultsubjects
+                                    .map(
+                                      (e) => MyCard(
+                                        subject: e.name,
+                                        subNo: e.id,
+                                        firstText: e.name,
+                                        secondText: e.quizCount.toString(),
+                                        subjectIcon: AssetImage(
+                                          subController.subImage
+                                                  .containsKey(e.name)
+                                              ? subController.subImage[e.name]!
+                                              : 'assets/images/subjects_icons/jokerIcon.png',
+                                        ),
+                                      ),
+                                    )
+                                    .toList())
+                            : Padding(
+                                padding: EdgeInsets.only(
+                                    top:
+                                        MediaQuery.of(context).size.height / 4),
+                                child: const MyLoading(),
+                              );
+                      }),
                     ),
+                    // assets/images/subjects_icons/jokerIcon.png
                   ),
                 ),
               ),

@@ -26,6 +26,7 @@ class MainController extends GetxController {
   SubjectsControllers subjectsControllers = Get.find();
   QuizController quizController = Get.find();
   TimerController timerController = Get.find();
+  DropdownButtonController dropdownButtonController = Get.find();
 
   List screens = [
     [
@@ -42,14 +43,17 @@ class MainController extends GetxController {
   ];
 
   Widget whichScreen() {
-    if (!subjectsControllers.getSubjectsDone.value &&
+    if (!dropdownButtonController.getstagesDone.value &&
+        !subjectsControllers.getSubjectsDone.value &&
         navController.index.value == 0) {
+      dropdownButtonController.getStages();
       subjectsControllers.getDeffultSubjects();
     }
 
     if (navController.index.value == 0) {
       if (!insub.value) {
-        if (subjectsControllers.getSubjectsDone.value) {
+        if (subjectsControllers.getSubjectsDone.value &&
+            dropdownButtonController.getstagesDone.value) {
           return screens[0][0];
         } else {
           return const MyLoading();
@@ -85,7 +89,7 @@ class MainController extends GetxController {
         return IconButton(
           onPressed: () {
             insub.value = false;
-            Quizes.deffultQuizes = [];
+            Quizes.quizesList = [];
           },
           icon: const Icon(
             Icons.keyboard_arrow_left,

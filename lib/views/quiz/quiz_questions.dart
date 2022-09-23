@@ -1,4 +1,6 @@
+import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart';
 import 'package:amti7ane_unicoding/controllers/choiceController.dart';
+import 'package:amti7ane_unicoding/controllers/controller_main.dart';
 import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
 import 'package:amti7ane_unicoding/controllers/timerController.dart';
 import 'package:amti7ane_unicoding/models/choice.dart';
@@ -17,13 +19,15 @@ class QuizQuestons extends StatelessWidget {
   final QuizController quizController = Get.find();
   final ChoiceController choiceController = Get.find();
   final TimerController timerController = Get.find();
+  final BottomNavigationController navController = Get.find();
   static String? subjectName;
 
   @override
   Widget build(BuildContext context) {
+    MainController mainController = Get.find();
     ScrollController scrollController = ScrollController();
     timerController.startTimer();
-
+    RxInt counter = 0.obs;
     return Container(
       padding: const EdgeInsets.only(
         right: 20,
@@ -75,17 +79,19 @@ class QuizQuestons extends StatelessWidget {
               //! score
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  MyText(
+                children: [
+                  const MyText(
                     myText: 'Score',
                     mysize: 20,
                     family: MyFont.poppinsMedium,
                   ),
-                  MyText(
-                    myText: '3',
-                    mysize: 18,
-                    family: MyFont.poppinsMedium,
-                  )
+                  GetX<QuizController>(builder: (quizController) {
+                    return MyText(
+                      myText: '${quizController.score.value}',
+                      mysize: 18,
+                      family: MyFont.poppinsMedium,
+                    );
+                  })
                 ],
               )
             ],
@@ -182,26 +188,26 @@ class QuizQuestons extends StatelessWidget {
                             height: 20,
                           ),
                           //! choices row
-                          ListView.separated(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: NetQuiz
-                                .quizquestions[quizController
-                                            .currentQuestionIndecator.value -
-                                        1][
-                                    quizController
-                                        .currentQuestionIndecator.value]!
-                                .choices
-                                .length,
-                            separatorBuilder:
-                                (BuildContext context, int index) {
-                              return const SizedBox(
-                                height: 15,
-                              );
-                            },
-                            itemBuilder: (BuildContext context, int index) {
-                              return GetX<QuizController>(
-                                builder: (quizController) => Choice(
+                          GetX<QuizController>(builder: (quizController) {
+                            return ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: NetQuiz
+                                  .quizquestions[quizController
+                                              .currentQuestionIndecator.value -
+                                          1][
+                                      quizController
+                                          .currentQuestionIndecator.value]!
+                                  .choices
+                                  .length,
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return const SizedBox(
+                                  height: 15,
+                                );
+                              },
+                              itemBuilder: (BuildContext context, index) {
+                                return Choice(
                                   questionNo: NetQuiz
                                       .quizquestions[
                                           quizController
@@ -221,10 +227,10 @@ class QuizQuestons extends StatelessWidget {
                                               .currentQuestionIndecator.value]!
                                       .choices[index]
                                       .choiceBody,
-                                ),
-                              );
-                            },
-                          ),
+                                );
+                              },
+                            );
+                          }),
                         ],
                       ),
                     ),
@@ -235,21 +241,70 @@ class QuizQuestons extends StatelessWidget {
                   //! next button
                   GestureDetector(
                     onTap: () {
-                      quizController.nextQuestion();
-                      if (quizController.circleNumber.value <
-                          quizController.circles.length - 1) {
-                        quizController.currentQuestionIndecator.value++;
+                      if (counter.value == quizController.noOfQuestions) {
+                        counter.value++;
                       }
-                      quizController.circleNumber.value++;
-                      if (quizController.circleNumber.value <
-                              quizController.circles.length - 3 &&
-                          quizController.circleNumber.value > 3) {
-                        if (quizController.circleNumber.value == 4) {
-                          scrollController
-                              .jumpTo(scrollController.offset + 53.71484375);
-                        } else {
-                          scrollController.jumpTo(scrollController.offset + 56);
+                      if (choiceController.heSelectOneOfChoices) {
+                        if ((
+                                //!--------------------------------------------
+                                NetQuiz
+                                    .quizquestions[
+                                        quizController.currentQuestionIndecator
+                                                .value -
+                                            1][
+                                        quizController
+                                            .currentQuestionIndecator.value]!
+                                    .choices
+                                    .firstWhere((e) =>
+                                        e.choiceBody ==
+                                        NetQuiz
+                                            .quizquestions[quizController
+                                                        .currentQuestionIndecator
+                                                        .value -
+                                                    1][
+                                                quizController
+                                                    .currentQuestionIndecator
+                                                    .value]!
+                                            .selectedChioce
+                                            .value)).isCorrect
+                            //!--------------------------------------------
+                            ) {
+                          quizController.score += 5;
                         }
+                        counter.value++;
+                        if (quizController.circleNumber.value <
+                            quizController.circles.length - 1) {
+                          quizController.currentQuestionIndecator.value++;
+                          quizController.nextQuestion();
+                          quizController.circleNumber.value++;
+                        }
+
+                        if (quizController.circleNumber.value <
+                                quizController.circles.length - 3 &&
+                            quizController.circleNumber.value > 3) {
+                          if (quizController.circleNumber.value == 4) {
+                            scrollController
+                                .jumpTo(scrollController.offset + 53.71484375);
+                          } else {
+                            scrollController
+                                .jumpTo(scrollController.offset + 56);
+                          }
+                        }
+                        choiceController.heSelectOneOfChoices = false;
+                      }
+                      //! submit
+                      if (counter.value > quizController.noOfQuestions) {
+                        quizController.sendQuiz();
+                        mainController.inQuiz.value = false;
+                        navController.index.value = 0;
+                        quizController.resetQuestion();
+                        timerController.stopTimer();
+                        timerController.firstTime = true;
+                        quizController.circleNumber.value = 0;
+                        quizController.circles = [];
+                        quizController.currentQuestionIndecator.value = 1;
+                        NetQuiz.quizquestions = [];
+                        quizController.saveLastQuizScore();
                       }
                     },
                     child: PurpleContainer(
@@ -257,8 +312,7 @@ class QuizQuestons extends StatelessWidget {
                       W: 140,
                       child: GetX<QuizController>(builder: (quizController) {
                         return MyText(
-                          myText: quizController.index.value ==
-                                  quizController.noOfQuestions - 1
+                          myText: counter.value >= quizController.noOfQuestions
                               ? 'Submit'
                               : 'Next',
                           mysize: 20,

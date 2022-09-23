@@ -1,5 +1,5 @@
 class Quizes {
-  static List<Quiz> deffultQuizes = [];
+  static List<Quiz> quizesList = [];
   static late Quiz finalQuiz;
   static void fromJson(List json) {
     finalQuiz = Quiz(
@@ -9,7 +9,7 @@ class Quizes {
       id: json[0]['id'],
     );
     for (int i = 1; i < json.length; i++) {
-      deffultQuizes.add(
+      quizesList.add(
         Quiz(
           name: json[i]['name'],
           questionNo: json[i]['q_num'],

@@ -24,6 +24,7 @@ class Choice extends StatelessWidget {
         if (!inSolution) {
           NetQuiz.quizquestions[questionNo - 1][questionNo]!.selectedChioce
               .value = choiceBody;
+          choiceController.heSelectOneOfChoices = true;
         }
       },
       child: Row(

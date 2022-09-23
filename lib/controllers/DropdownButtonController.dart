@@ -6,6 +6,7 @@ import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
 
 class DropdownButtonController extends GetxController {
+  RxBool getstagesDone = false.obs;
   List<String> ganderList = ['Male', 'Female'];
   RxString selectedItem1 = 'Male'.obs;
   Dio dio = Dio();
@@ -20,5 +21,6 @@ class DropdownButtonController extends GetxController {
       options: Server.token,
     );
     Stages.fromJson(response.data);
+    getstagesDone.value = true;
   }
 }
