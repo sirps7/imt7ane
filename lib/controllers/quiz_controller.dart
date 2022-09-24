@@ -2,14 +2,21 @@ import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
 import 'package:amti7ane_unicoding/controllers/choiceController.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_quizes.dart';
 import 'package:amti7ane_unicoding/models/networking/quiz.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz_history.dart';
 import 'package:amti7ane_unicoding/models/networking/server_variable.dart';
 import 'package:amti7ane_unicoding/models/networking/stages.dart';
 import 'package:amti7ane_unicoding/models/question_circle.dart';
+import 'package:intl/intl.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
 
 class QuizController extends GetxController {
+  RxBool thereIsNoScore = true.obs;
+  RxInt avg = 0.obs;
+  RxInt total = 0.obs;
   RxInt score = 0.obs;
+  RxInt correctAnswer = 0.obs;
+  RxInt inCorrectAnswer = 0.obs;
   int lastQuizscore = 0;
   bool deffult = true;
   int quizSubjectNO = 0;
@@ -28,13 +35,14 @@ class QuizController extends GetxController {
 
   @override
   void onInit() {
-    getQuizesHistory();
-    // print(DateTime.now());
+    getQuizesHistoryWithAvgAndTotal();
+
     super.onInit();
   }
 
   void saveLastQuizScore() {
     lastQuizscore = score.value;
+    score.value = 0;
   }
 
   void addCircles() {
@@ -61,7 +69,6 @@ class QuizController extends GetxController {
     circles[index.value].isSelected.value = false;
     index.value = 0;
     circles[index.value].isSelected.value = true;
-    choiceController.selectedChoice.value = '';
   }
 
 //! lecture quizes not actual quizes
@@ -97,6 +104,7 @@ class QuizController extends GetxController {
         Server.baseUrl + Server.getQuizPath,
         queryParameters: {'quizid': quizId},
         options: Server.token);
+    print(response.data['quiz'][0]['Questions']['image']);
     NetQuiz.fromJson(response.data);
     getQuizDone.value = true;
   }
@@ -107,17 +115,21 @@ class QuizController extends GetxController {
       options: Server.token,
       data: {
         "quiz_id": quizId,
-        "created": DateTime.now().toString(),
+        "created": DateFormat('yy/MM/dd KK:mm:ss a').format(DateTime.now()),
         "score": score.value,
       },
     );
   }
 
-  Future<void> getQuizesHistory() async {
-    Response response = await Server.dio.get(
+  Future<void> getQuizesHistoryWithAvgAndTotal() async {
+    Response historyResponse = await Server.dio.get(
       Server.baseUrl + Server.getQuizesHistoryPath,
       options: Server.token,
     );
-    print(response.data);
+    Response avgTotalResponse = await Server.dio
+        .get(Server.baseUrl + Server.getAvgAndTotalPath, options: Server.token);
+    History.fromJson(historyResponse.data);
+    total.value = avgTotalResponse.data['total'];
+    avg.value = avgTotalResponse.data['avg'];
   }
 }

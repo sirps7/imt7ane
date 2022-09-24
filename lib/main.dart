@@ -1,5 +1,7 @@
 import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/controllers/init_dependency.dart';
+import 'package:amti7ane_unicoding/models/loading.dart';
+import 'package:amti7ane_unicoding/views/auth/mainScreen/loginScreen.dart';
 import 'package:amti7ane_unicoding/views/main/main_screen.dart';
 import 'package:amti7ane_unicoding/views/opening/logoMain.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +46,6 @@ class MyApp extends StatelessWidget {
             ? LogoMain(
                 showw: show,
               )
-            : const MainScreen());
+            : const LoginScreen());
   }
 }

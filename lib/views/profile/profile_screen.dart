@@ -1,6 +1,8 @@
 import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart';
+import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz_history.dart';
 import 'package:amti7ane_unicoding/models/quiz_history.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,17 +56,19 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          MyText(
+                        children: [
+                          const MyText(
                             myText: 'Avg Score',
                             mysize: 17,
                             family: 'Poppinsbold',
                           ),
-                          MyText(
-                            myText: '75%',
-                            mysize: 40,
-                            family: 'Poppinsbold',
-                          ),
+                          GetX<QuizController>(builder: (quizController) {
+                            return MyText(
+                              myText: '${quizController.avg.value}%',
+                              mysize: 40,
+                              family: 'Poppinsbold',
+                            );
+                          }),
                         ],
                       ),
                     ),
@@ -84,17 +88,22 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          MyText(
+                        children: [
+                          const MyText(
                             myText: 'Total Quizzes',
                             mysize: 17,
                             family: 'Poppinsbold',
                           ),
-                          MyText(
-                            myText: '12',
-                            mysize: 40,
-                            family: 'Poppinsbold',
-                          ),
+                          GetX<QuizController>(builder: (quizController) {
+                            return Expanded(
+                              child: MyText(
+                                myText: '${quizController.total.value}',
+                                mysize: 40,
+                                family: 'Poppinsbold',
+                                overFlow: TextOverflow.clip,
+                              ),
+                            );
+                          }),
                         ],
                       ),
                     ),
@@ -116,14 +125,14 @@ class ProfileScreen extends StatelessWidget {
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 8,
+                  itemCount: History.historyList.length,
                   separatorBuilder: (BuildContext context, int index) {
                     return const SizedBox(
                       height: 30,
                     );
                   },
                   itemBuilder: (BuildContext context, int index) {
-                    return const QuizHistory();
+                    return History.historyList[index];
                   },
                 ),
               ],

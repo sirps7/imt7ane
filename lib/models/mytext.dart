@@ -14,6 +14,7 @@ class MyText extends StatelessWidget {
     this.align = TextAlign.center,
     this.direction,
     this.defflutDirection = true,
+    this.overFlow,
   });
 
   final String myText;
@@ -26,6 +27,7 @@ class MyText extends StatelessWidget {
   final int lines;
   final TextAlign? align;
   final TextDirection? direction;
+  final TextOverflow? overFlow;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +47,7 @@ class MyText extends StatelessWidget {
       ),
       maxLines: lines,
       textAlign: align,
+      overflow: overFlow,
     );
   }
 }

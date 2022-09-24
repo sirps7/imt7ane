@@ -30,7 +30,7 @@ class NetQuiz {
 class QuizQuastion {
   QuizQuastion({
     required this.isProblem,
-    this.image,
+    this.image = '',
     required this.questionBody,
     required this.questionNo,
     required this.choices,

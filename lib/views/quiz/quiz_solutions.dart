@@ -1,10 +1,13 @@
 import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz.dart';
 import 'package:amti7ane_unicoding/models/solution_model.dart';
 import 'package:flutter/material.dart';
 
 class QuizSolutions extends StatelessWidget {
   const QuizSolutions({super.key});
+  static String subjectName = '';
+  static String lectureName = '';
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +23,13 @@ class QuizSolutions extends StatelessWidget {
               child: Column(
                 children: [
                   MyText(
-                    myText: 'فيزياء',
+                    myText: subjectName,
                     mysize: 25,
                     family: MyFont.arabic,
                     height: 1.5,
                   ),
                   MyText(
-                    myText: 'الفصل الاول',
+                    myText: lectureName,
                     mysize: 17,
                     family: MyFont.arabic,
                     height: 1,
@@ -34,7 +37,7 @@ class QuizSolutions extends StatelessWidget {
                 ],
               ),
             ),
-            MyText(
+            const MyText(
               myText: 'Solutions',
               mysize: 30,
               family: MyFont.poppinsMedium,
@@ -45,7 +48,7 @@ class QuizSolutions extends StatelessWidget {
             ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 4,
+              itemCount: NetQuiz.quizquestions.length,
               separatorBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),
@@ -57,8 +60,13 @@ class QuizSolutions extends StatelessWidget {
               },
               itemBuilder: (BuildContext context, int index) {
                 return QuizSolution(
-                    questionBody: 'what is your name ? ',
-                    questionNo: index + 1);
+                  questionBody:
+                      NetQuiz.quizquestions[index][index + 1]!.questionBody,
+                  questionNo: index + 1,
+                  choices: NetQuiz.quizquestions[index][index + 1]!.choices,
+                  isProblem: NetQuiz.quizquestions[index][index + 1]!.isProblem,
+                  problemImage: NetQuiz.quizquestions[index][index + 1]!.image,
+                );
               },
             ),
           ],

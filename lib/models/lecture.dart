@@ -36,6 +36,7 @@ class Lecture extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         if (quizController.firstTime) {
+          NetQuiz.quizquestions = [];
           navController.index.value = 1;
           mainController.inQuiz.value = true;
           quizController.quizId = quizId;
@@ -46,6 +47,8 @@ class Lecture extends StatelessWidget {
           quizController.noOfQuestions = NetQuiz.quizquestions.length;
           quizController.addCircles();
           quizController.firstTime = false;
+          QuizQuestons.lecture = lecture;
+          QuizQuestons.subName = subName;
         }
       },
       child: SizedBox(

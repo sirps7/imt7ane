@@ -35,11 +35,11 @@ class Choice extends StatelessWidget {
               height: 20,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: !(NetQuiz.quizquestions[questionNo - 1][questionNo]!
+                color: NetQuiz.quizquestions[questionNo - 1][questionNo]!
                             .selectedChioce.value ==
-                        choiceBody)
-                    ? Colors.white
-                    : Colors.blue,
+                        choiceBody
+                    ? Colors.blue
+                    : Colors.white,
                 border: Border.all(
                   color: const Color.fromARGB(255, 207, 211, 213),
                   width: 4,
@@ -56,9 +56,10 @@ class Choice extends StatelessWidget {
             family: MyFont.arabic,
             mycolor: inSolution
                 ? inSolution &&
-                        NetQuiz.quizquestions[questionNo - 1][questionNo]!
-                                .selectedChioce.value ==
-                            choiceBody
+                        NetQuiz
+                            .quizquestions[questionNo - 1][questionNo]!.choices
+                            .firstWhere((e) => e.choiceBody == choiceBody)
+                            .isCorrect
                     ? Colors.green
                     : Colors.red
                 : Colors.black,

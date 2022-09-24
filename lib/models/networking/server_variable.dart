@@ -13,6 +13,7 @@ class Server {
   static String getSubjectsWithStageId = '/api/subjects/get_subjects';
   static String sendQuizpath = '/api/quizLog/post_quiz_history';
   static String getQuizesHistoryPath = '/api/quizLog/get_quizzes_history';
+  static String getAvgAndTotalPath = '/api/quizLog/get_avg_n_total';
 
   static Options token = Options(
     responseType: ResponseType.json,

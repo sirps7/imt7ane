@@ -43,10 +43,12 @@ class HomeScreen extends StatelessWidget {
                         builder: (dropController) {
                       return DropdownButton<String>(
                         menuMaxHeight: 300,
-                        icon: const Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Colors.white,
-                          size: 25,
+                        icon: const Expanded(
+                          child: Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Colors.white,
+                            size: 25,
+                          ),
                         ),
                         dropdownColor: MyColor.mainColor,
                         value: dropController.selectedItem.value,

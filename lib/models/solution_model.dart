@@ -2,20 +2,30 @@ import 'package:amti7ane_unicoding/controllers/choiceController.dart';
 import 'package:amti7ane_unicoding/models/choice.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz.dart';
+import 'package:amti7ane_unicoding/models/networking/server_variable.dart';
 import 'package:amti7ane_unicoding/models/question.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class QuizSolution extends StatelessWidget {
-  const QuizSolution(
-      {super.key, required this.questionNo, required this.questionBody});
+  const QuizSolution({
+    super.key,
+    required this.questionNo,
+    required this.questionBody,
+    required this.choices,
+    required this.isProblem,
+    required this.problemImage,
+  });
   final int questionNo;
   final String questionBody;
+  final List choices;
+  final bool isProblem;
+  final String? problemImage;
 
   @override
   Widget build(BuildContext context) {
-    ChoiceController choiceController = Get.find();
-    choiceController.selectedChoice.value = 'العالم نيوتن';
+    // ChoiceController choiceController = Get.find();
     return SizedBox(
       width: double.maxFinite,
       child: Column(
@@ -63,17 +73,31 @@ class QuizSolution extends StatelessWidget {
                   ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: choiceController.choices.length,
+                    itemCount: choices.length,
                     separatorBuilder: (BuildContext context, int index) {
                       return const SizedBox(
                         height: 15,
                       );
                     },
                     itemBuilder: (BuildContext context, int index) {
-                      return Choice(
-                        questionNo: 1, //todo
-                        choiceBody: choiceController.choices[index],
-                        inSolution: true,
+                      return Column(
+                        children: [
+                          Choice(
+                            questionNo: choices[index].questionNo,
+                            choiceBody: choices[index].choiceBody,
+                            inSolution: true,
+                          ),
+                          index == choices.length - 1
+                              ? isProblem
+                                  ? Padding(
+                                      padding: const EdgeInsets.only(top: 25),
+                                      child: Image(
+                                          image: NetworkImage(
+                                              Server.baseUrl + problemImage!)),
+                                    )
+                                  : const Align()
+                              : const Align()
+                        ],
                       );
                     },
                   ),

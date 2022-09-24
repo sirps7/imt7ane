@@ -10,11 +10,15 @@ import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/networking/quiz.dart';
 import 'package:amti7ane_unicoding/models/purple_container.dart';
 import 'package:amti7ane_unicoding/models/question.dart';
+import 'package:amti7ane_unicoding/views/quiz/quiz_score_page.dart';
+import 'package:amti7ane_unicoding/views/quiz/quiz_solutions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class QuizQuestons extends StatelessWidget {
   QuizQuestons({super.key});
+  static String lecture = '';
+  static String subName = '';
 
   final QuizController quizController = Get.find();
   final ChoiceController choiceController = Get.find();
@@ -270,6 +274,9 @@ class QuizQuestons extends StatelessWidget {
                             //!--------------------------------------------
                             ) {
                           quizController.score += 5;
+                          quizController.correctAnswer.value++;
+                        } else {
+                          quizController.inCorrectAnswer.value++;
                         }
                         counter.value++;
                         if (quizController.circleNumber.value <
@@ -303,8 +310,12 @@ class QuizQuestons extends StatelessWidget {
                         quizController.circleNumber.value = 0;
                         quizController.circles = [];
                         quizController.currentQuestionIndecator.value = 1;
-                        NetQuiz.quizquestions = [];
                         quizController.saveLastQuizScore();
+                        QuizSolutions.lectureName = lecture;
+                        QuizSolutions.subjectName = subName;
+                        QuizScore.lecture = lecture;
+                        QuizScore.subName = subName;
+                        quizController.thereIsNoScore.value = false;
                       }
                     },
                     child: PurpleContainer(

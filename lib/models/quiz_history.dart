@@ -3,7 +3,17 @@ import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:flutter/material.dart';
 
 class QuizHistory extends StatelessWidget {
-  const QuizHistory({super.key});
+  const QuizHistory(
+      {super.key,
+      required this.created,
+      required this.subject,
+      required this.chapter,
+      required this.score});
+
+  final String created;
+  final String subject;
+  final String chapter;
+  final String score;
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +32,15 @@ class QuizHistory extends StatelessWidget {
             fit: FlexFit.loose,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                MyText(
+              children: [
+                const MyText(
                   myText: 'التاريخ',
                   mysize: 20,
                   family: 'SFMarwa',
                   mycolor: Colors.white,
                 ),
                 MyText(
-                  myText: '22/9/3',
+                  myText: created,
                   mysize: 16,
                   mycolor: Colors.white,
                 ),
@@ -41,15 +51,15 @@ class QuizHistory extends StatelessWidget {
             fit: FlexFit.loose,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                MyText(
+              children: [
+                const MyText(
                   myText: 'المادة',
                   mysize: 20,
                   family: 'SFMarwa',
                   mycolor: Colors.white,
                 ),
                 MyText(
-                  myText: 'فيزياء',
+                  myText: subject,
                   mysize: 16,
                   mycolor: Colors.white,
                   family: 'SFMarwa',
@@ -61,15 +71,15 @@ class QuizHistory extends StatelessWidget {
             fit: FlexFit.loose,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                MyText(
+              children: [
+                const MyText(
                   myText: 'الفصل',
                   mysize: 20,
                   family: 'SFMarwa',
                   mycolor: Colors.white,
                 ),
                 MyText(
-                  myText: 'الفصل الاول ',
+                  myText: chapter,
                   mysize: 16,
                   mycolor: Colors.white,
                   family: 'SFMarwa',
@@ -81,15 +91,15 @@ class QuizHistory extends StatelessWidget {
             fit: FlexFit.loose,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                MyText(
+              children: [
+                const MyText(
                   myText: 'النتيجه',
                   mysize: 20,
                   family: 'SFMarwa',
                   mycolor: Colors.white,
                 ),
                 MyText(
-                  myText: '8/15',
+                  myText: score,
                   mysize: 16,
                   mycolor: Colors.white,
                 ),
