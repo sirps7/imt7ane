@@ -21,7 +21,10 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mycontroller.text = ProfileInfo.studentName!;
+    if (settingController.takeTheNameFromDb) {
+      mycontroller.text = ProfileInfo.studentName!;
+      settingController.takeTheNameFromDb = false;
+    }
     return SizedBox(
       width: double.infinity,
 

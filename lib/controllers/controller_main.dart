@@ -3,10 +3,13 @@ import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
 import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
 import 'package:amti7ane_unicoding/controllers/subjects_controllers.dart';
 import 'package:amti7ane_unicoding/controllers/timerController.dart';
+import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/models/loading.dart';
+import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_quizes.dart';
 import 'package:amti7ane_unicoding/models/networking/quiz.dart';
+import 'package:amti7ane_unicoding/models/purple_container.dart';
 import 'package:amti7ane_unicoding/views/home/home_screen.dart';
 import 'package:amti7ane_unicoding/views/home/subjects_lectures.dart';
 import 'package:amti7ane_unicoding/views/profile/profile_screen.dart';
@@ -107,15 +110,53 @@ class MainController extends GetxController {
         return IconButton(
           onPressed: () {
             if (inQuiz.value) {
-              inQuiz.value = false;
-              navController.index.value = 0;
-              quizController.resetQuestion();
-              timerController.stopTimer();
-              timerController.firstTime = true;
-              quizController.circleNumber.value = 0;
-              quizController.circles = [];
-              quizController.currentQuestionIndecator.value = 1;
-              NetQuiz.quizquestions = [];
+              Get.defaultDialog(
+                barrierDismissible: false,
+                radius: 12,
+                titlePadding: const EdgeInsets.all(10),
+                title: 'Are you sure you want to quit ?',
+                confirm: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: MyColor.milk,
+                      backgroundColor: MyColor.mainColor,
+                    ),
+                    onPressed: () {
+                      inQuiz.value = false;
+                      navController.index.value = 0;
+                      quizController.resetQuestion();
+                      timerController.stopTimer();
+                      timerController.firstTime = true;
+                      quizController.circleNumber.value = 0;
+                      quizController.circles = [];
+                      quizController.currentQuestionIndecator.value = 1;
+                      NetQuiz.quizquestions = [];
+                      Get.back();
+                    },
+                    child: const MyText(
+                      myText: 'yes',
+                      mysize: 15,
+                      mycolor: Colors.white,
+                      family: MyFont.poppinsMedium,
+                    ),
+                  ),
+                ),
+                cancel: TextButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    style: TextButton.styleFrom(
+                      side: const BorderSide(width: 1),
+                    ),
+                    child: const MyText(
+                      myText: 'no',
+                      mysize: 15,
+                      family: MyFont.poppinsMedium,
+                      mycolor: Colors.black,
+                    )),
+                middleText: '',
+              );
             } else {
               showSolutions.value = false;
             }

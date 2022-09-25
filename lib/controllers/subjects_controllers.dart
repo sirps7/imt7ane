@@ -18,7 +18,7 @@ class SubjectsControllers extends GetxController {
     'الرياضيات': 'assets/images/subjects_icons/Math_sub.png',
     'الاحياء': 'assets/images/subjects_icons/bio_sub.png',
     'الكيمياء': 'assets/images/subjects_icons/chemical_sub.png',
-    'الإنكليزي': 'assets/images/subjects_icons/english_sub.png',
+    'الانكليزي': 'assets/images/subjects_icons/english_sub.png',
     'الجغرافيا': 'assets/images/subjects_icons/geo_sub.png',
     'العلوم': 'assets/images/subjects_icons/sciences.png',
     'الاسلاميه': 'assets/images/subjects_icons/quran.png',

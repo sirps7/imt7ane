@@ -8,6 +8,7 @@ import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/networking/quiz.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz_history.dart';
 import 'package:amti7ane_unicoding/models/purple_container.dart';
 import 'package:amti7ane_unicoding/models/question.dart';
 import 'package:amti7ane_unicoding/views/quiz/quiz_score_page.dart';
@@ -315,6 +316,8 @@ class QuizQuestons extends StatelessWidget {
                         QuizSolutions.subjectName = subName;
                         QuizScore.lecture = lecture;
                         QuizScore.subName = subName;
+                        History.historyList = [];
+                        quizController.getQuizesHistoryWithAvgAndTotal();
                         quizController.thereIsNoScore.value = false;
                       }
                     },

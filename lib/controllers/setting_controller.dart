@@ -9,6 +9,7 @@ import 'package:get/get.dart' hide Response, FormData;
 import 'package:dio/dio.dart';
 
 class SettingController extends GetxController {
+  bool takeTheNameFromDb = true;
   RxBool profilebutton = false.obs;
   RxBool updateProfileDone = true.obs;
   RxBool languagebutton = false.obs;
