@@ -304,7 +304,7 @@ class QuizQuestons extends StatelessWidget {
                       if (counter.value > quizController.noOfQuestions) {
                         quizController.sendQuiz();
                         mainController.inQuiz.value = false;
-                        navController.index.value = 0;
+                        navController.index.value = 1;
                         quizController.resetQuestion();
                         timerController.stopTimer();
                         timerController.firstTime = true;

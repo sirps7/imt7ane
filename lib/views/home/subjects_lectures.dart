@@ -57,13 +57,15 @@ class SubjectLectures extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     if (quizController.firstTime) {
+                      quizController.quizId = Quizes.finalQuiz.id;
+                      QuizQuestons.lecture = Quizes.finalQuiz.name;
+                      QuizQuestons.subName = subName!;
                       navController.index.value = 1;
                       mainController.inQuiz.value = true;
                       quizController.quizId = Quizes.finalQuiz.id;
                       await quizController.getQuiz();
                       TimerController.givenMinutes = Quizes.finalQuiz.time;
                       timerController.refreshTimer();
-
                       quizController.noOfQuestions =
                           NetQuiz.quizquestions.length;
                       quizController.addCircles();
