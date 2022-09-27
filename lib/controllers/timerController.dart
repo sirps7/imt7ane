@@ -46,7 +46,7 @@ class TimerController extends GetxController {
           padding: const EdgeInsets.only(left: 20),
           child: TextButton(
             style: TextButton.styleFrom(
-              foregroundColor: MyColor.milk,
+              primary: MyColor.milk,
               backgroundColor: MyColor.mainColor,
             ),
             onPressed: () {
