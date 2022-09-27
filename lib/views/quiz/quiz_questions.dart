@@ -14,6 +14,8 @@ import 'package:amti7ane_unicoding/models/question.dart';
 import 'package:amti7ane_unicoding/views/quiz/quiz_score_page.dart';
 import 'package:amti7ane_unicoding/views/quiz/quiz_solutions.dart';
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_shake_animated/flutter_shake_animated.dart';
 import 'package:get/get.dart';
 
 class QuizQuestons extends StatelessWidget {
@@ -29,6 +31,7 @@ class QuizQuestons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final player = AudioCache();
     MainController mainController = Get.find();
     ScrollController scrollController = ScrollController();
     timerController.startTimer();
@@ -192,7 +195,7 @@ class QuizQuestons extends StatelessWidget {
                           const SizedBox(
                             height: 20,
                           ),
-                          //! choices row
+                          //! choices column
                           GetX<QuizController>(builder: (quizController) {
                             return ListView.separated(
                               physics: const NeverScrollableScrollPhysics(),
@@ -207,8 +210,14 @@ class QuizQuestons extends StatelessWidget {
                                   .length,
                               separatorBuilder:
                                   (BuildContext context, int index) {
-                                return const SizedBox(
-                                  height: 15,
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 15),
+                                  child: Container(
+                                    color: const Color.fromARGB(
+                                        255, 148, 155, 183),
+                                    height: 1,
+                                  ),
                                 );
                               },
                               itemBuilder: (BuildContext context, index) {
@@ -245,7 +254,7 @@ class QuizQuestons extends StatelessWidget {
                   ),
                   //! next button
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       if (counter.value == quizController.noOfQuestions) {
                         counter.value++;
                       }
@@ -274,9 +283,11 @@ class QuizQuestons extends StatelessWidget {
                                             .value)).isCorrect
                             //!--------------------------------------------
                             ) {
+                          player.play('sounds/Correct.mp3');
                           quizController.score += 5;
                           quizController.correctAnswer.value++;
                         } else {
+                          player.play('sounds/Error.mp3');
                           quizController.inCorrectAnswer.value++;
                         }
                         counter.value++;
@@ -301,7 +312,7 @@ class QuizQuestons extends StatelessWidget {
                         choiceController.heSelectOneOfChoices = false;
                       }
                       //! submit
-                      if (counter.value > quizController.noOfQuestions) {
+                      if (counter.value == quizController.noOfQuestions) {
                         quizController.sendQuiz();
                         mainController.inQuiz.value = false;
                         navController.index.value = 1;
@@ -326,7 +337,7 @@ class QuizQuestons extends StatelessWidget {
                       W: 140,
                       child: GetX<QuizController>(builder: (quizController) {
                         return MyText(
-                          myText: counter.value >= quizController.noOfQuestions
+                          myText: counter.value == quizController.noOfQuestions
                               ? 'Submit'
                               : 'Next',
                           mysize: 20,

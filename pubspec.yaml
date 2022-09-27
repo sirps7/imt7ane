@@ -51,6 +51,8 @@ dev_dependencies:
   fluentui_system_icons: ^1.1.178
   dio: ^4.0.6
   intl: ^0.17.0
+  flutter_shake_animated: ^0.0.5
+  audioplayers: ^0.20.1
 #  shared_preferences: ^2.0.15
 
 
@@ -101,6 +103,7 @@ flutter:
     - assets/images/buttom_icons/
     - assets/images/subjects_icons/
     - assets/images/
+    - assets/sounds/
 
 
 
