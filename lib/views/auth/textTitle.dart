@@ -1,18 +1,17 @@
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 class TextTitle extends StatelessWidget {
-  const TextTitle({Key? key, required this.text, required this.size})
-      : super(key: key);
-  final String text;
-  final double size;
+   TextTitle({Key? key, required this.text, required this.size}) : super(key: key);
+final String text;
+final double size;
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-          color: const Color(0xff870DFF),
-          fontSize: size,
-          fontWeight: FontWeight.bold),
-    );
+    return Text(text.tr,style: TextStyle(
+        color: Color(0xff870DFF),
+        fontSize: size,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'fonts'.tr
+    ),);
   }
 }

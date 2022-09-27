@@ -88,13 +88,13 @@ class MainController extends GetxController {
   Widget? whichLeading() {
     if (navController.index.value == 0) {
       if (insub.value == true &&
-          navController.buttomNavIcons[navController.index.value] == 'Home') {
+          navController.buttomNavIcons[navController.index.value] == 'home'.tr) {
         return IconButton(
           onPressed: () {
             insub.value = false;
             Quizes.quizesList = [];
           },
-          icon: const Icon(
+          icon:const  Icon(
             Icons.keyboard_arrow_left,
             color: Colors.white,
             size: 40,
@@ -106,7 +106,7 @@ class MainController extends GetxController {
     }
     if (navController.index.value == 1) {
       if ((inQuiz.value || showSolutions.value) &&
-          navController.buttomNavIcons[navController.index.value] == 'Quiz') {
+          navController.buttomNavIcons[navController.index.value] == 'quiz'.tr) {
         return IconButton(
           onPressed: () {
             if (inQuiz.value) {
@@ -119,7 +119,7 @@ class MainController extends GetxController {
                   padding: const EdgeInsets.only(left: 20),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      foregroundColor: MyColor.milk,
+                      primary: MyColor.milk,
                       backgroundColor: MyColor.mainColor,
                     ),
                     onPressed: () {
@@ -134,8 +134,8 @@ class MainController extends GetxController {
                       NetQuiz.quizquestions = [];
                       Get.back();
                     },
-                    child: const MyText(
-                      myText: 'yes',
+                    child:  MyText(
+                      myText: 'yes'.tr,
                       mysize: 15,
                       mycolor: Colors.white,
                       family: MyFont.poppinsMedium,
@@ -149,8 +149,8 @@ class MainController extends GetxController {
                     style: TextButton.styleFrom(
                       side: const BorderSide(width: 1),
                     ),
-                    child: const MyText(
-                      myText: 'no',
+                    child:  MyText(
+                      myText: 'no'.tr,
                       mysize: 15,
                       family: MyFont.poppinsMedium,
                       mycolor: Colors.black,
@@ -176,11 +176,11 @@ class MainController extends GetxController {
 
   Widget whichTitle() {
     return Padding(
-      padding: navController.buttomNavIcons[navController.index.value] == 'Home'
+      padding: navController.buttomNavIcons[navController.index.value] == 'home'.tr
           ? insub.value
               ? const EdgeInsets.only(right: 56)
               : EdgeInsets.zero
-          : navController.buttomNavIcons[navController.index.value] == 'Quiz'
+          : navController.buttomNavIcons[navController.index.value] == 'quiz'.tr
               ? showSolutions.value || inQuiz.value
                   ? const EdgeInsets.only(right: 56)
                   : EdgeInsets.zero
@@ -189,7 +189,7 @@ class MainController extends GetxController {
         child: MyText(
           myText: navController.buttomNavIcons[navController.index.value],
           mysize: 35,
-          family: 'Poppins',
+          family: 'fonts'.tr,
         ),
       ),
     );

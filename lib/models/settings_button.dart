@@ -35,30 +35,25 @@ class SettingsButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               color: MyColor.secounderyColor,
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 60),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  MyText(
-                    myText: title,
-                    mysize: 20,
-                    mycolor: Colors.white,
-                  ),
-                  const SizedBox(
-                    width: 60,
-                  ),
-                  GetX<SettingController>(builder: (context) {
-                    return Icon(
-                      wichicon.value
-                          ? Icons.keyboard_arrow_down
-                          : Icons.keyboard_arrow_right,
-                      size: 35,
-                      color: Colors.white,
-                    );
-                  })
-                ],
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                MyText(
+                  myText: title,
+                  mysize: 20,
+                  mycolor: Colors.white,
+                ),
+
+                GetX<SettingController>(builder: (context) {
+                  return Icon(
+                    wichicon.value
+                        ? Icons.keyboard_arrow_down
+                        : Icons.keyboard_arrow_right,
+                    size: 35,
+                    color: Colors.white,
+                  );
+                })
+              ],
             ),
           ),
         ),

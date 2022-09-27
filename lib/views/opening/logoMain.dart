@@ -1,5 +1,7 @@
-import 'package:amti7ane_unicoding/views/auth/mainScreen/loginScreen.dart';
+
+import 'package:amti7ane_unicoding/views/auth/mainScreen/login_Screen.dart';
 import 'package:amti7ane_unicoding/views/opening/introduction_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -14,17 +16,15 @@ class LogoMain extends StatefulWidget {
 class _LogoMainState extends State<LogoMain> {
   @override
   void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 5), () {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  widget.showw ? IntroScreen() : const LoginScreen()));
+                  widget.showw ? IntroScreen() :  LoginScreen()));
     });
   }
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -53,8 +53,8 @@ class _LogoMainState extends State<LogoMain> {
               Container(
                 width: 200,
                 height: 130,
-                margin: const EdgeInsets.only(bottom: 20),
-                padding: const EdgeInsets.only(left: 35),
+                margin: EdgeInsets.only(bottom: 20),
+                padding: EdgeInsets.only(left: 35),
                 child: Column(
                   children: const [
                     Text(

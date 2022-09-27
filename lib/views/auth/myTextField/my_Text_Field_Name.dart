@@ -1,46 +1,49 @@
+
+import 'package:amti7ane_unicoding/controllers/ahmedController/email_Controller.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 class MyTextFiledName extends StatelessWidget {
-  const MyTextFiledName(
-      {Key? key,
-      required this.text,
-      required this.myPrefixIcon,
-      this.mySuffixIcon})
-      : super(key: key);
-  final String text;
-  final IconData myPrefixIcon;
-  final IconData? mySuffixIcon;
+   MyTextFiledName({Key? key}) : super(key: key);
 
+   final from = Get.find<MyControllerAuth>();
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 25, left: 57, right: 57),
+      constraints:const BoxConstraints(
+
+        maxWidth: 300.0,
+        minWidth: 300.0,
+      ),
+      margin: EdgeInsets.only(top: 25, left: 57, right: 57),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            text,
-            style: const TextStyle(color: Colors.black, fontSize: 15),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
+           Text('full_name'.tr,style:  TextStyle(
+              color: Colors.black,
+              fontSize: 15,
+             fontFamily: 'fonts'.tr
+          ),),
+          const SizedBox(height: 10,),
           TextFormField(
-            validator: (value) {
-              if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+            controller: from.nameController,
+
+            validator: (value){
+              if(value!.isEmpty || !RegExp(r'^[a-z A-Z -]+$').hasMatch(value)){
                 return " Enter Correct name";
-              } else {
+              }else{
                 return null;
               }
             },
+
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
+            textAlign: TextAlign.start,
+            textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              constraints: const BoxConstraints(maxHeight: 50),
+              contentPadding: const EdgeInsets.symmetric(vertical: 15),
+              constraints:const  BoxConstraints(maxHeight: 70),
               enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
+                borderSide:const BorderSide(
                   width: 1,
                   color: Color(0xffC4C4C4),
                 ),
@@ -54,20 +57,21 @@ class MyTextFiledName extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               errorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
+                borderSide:const BorderSide(
                   width: 1,
                   color: Colors.red,
                 ),
                 borderRadius: BorderRadius.circular(8),
               ),
-              prefixIcon: Icon(
-                myPrefixIcon,
-                size: 20,
-                color: const Color(0xff555555),
+              prefixIcon:const Icon(Icons.person_outline_rounded,size: 20,color: Color(0xff555555),),
+
+              hintText: 'your_full_name'.tr,
+              hintStyle: TextStyle(
+                  color: Color(0xff555555),
+                  fontSize: 12,
+                fontFamily: 'fonts'.tr
               ),
-              hintText: 'ali ahmed',
-              hintStyle:
-                  const TextStyle(color: Color(0xff555555), fontSize: 12),
+
             ),
             style: const TextStyle(
               color: Colors.black,
@@ -78,3 +82,4 @@ class MyTextFiledName extends StatelessWidget {
     );
   }
 }
+

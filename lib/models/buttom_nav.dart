@@ -13,6 +13,7 @@ class ButtomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetX<BottomNavigationController>(builder: (mycontroller) {
       return BottomNavigationBar(
+        selectedLabelStyle: TextStyle(fontFamily: 'fonts'.tr),
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
         currentIndex: mycontroller.index.value,
@@ -28,64 +29,64 @@ class ButtomNav extends StatelessWidget {
               image:
                   const AssetImage('assets/images/buttom_icons/home_icon.png'),
               color: mycontroller.buttomNavIcons[mycontroller.index.value] ==
-                      'Home'
+                      'home'.tr
                   ? MyColor.mainColor
                   : Colors.grey,
               fit: BoxFit.cover,
               height: mycontroller.buttomNavIcons[mycontroller.index.value] ==
-                      'Home'
+                  'home'.tr
                   ? mycontroller.max
                   : mycontroller.min,
             ),
-            label: 'Home',
+            label: 'home'.tr,
           ),
           BottomNavigationBarItem(
             icon: Image(
               image:
                   const AssetImage('assets/images/buttom_icons/quiz_icon.png'),
               color: mycontroller.buttomNavIcons[mycontroller.index.value] ==
-                      'Quiz'
+                      'quiz'.tr
                   ? MyColor.mainColor
                   : Colors.grey,
               fit: BoxFit.cover,
               height: mycontroller.buttomNavIcons[mycontroller.index.value] ==
-                      'Quiz'
+                      'quiz'.tr
                   ? mycontroller.max
                   : mycontroller.min,
             ),
-            label: 'Quiz',
+            label: 'quiz'.tr,
           ),
           BottomNavigationBarItem(
             icon: Image(
               image: const AssetImage(
                   'assets/images/buttom_icons/profile_icon.png'),
               color: mycontroller.buttomNavIcons[mycontroller.index.value] ==
-                      'profile'
+                      'profile'.tr
                   ? MyColor.mainColor
                   : Colors.grey,
               height: mycontroller.buttomNavIcons[mycontroller.index.value] ==
-                      'profile'
+                      'profile'.tr
                   ? mycontroller.max
                   : mycontroller.min,
               fit: BoxFit.cover,
             ),
-            label: 'Profile',
+            label: 'profile'.tr,
           ),
           BottomNavigationBarItem(
             icon: Image(
               image: const AssetImage(
                   'assets/images/buttom_icons/sittings_icon.png'),
               color: mycontroller.buttomNavIcons[mycontroller.index.value] ==
-                      'settings'
+                      'settings'.tr
                   ? MyColor.mainColor
                   : Colors.grey,
               fit: BoxFit.cover,
               height: mycontroller.buttomNavIcons[mycontroller.index.value] ==
-                      'settings'
+                      'settings'.tr
                   ? mycontroller.max
                   : mycontroller.min,
             ),
-            label: 'Settings',
+            label: 'settings'.tr,
           ),
         ],
       );

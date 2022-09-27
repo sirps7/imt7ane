@@ -9,4 +9,5 @@ class MyColor {
   static const Color profileBackColor = Color(0xffE6F1F4);
   static const Color borderColor = Color(0xff5C76DA);
   static const Color milk = Color.fromARGB(255, 255, 253, 247);
+  static const Color w70 = Colors.white70;
 }

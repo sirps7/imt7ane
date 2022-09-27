@@ -72,7 +72,7 @@ class SettingController extends GetxController {
       snackPosition: SnackPosition.TOP,
       backgroundColor: MyColor.borderColor,
       messageText: MyText(
-        myText: 'profile updated succfully',
+        myText: 'profile updated successfully',
         mysize: 20,
         mycolor: Colors.white,
       ),

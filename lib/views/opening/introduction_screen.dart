@@ -1,4 +1,4 @@
-import 'package:amti7ane_unicoding/views/auth/mainScreen/loginScreen.dart';
+import 'package:amti7ane_unicoding/views/auth/mainScreen/login_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -74,6 +74,6 @@ class IntroScreen extends StatelessWidget {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('ON_BOARDING', false);
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 }

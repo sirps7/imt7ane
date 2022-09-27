@@ -1,6 +1,9 @@
+import 'package:amti7ane_unicoding/Services/Sign_up_remote.dart';
 import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart';
 import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
+import 'package:amti7ane_unicoding/controllers/ahmedController/email_Controller.dart';
 import 'package:amti7ane_unicoding/controllers/setting_controller.dart';
+import 'package:amti7ane_unicoding/locale/locale_Controller.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/models/loading.dart';
 import 'package:amti7ane_unicoding/models/myFonts.dart';
@@ -9,6 +12,7 @@ import 'package:amti7ane_unicoding/models/networking/profileInfo.dart';
 import 'package:amti7ane_unicoding/models/networking/stages.dart';
 import 'package:amti7ane_unicoding/models/purple_container.dart';
 import 'package:amti7ane_unicoding/models/settings_button.dart';
+import 'package:amti7ane_unicoding/views/auth/mainScreen/login_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +22,8 @@ class SettingsScreen extends StatelessWidget {
   final BottomNavigationController bottomNavigationController = Get.find();
   final DropdownButtonController dropController = Get.find();
   final TextEditingController mycontroller = TextEditingController();
+  final from = Get.find<MyControllerAuth>();
+  MyLocaleController controllerLang =Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -59,32 +65,34 @@ class SettingsScreen extends StatelessWidget {
             SettingsButton(
               condtion: settingController.profilebutton,
               wichicon: settingController.profilebutton,
-              title: 'Profile Settings',
+              title: 'profile_settings'.tr,
               ontap: () {
                 settingController.toogleprofile();
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const MyText(
-                    myText: 'Name',
+                   MyText(
+                    myText: 'name'.tr,
                     mysize: 15,
                     mycolor: Colors.grey,
-                    family: 'PoppinsMedium',
+                    // family: 'PoppinsMedium',
+                     family: 'fonts'.tr,
                   ),
                   TextFormField(
                     controller: mycontroller,
-                    textDirection: TextDirection.rtl,
-                    style: const TextStyle(fontFamily: 'SFMarwa', fontSize: 25),
+                    textDirection: TextDirection.ltr,
+                    style:  TextStyle(fontFamily: 'fonts'.tr, fontSize: 25),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  const MyText(
-                    myText: 'Stage',
+                   MyText(
+                    myText: 'stage'.tr,
                     mysize: 15,
                     mycolor: Colors.grey,
-                    family: 'PoppinsMedium',
+                    // family: 'PoppinsMedium',
+                     family: 'fonts'.tr,
                   ),
                   const SizedBox(
                     height: 20,
@@ -123,7 +131,7 @@ class SettingsScreen extends StatelessWidget {
                                   (item) => DropdownMenuItem(
                                     value: item,
                                     child: MyText(
-                                      family: 'SFMarwa',
+                                      family: 'fonts'.tr,
                                       myText: item,
                                       mysize: 20,
                                       mycolor: Colors.black,
@@ -143,11 +151,12 @@ class SettingsScreen extends StatelessWidget {
                     height: 20,
                   ),
                   //! gender drop down
-                  const MyText(
-                    myText: 'Gender',
+                   MyText(
+                    myText: 'gender'.tr,
                     mysize: 15,
                     mycolor: Colors.grey,
-                    family: 'PoppinsMedium',
+                    // family: 'PoppinsMedium',
+                     family: 'fonts'.tr,
                   ),
                   const SizedBox(
                     height: 20,
@@ -218,11 +227,12 @@ class SettingsScreen extends StatelessWidget {
                           H: 50,
                           W: 120,
                           child: settingController.updateProfileDone.value
-                              ? const MyText(
-                                  myText: 'Save',
+                              ?  MyText(
+                                  myText: 'save'.tr,
                                   mysize: 20,
                                   mycolor: Colors.white,
-                                  family: MyFont.poppinsMedium,
+                                  // family: MyFont.poppinsMedium,
+                            family: 'fonts'.tr,
                                 )
                               : const MyLoading(mycolor: Colors.white),
                         );
@@ -240,7 +250,7 @@ class SettingsScreen extends StatelessWidget {
                 ontap: () {
                   settingController.tooglelanguageButton();
                 },
-                title: 'Language        ',
+                title: 'language'.tr,
                 wichicon: settingController.languagebutton,
                 condtion: settingController.languagebutton,
                 child: Padding(
@@ -255,6 +265,7 @@ class SettingsScreen extends StatelessWidget {
                           onTap: () {
                             if (controller.language.value != 'EN') {
                               controller.tooglelanguage();
+                              controllerLang.changelang('en');
                             }
                           },
                           child: PurpleContainer(
@@ -274,6 +285,7 @@ class SettingsScreen extends StatelessWidget {
                           onTap: () {
                             if (controller.language.value != 'AR') {
                               controller.tooglelanguage();
+                              controllerLang.changelang('ar');
                             }
                           },
                           child: PurpleContainer(
@@ -298,13 +310,18 @@ class SettingsScreen extends StatelessWidget {
             ),
             //! settings third button
             GestureDetector(
-              onTap: () {},
-              child: const PurpleContainer(
+              onTap: () {
+                RemoteServices.ed.value='';
+                from.emailInController.clear();
+                from.passwordInController.clear();
+                Get.offAll(LoginScreen());
+              },
+              child:  PurpleContainer(
                 H: 40,
                 W: 350,
                 withShadow: false,
                 child: MyText(
-                  myText: 'Sign out',
+                  myText: 'sign_out'.tr,
                   mysize: 20,
                   mycolor: Colors.white,
                 ),

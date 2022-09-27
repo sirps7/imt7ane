@@ -1,7 +1,13 @@
+
+import 'package:amti7ane_unicoding/controllers/ahmedController/email_Controller.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/views/auth/mainScreen/forgot_Password_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../Services/sign_in_remote.dart';
+
+
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({
@@ -10,18 +16,25 @@ class ForgotPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 150),
+    final from = Get.find<MyControllerAuth>();
+    return  Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 100),
       child: TextButton(
-        onPressed: () {
-          Get.to(() => const ForgotPasswordScreen());
+        onPressed: (){
+          from.emailInController.clear();
+          from.passwordInController.clear();
+          SignInRemote.ed.value='';
+          Get.to(()=>  ForgotPasswordScreen());
         },
         style: TextButton.styleFrom(
-          foregroundColor: MyColor.mainColor,
+          primary: MyColor.mainColor,
         ),
-        child: const Text(
-          'Forgot your password?',
-          style: TextStyle(color: MyColor.mainColor, fontSize: 12),
+        child:   Text('forgot'.tr,
+          style: TextStyle(
+            color: MyColor.mainColor,
+            fontSize: 15,
+            fontFamily: 'fonts'.tr
+        ),
         ),
       ),
     );

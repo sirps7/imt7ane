@@ -49,10 +49,10 @@ class QuizQuestons extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const MyText(
-                    myText: 'TIMER',
+                   MyText(
+                    myText: 'timer'.tr,
                     mysize: 20,
-                    family: MyFont.poppinsMedium,
+                    family: 'fonts'.tr,
                   ),
                   GetX<TimerController>(builder: (timerController) {
                     return MyText(
@@ -73,10 +73,11 @@ class QuizQuestons extends StatelessWidget {
                     family: MyFont.arabic,
                     isbold: true,
                   ),
-                  const MyText(
-                    myText: 'Questions',
+                   MyText(
+                    myText: 'question'.tr,
                     mysize: 27,
-                    family: MyFont.poppins,
+                    // family: MyFont.poppins,
+                     family: 'fonts'.tr,
                     height: 1.5,
                   )
                 ],
@@ -85,10 +86,11 @@ class QuizQuestons extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const MyText(
-                    myText: 'Score',
+                   MyText(
+                    myText: 'score'.tr,
                     mysize: 20,
-                    family: MyFont.poppinsMedium,
+                    // family: MyFont.poppinsMedium,
+                     family: 'fonts'.tr,
                   ),
                   GetX<QuizController>(builder: (quizController) {
                     return MyText(
@@ -185,8 +187,8 @@ class QuizQuestons extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const MyText(
-                            myText: 'Choose any of the following:',
+                           MyText(
+                            myText: 'choose_any_the_following'.tr,
                             mysize: 20,
                           ),
                           const SizedBox(
@@ -327,8 +329,8 @@ class QuizQuestons extends StatelessWidget {
                       child: GetX<QuizController>(builder: (quizController) {
                         return MyText(
                           myText: counter.value >= quizController.noOfQuestions
-                              ? 'Submit'
-                              : 'Next',
+                              ? 'send'.tr
+                              : 'next'.tr,
                           mysize: 20,
                           mycolor: Colors.white,
                           family: MyFont.poppinsMedium,

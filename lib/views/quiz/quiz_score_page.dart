@@ -26,10 +26,10 @@ class QuizScore extends StatelessWidget {
         child: Column(
           children: [
             //! score page text
-            const MyText(
-              myText: 'Score page',
+             MyText(
+              myText: 'score_page'.tr,
               mysize: 30,
-              family: 'Poppins',
+              family: 'fonts'.tr,
             ),
             const SizedBox(
               height: 30,
@@ -71,11 +71,11 @@ class QuizScore extends StatelessWidget {
                                   myText: subName,
                                   mysize: 40,
                                   isbold: true,
-                                  family: 'SFMarwa',
+                                  family: 'fonts'.tr,
                                   height: 1,
                                 ),
                                 MyText(
-                                  family: 'SFMarwa',
+                                  family: 'fonts'.tr,
                                   myText: lecture,
                                   mysize: 20,
                                   mycolor: Colors.grey,
@@ -97,7 +97,7 @@ class QuizScore extends StatelessWidget {
                         child: MyText(
                           myText: 'Your Score ${quizController.lastQuizscore}',
                           mysize: 25,
-                          family: 'Poppins',
+                          family: 'fonts'.tr,
                           mycolor: Colors.white,
                         ),
                       ),
@@ -120,13 +120,13 @@ class QuizScore extends StatelessWidget {
                                           '${quizController.correctAnswer.value}',
                                       mysize: 40,
                                       mycolor: Colors.black,
-                                      family: 'PoppinsMedium',
+                                      family: 'fonts'.tr,
                                     ),
                                   ),
-                                  const MyText(
-                                    myText: 'Correct',
+                                   MyText(
+                                    myText: 'correct'.tr,
                                     mysize: 15,
-                                    family: 'PoppinsMedium',
+                                    family: 'fonts'.tr,
                                   )
                                 ],
                               ),
@@ -140,13 +140,13 @@ class QuizScore extends StatelessWidget {
                                           '${quizController.inCorrectAnswer.value}',
                                       mysize: 40,
                                       mycolor: Colors.black,
-                                      family: 'PoppinsMedium',
+                                      family: 'fonts'.tr,
                                     ),
                                   ),
-                                  const MyText(
-                                    myText: 'Incorrect',
+                                   MyText(
+                                    myText: 'incorrect'.tr,
                                     mysize: 15,
-                                    family: 'PoppinsMedium',
+                                    family: 'fonts'.tr,
                                   )
                                 ],
                               )
@@ -160,17 +160,17 @@ class QuizScore extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () => mainController.showSolutions.value = true,
-                        child: const PurpleContainer(
+                        child:  PurpleContainer(
                           H: 67,
                           W: 240,
                           child: Expanded(
                             child: MyText(
-                              myText: 'Show The Correct Answers',
+                              myText: 'show_the_correct_answer'.tr,
                               mysize: 20,
                               mycolor: Colors.white,
                               isbold: true,
                               height: 1.4,
-                              family: 'PoppinsMedium',
+                              family: 'fonts'.tr,
                             ),
                           ),
                         ),
@@ -180,8 +180,8 @@ class QuizScore extends StatelessWidget {
                 : Padding(
                     padding: EdgeInsets.only(
                         top: MediaQuery.of(context).size.height / 4),
-                    child: const MyText(
-                      myText: 'there is no quiz yet ',
+                    child:  MyText(
+                      myText: 'no_quiz'.tr,
                       mysize: 20,
                       mycolor: MyColor.mainColor,
                     ),

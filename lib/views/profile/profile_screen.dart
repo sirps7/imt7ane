@@ -45,7 +45,7 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     //!first outlin border
                     Container(
-                      height: 100,
+                      height: 110,
                       width: 140,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -57,10 +57,11 @@ class ProfileScreen extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const MyText(
-                            myText: 'Avg Score',
+                           MyText(
+                            myText: 'avg_score'.tr,
                             mysize: 17,
-                            family: 'Poppinsbold',
+                            // family: 'Poppinsbold',
+                             family: 'fonts'.tr,
                           ),
                           GetX<QuizController>(builder: (quizController) {
                             return MyText(
@@ -77,7 +78,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     //!secound outlin border
                     Container(
-                      height: 100,
+                      height: 110,
                       width: 140,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -89,10 +90,11 @@ class ProfileScreen extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const MyText(
-                            myText: 'Total Quizzes',
+                           MyText(
+                            myText: 'total_quizzes'.tr,
                             mysize: 17,
-                            family: 'Poppinsbold',
+                            // family: 'Poppinsbold',
+                             family: 'fonts'.tr,
                           ),
                           GetX<QuizController>(builder: (quizController) {
                             return Expanded(
@@ -113,8 +115,8 @@ class ProfileScreen extends StatelessWidget {
                   height: 20,
                 ),
                 //!Quiz History
-                const MyText(
-                  myText: 'Quiz History',
+                 MyText(
+                  myText: 'quiz_history'.tr,
                   mysize: 35,
                 ),
                 const SizedBox(
