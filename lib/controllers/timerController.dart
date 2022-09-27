@@ -1,5 +1,16 @@
 import 'dart:async';
 
+import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart';
+import 'package:amti7ane_unicoding/controllers/controller_main.dart';
+import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
+import 'package:amti7ane_unicoding/models/Colors.dart';
+import 'package:amti7ane_unicoding/models/myFonts.dart';
+import 'package:amti7ane_unicoding/models/mytext.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz_history.dart';
+import 'package:amti7ane_unicoding/views/quiz/quiz_questions.dart';
+import 'package:amti7ane_unicoding/views/quiz/quiz_score_page.dart';
+import 'package:amti7ane_unicoding/views/quiz/quiz_solutions.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TimerController extends GetxController {
@@ -21,7 +32,53 @@ class TimerController extends GetxController {
     duration = Duration(seconds: secound);
 
     if (duration.inSeconds < 0) {
+      QuizController quizController = Get.find();
+      MainController mainController = Get.find();
+      BottomNavigationController navController = Get.find();
+      TimerController timerController = Get.find();
       timer!.cancel();
+      Get.defaultDialog(
+        barrierDismissible: false,
+        radius: 12,
+        titlePadding: const EdgeInsets.all(10),
+        title: 'time out your score is ${quizController.score}',
+        confirm: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: TextButton(
+            style: TextButton.styleFrom(
+              foregroundColor: MyColor.milk,
+              backgroundColor: MyColor.mainColor,
+            ),
+            onPressed: () {
+              quizController.sendQuiz();
+              mainController.inQuiz.value = false;
+              navController.index.value = 1;
+              quizController.resetQuestion();
+              timerController.stopTimer();
+              timerController.firstTime = true;
+              quizController.circleNumber.value = 0;
+              quizController.circles = [];
+              quizController.currentQuestionIndecator.value = 1;
+              quizController.saveLastQuizScore();
+              QuizSolutions.lectureName = QuizQuestons.lecture;
+              QuizSolutions.subjectName = QuizQuestons.subName;
+              QuizScore.lecture = QuizQuestons.lecture;
+              QuizScore.subName = QuizQuestons.subName;
+              History.historyList = [];
+              quizController.getQuizesHistoryWithAvgAndTotal();
+              quizController.thereIsNoScore.value = false;
+              Get.back();
+            },
+            child: const MyText(
+              myText: 'OK',
+              mysize: 15,
+              mycolor: Colors.white,
+              family: MyFont.poppinsMedium,
+            ),
+          ),
+        ),
+        middleText: '',
+      );
     } else {
       seconds.value = towDigit(duration.inSeconds.remainder(60));
       minutes.value = towDigit(duration.inMinutes.remainder(60));

@@ -28,6 +28,7 @@ class Choice extends StatelessWidget {
         }
       },
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Obx(() {
             return Container(
@@ -50,19 +51,24 @@ class Choice extends StatelessWidget {
           const SizedBox(
             width: 20,
           ),
-          MyText(
-            myText: choiceBody,
-            mysize: 20,
-            family: MyFont.arabic,
-            mycolor: inSolution
-                ? inSolution &&
-                        NetQuiz
-                            .quizquestions[questionNo - 1][questionNo]!.choices
-                            .firstWhere((e) => e.choiceBody == choiceBody)
-                            .isCorrect
-                    ? Colors.green
-                    : Colors.red
-                : Colors.black,
+          Expanded(
+            child: MyText(
+              myText: choiceBody,
+              mysize: 20,
+              family: MyFont.arabic,
+              lines: 25,
+              height: 1.2,
+              align: TextAlign.start,
+              mycolor: inSolution
+                  ? inSolution &&
+                          NetQuiz.quizquestions[questionNo - 1][questionNo]!
+                              .choices
+                              .firstWhere((e) => e.choiceBody == choiceBody)
+                              .isCorrect
+                      ? Colors.green
+                      : Colors.red
+                  : Colors.black,
+            ),
           ),
         ],
       ),

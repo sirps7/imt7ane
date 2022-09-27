@@ -15,5 +15,6 @@ class History {
         ),
       );
     }
+    historyList = List.from(historyList.reversed);
   }
 }
