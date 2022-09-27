@@ -164,91 +164,97 @@ class QuizQuestons extends StatelessWidget {
                     height: 30,
                   ),
                   //! choices
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.grey.shade300,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                      color: MyColor.milk,
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.grey.shade300,
-                          width: 5,
+                  GetX<QuizController>(builder: (quizController) {
+                    return ShakeWidget(
+                      shakeConstant: ShakeDefaultConstant1(),
+                      autoPlay: quizController.playShake.value,
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey.shade300,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                          color: MyColor.milk,
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            border: Border.all(
+                              color: Colors.grey.shade300,
+                              width: 5,
+                            ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const MyText(
+                                myText: 'Choose any of the following:',
+                                mysize: 20,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              //! choices column
+
+                              ListView.separated(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: NetQuiz
+                                    .quizquestions[
+                                        quizController.currentQuestionIndecator
+                                                .value -
+                                            1][
+                                        quizController
+                                            .currentQuestionIndecator.value]!
+                                    .choices
+                                    .length,
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 15),
+                                    child: Container(
+                                      color: const Color.fromARGB(
+                                          255, 148, 155, 183),
+                                      height: 1,
+                                    ),
+                                  );
+                                },
+                                itemBuilder: (BuildContext context, index) {
+                                  return Choice(
+                                    questionNo: NetQuiz
+                                        .quizquestions[quizController
+                                                    .currentQuestionIndecator
+                                                    .value -
+                                                1][
+                                            quizController
+                                                .currentQuestionIndecator
+                                                .value]!
+                                        .questionNo,
+                                    choiceBody: NetQuiz
+                                        .quizquestions[quizController
+                                                    .currentQuestionIndecator
+                                                    .value -
+                                                1][
+                                            quizController
+                                                .currentQuestionIndecator
+                                                .value]!
+                                        .choices[index]
+                                        .choiceBody,
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const MyText(
-                            myText: 'Choose any of the following:',
-                            mysize: 20,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          //! choices column
-                          GetX<QuizController>(builder: (quizController) {
-                            return ListView.separated(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: NetQuiz
-                                  .quizquestions[quizController
-                                              .currentQuestionIndecator.value -
-                                          1][
-                                      quizController
-                                          .currentQuestionIndecator.value]!
-                                  .choices
-                                  .length,
-                              separatorBuilder:
-                                  (BuildContext context, int index) {
-                                return Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 15),
-                                  child: Container(
-                                    color: const Color.fromARGB(
-                                        255, 148, 155, 183),
-                                    height: 1,
-                                  ),
-                                );
-                              },
-                              itemBuilder: (BuildContext context, index) {
-                                return Choice(
-                                  questionNo: NetQuiz
-                                      .quizquestions[
-                                          quizController
-                                                  .currentQuestionIndecator
-                                                  .value -
-                                              1][
-                                          quizController
-                                              .currentQuestionIndecator.value]!
-                                      .questionNo,
-                                  choiceBody: NetQuiz
-                                      .quizquestions[
-                                          quizController
-                                                  .currentQuestionIndecator
-                                                  .value -
-                                              1][
-                                          quizController
-                                              .currentQuestionIndecator.value]!
-                                      .choices[index]
-                                      .choiceBody,
-                                );
-                              },
-                            );
-                          }),
-                        ],
-                      ),
-                    ),
-                  ),
+                    );
+                  }),
                   const SizedBox(
                     height: 20,
                   ),
@@ -288,6 +294,10 @@ class QuizQuestons extends StatelessWidget {
                           quizController.correctAnswer.value++;
                         } else {
                           player.play('sounds/Error.mp3');
+                          quizController.playShake.value = true;
+                          await Future.delayed(
+                              const Duration(milliseconds: 500));
+                          quizController.playShake.value = false;
                           quizController.inCorrectAnswer.value++;
                         }
                         counter.value++;

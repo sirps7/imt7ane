@@ -11,6 +11,7 @@ import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
 
 class QuizController extends GetxController {
+  RxBool playShake = false.obs;
   RxBool thereIsNoScore = true.obs;
   RxInt avg = 0.obs;
   RxInt total = 0.obs;
