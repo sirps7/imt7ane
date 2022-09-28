@@ -11,6 +11,8 @@ import 'package:amti7ane_unicoding/views/quiz/quiz_questions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'home_screen.dart';
+
 class SubjectLectures extends StatelessWidget {
   const SubjectLectures({super.key});
 
@@ -25,8 +27,16 @@ class SubjectLectures extends StatelessWidget {
     BottomNavigationController navController = Get.find();
     QuizController quizController = Get.find();
     TimerController timerController = Get.find();
+     BottomNavigationController mycontroller = Get.find();
     quizController.firstTime = true;
-    return Padding(
+    return WillPopScope(
+        onWillPop: () {
+          mycontroller.index.value = 0;
+          mainController.insub.value=false;
+          Quizes.quizesList = [];
+      return Future.value(false);
+    },
+    child: Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 20,
       ),
@@ -185,6 +195,6 @@ class SubjectLectures extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
 import 'package:amti7ane_unicoding/controllers/choiceController.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_quizes.dart';
@@ -6,18 +8,25 @@ import 'package:amti7ane_unicoding/models/networking/quiz_history.dart';
 import 'package:amti7ane_unicoding/models/networking/server_variable.dart';
 import 'package:amti7ane_unicoding/models/networking/stages.dart';
 import 'package:amti7ane_unicoding/models/question_circle.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:dio/dio.dart';
 
 class QuizController extends GetxController {
+  RxString dialogTC=('exit'.tr).obs;
+  RxBool isTrue=false.obs;
+  RxBool isFalse=false.obs;
+  Rx<Color> con_color=Colors.grey.shade300.obs;
   RxBool playShake = false.obs;
   RxBool thereIsNoScore = true.obs;
   RxInt avg = 0.obs;
   RxInt total = 0.obs;
   RxInt score = 0.obs;
   RxInt correctAnswer = 0.obs;
+  RxInt last_correctAnswer=0.obs;
   RxInt inCorrectAnswer = 0.obs;
+  RxInt last_incorrectAnswer=0.obs;
   int lastQuizscore = 0;
   bool deffult = true;
   int quizSubjectNO = 0;
@@ -105,7 +114,6 @@ class QuizController extends GetxController {
         Server.baseUrl + Server.getQuizPath,
         queryParameters: {'quizid': quizId},
         options: Server.token);
-    print(response.data['quiz'][0]['Questions']['image']);
     NetQuiz.fromJson(response.data);
     getQuizDone.value = true;
   }

@@ -7,6 +7,8 @@ import 'package:amti7ane_unicoding/models/purple_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../utlites/dialogWarning.dart';
+
 class QuizScore extends StatelessWidget {
   const QuizScore({super.key});
   static String lecture = '';
@@ -18,7 +20,12 @@ class QuizScore extends StatelessWidget {
     QuizController quizController = Get.find();
     SubjectsControllers subjectsControllers = Get.find();
 
-    return SingleChildScrollView(
+    return WillPopScope(
+        onWillPop: () async {
+          final shouldPop = await showWarning(context);
+          return shouldPop ?? false;
+        },
+        child :SingleChildScrollView(
       physics: const BouncingScrollPhysics(parent: ScrollPhysics()),
       child: Container(
         width: double.infinity,
@@ -117,7 +124,7 @@ class QuizScore extends StatelessWidget {
                                     radius: 35,
                                     child: MyText(
                                       myText:
-                                          '${quizController.correctAnswer.value}',
+                                          '${quizController.last_correctAnswer.value}',
                                       mysize: 40,
                                       mycolor: Colors.black,
                                       family: 'fonts'.tr,
@@ -137,7 +144,7 @@ class QuizScore extends StatelessWidget {
                                     radius: 35,
                                     child: MyText(
                                       myText:
-                                          '${quizController.inCorrectAnswer.value}',
+                                          '${quizController.last_incorrectAnswer.value}',
                                       mysize: 40,
                                       mycolor: Colors.black,
                                       family: 'fonts'.tr,
@@ -189,6 +196,6 @@ class QuizScore extends StatelessWidget {
           ],
         ),
       ),
-    );
+        ) );
   }
 }

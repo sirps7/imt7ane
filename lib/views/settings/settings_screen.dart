@@ -16,6 +16,8 @@ import 'package:amti7ane_unicoding/views/auth/mainScreen/login_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../utlites/dialogWarning.dart';
+
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
   final SettingController settingController = Get.find();
@@ -31,7 +33,12 @@ class SettingsScreen extends StatelessWidget {
       mycontroller.text = ProfileInfo.studentName!;
       settingController.takeTheNameFromDb = false;
     }
-    return SizedBox(
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldPop = await showWarning(context);
+        return shouldPop ?? false;
+      },
+      child :SizedBox(
       width: double.infinity,
 
       //todo the first column
@@ -330,6 +337,6 @@ class SettingsScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
+      ));
   }
 }

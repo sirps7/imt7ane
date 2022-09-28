@@ -111,18 +111,20 @@ class MainController extends GetxController {
           onPressed: () {
             if (inQuiz.value) {
               Get.defaultDialog(
+                backgroundColor: MyColor.mainColor,
                 barrierDismissible: false,
-                radius: 12,
-                titlePadding: const EdgeInsets.all(10),
-                title: 'Are you sure you want to quit ?',
+                radius: 10,
+                titlePadding: const EdgeInsets.only(top: 10,bottom: 0,right: 15),
+                title: 'exit exam'.tr,
+                titleStyle: TextStyle(color: Colors.white,fontFamily: MyFont.poppins),
                 confirm: Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      primary: MyColor.milk,
-                      backgroundColor: MyColor.mainColor,
+                      primary: Colors.white,
                     ),
                     onPressed: () {
+                      quizController.dialogTC.value='exit'.tr;
                       inQuiz.value = false;
                       navController.index.value = 0;
                       quizController.resetQuestion();
@@ -136,7 +138,7 @@ class MainController extends GetxController {
                     },
                     child:  MyText(
                       myText: 'yes'.tr,
-                      mysize: 15,
+                      mysize: 20,
                       mycolor: Colors.white,
                       family: MyFont.poppinsMedium,
                     ),
@@ -146,14 +148,12 @@ class MainController extends GetxController {
                     onPressed: () {
                       Get.back();
                     },
-                    style: TextButton.styleFrom(
-                      side: const BorderSide(width: 1),
-                    ),
+
                     child:  MyText(
                       myText: 'no'.tr,
-                      mysize: 15,
+                      mysize: 20,
                       family: MyFont.poppinsMedium,
-                      mycolor: Colors.black,
+                      mycolor: Colors.white,
                     )),
                 middleText: '',
               );

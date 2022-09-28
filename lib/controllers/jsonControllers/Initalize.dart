@@ -4,6 +4,7 @@ import 'package:amti7ane_unicoding/locale/locale_Controller.dart';
 
 
 
+import '../controller_main.dart';
 import 'code_controller.dart';
 import 'stageController.dart';
 import 'package:get/get.dart';
@@ -16,5 +17,6 @@ class UsersBinding extends Bindings {
     Get.put<SignInController>(SignInController());
     Get.put<codeChecker>(codeChecker());
     Get.put<MyLocaleController>(MyLocaleController());
+
   }
 }

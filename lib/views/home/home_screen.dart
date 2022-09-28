@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
 import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
 import 'package:amti7ane_unicoding/controllers/subjects_controllers.dart';
@@ -7,17 +9,26 @@ import 'package:amti7ane_unicoding/models/loading.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_subjects.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/controller_main.dart';
+import '../utlites/dialogWarning.dart';
+
 class HomeScreen extends StatelessWidget {
+
   HomeScreen({super.key});
   final DropdownButtonController dropController = Get.find();
   final SubjectsControllers subController = Get.find();
   final QuizController quizController = Get.find();
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
+  Widget build(BuildContext context) => WillPopScope(
+    onWillPop: () async {
+      final shouldPop = await showWarning(context);
+      return shouldPop ?? false;
+    },
+    child: SizedBox(
       width: double.infinity,
       child: Column(
         children: [
@@ -130,6 +141,6 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
-    );
+    ));
   }
-}
+

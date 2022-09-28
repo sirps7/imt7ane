@@ -39,15 +39,16 @@ class TimerController extends GetxController {
       timer!.cancel();
       Get.defaultDialog(
         barrierDismissible: false,
-        radius: 12,
-        titlePadding: const EdgeInsets.all(10),
-        title: 'time out your score is ${quizController.score}',
+        radius: 10,
+        backgroundColor: MyColor.mainColor,
+        titlePadding: const EdgeInsets.only(top: 10,bottom: 0,right: 15),
+        title: 'timeout'.tr,
+        titleStyle: TextStyle(color: Colors.white,fontFamily: MyFont.poppins),
         confirm: Padding(
           padding: const EdgeInsets.only(left: 20),
           child: TextButton(
             style: TextButton.styleFrom(
-              primary: MyColor.milk,
-              backgroundColor: MyColor.mainColor,
+              primary: Colors.white,
             ),
             onPressed: () {
               quizController.sendQuiz();
@@ -69,9 +70,9 @@ class TimerController extends GetxController {
               quizController.thereIsNoScore.value = false;
               Get.back();
             },
-            child: const MyText(
-              myText: 'OK',
-              mysize: 15,
+            child:  MyText(
+              myText: 'OK'.tr,
+              mysize: 20,
               mycolor: Colors.white,
               family: MyFont.poppinsMedium,
             ),

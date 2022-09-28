@@ -15,7 +15,6 @@ class MainScreen extends StatelessWidget {
         return Scaffold(
           //! / app bar
           appBar: AppBar(
-
             leading: mainController.whichLeading(),
             elevation: 0,
             title: mainController.whichTitle(),

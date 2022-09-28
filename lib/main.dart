@@ -40,12 +40,12 @@ class MyApp extends StatelessWidget {
           builder: (context, child) => ResponsiveWrapper.builder(
               BouncingScrollWrapper.builder(context, child!),
               maxWidth: 1200,
-              minWidth: 400,
+              minWidth: 410,
               defaultScale: true,
               breakpoints: [
-                const ResponsiveBreakpoint.resize(400 , name: MOBILE),
-                const ResponsiveBreakpoint.autoScale(600, name: TABLET),
-                const ResponsiveBreakpoint.autoScale(1000, name: TABLET),
+                const ResponsiveBreakpoint.resize(410 , name: MOBILE),
+                const ResponsiveBreakpoint.autoScale(650, name: TABLET),
+                const ResponsiveBreakpoint.autoScale(900, name: TABLET),
                 const ResponsiveBreakpoint.resize(1200, name: DESKTOP),
                 const ResponsiveBreakpoint.autoScale(2460, name: "4K"),
               ],

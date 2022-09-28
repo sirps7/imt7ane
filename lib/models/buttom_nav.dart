@@ -3,12 +3,15 @@ import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controllers/controller_main.dart';
+import 'networking/deffult_quizes.dart';
+
 class ButtomNav extends StatelessWidget {
   ButtomNav({
     Key? key,
   }) : super(key: key);
   final BottomNavigationController mycontroller = Get.find();
-
+  final MainController mainController = Get.find();
   @override
   Widget build(BuildContext context) {
     return GetX<BottomNavigationController>(builder: (mycontroller) {
@@ -22,6 +25,8 @@ class ButtomNav extends StatelessWidget {
         showUnselectedLabels: true,
         onTap: (int v) {
           mycontroller.index.value = v;
+          mainController.insub.value=false;
+          Quizes.quizesList = [];
         },
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -33,10 +38,7 @@ class ButtomNav extends StatelessWidget {
                   ? MyColor.mainColor
                   : Colors.grey,
               fit: BoxFit.cover,
-              height: mycontroller.buttomNavIcons[mycontroller.index.value] ==
-                  'home'.tr
-                  ? mycontroller.max
-                  : mycontroller.min,
+              height:mycontroller.max
             ),
             label: 'home'.tr,
           ),
@@ -49,10 +51,7 @@ class ButtomNav extends StatelessWidget {
                   ? MyColor.mainColor
                   : Colors.grey,
               fit: BoxFit.cover,
-              height: mycontroller.buttomNavIcons[mycontroller.index.value] ==
-                      'quiz'.tr
-                  ? mycontroller.max
-                  : mycontroller.min,
+              height: mycontroller.max,
             ),
             label: 'quiz'.tr,
           ),
@@ -64,10 +63,7 @@ class ButtomNav extends StatelessWidget {
                       'profile'.tr
                   ? MyColor.mainColor
                   : Colors.grey,
-              height: mycontroller.buttomNavIcons[mycontroller.index.value] ==
-                      'profile'.tr
-                  ? mycontroller.max
-                  : mycontroller.min,
+              height: mycontroller.max,
               fit: BoxFit.cover,
             ),
             label: 'profile'.tr,
@@ -81,10 +77,7 @@ class ButtomNav extends StatelessWidget {
                   ? MyColor.mainColor
                   : Colors.grey,
               fit: BoxFit.cover,
-              height: mycontroller.buttomNavIcons[mycontroller.index.value] ==
-                      'settings'.tr
-                  ? mycontroller.max
-                  : mycontroller.min,
+              height: mycontroller.max,
             ),
             label: 'settings'.tr,
           ),

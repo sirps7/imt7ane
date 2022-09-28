@@ -7,12 +7,18 @@ import 'package:amti7ane_unicoding/models/quiz_history.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../utlites/dialogWarning.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
+  Widget build(BuildContext context) => WillPopScope(
+      onWillPop: () async {
+        final shouldPop = await showWarning(context);
+        return shouldPop ?? false;
+      },
+      child: SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,6 +148,6 @@ class ProfileScreen extends StatelessWidget {
           )
         ],
       ),
-    );
+      ));
   }
-}
+

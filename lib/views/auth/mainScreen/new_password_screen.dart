@@ -35,7 +35,7 @@ class _NewPassowrdScreen extends State<NewPassowrdScreen> {
                 borderRadius: BorderRadius.all(Radius.circular(10))),
 
             title:  Text(
-              'exit'.tr,
+              'back to login'.tr,
               style: TextStyle(color: Colors.white,fontFamily: 'fonts'.tr),
             ),
             actions: [

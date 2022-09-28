@@ -18,6 +18,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_shake_animated/flutter_shake_animated.dart';
 import 'package:get/get.dart';
 
+import '../utlites/dialogWarning.dart';
+
 class QuizQuestons extends StatelessWidget {
   QuizQuestons({super.key});
   static String lecture = '';
@@ -36,7 +38,13 @@ class QuizQuestons extends StatelessWidget {
     ScrollController scrollController = ScrollController();
     timerController.startTimer();
     RxInt counter = 0.obs;
-    return Container(
+    return WillPopScope(
+      onWillPop: () async {
+        quizController.dialogTC.value='exit exam'.tr;
+        final shouldPop = await showWarning(context);
+        return shouldPop ?? false;
+      },
+      child :Container(
       padding: const EdgeInsets.only(
         right: 20,
         left: 20,
@@ -175,7 +183,7 @@ class QuizQuestons extends StatelessWidget {
                         width: double.maxFinite,
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Colors.grey.shade300,
+                            color: quizController.con_color.value,
                             width: 1,
                           ),
                           borderRadius: BorderRadius.circular(20),
@@ -187,7 +195,7 @@ class QuizQuestons extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
                             border: Border.all(
-                              color: Colors.grey.shade300,
+                              color: quizController.con_color.value,
                               width: 5,
                             ),
                           ),
@@ -206,11 +214,7 @@ class QuizQuestons extends StatelessWidget {
                               ListView.separated(
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: NetQuiz
-                                    .quizquestions[
-                                        quizController.currentQuestionIndecator
-                                                .value -
-                                            1][
+                                itemCount: NetQuiz.quizquestions[quizController.currentQuestionIndecator.value - 1][
                                         quizController
                                             .currentQuestionIndecator.value]!
                                     .choices
@@ -294,13 +298,20 @@ class QuizQuestons extends StatelessWidget {
                             //!--------------------------------------------
                             ) {
                           player.play('sounds/Correct.mp3');
+                          quizController.con_color.value=Colors.greenAccent;
+                          await Future.delayed(
+                              const Duration(milliseconds: 500));
+                          quizController.con_color.value=Colors.grey.shade300;
                           quizController.score += 5;
                           quizController.correctAnswer.value++;
                         } else {
                           player.play('sounds/Error.mp3');
+                          quizController.con_color.value=Colors.redAccent;
+
                           quizController.playShake.value = true;
                           await Future.delayed(
                               const Duration(milliseconds: 500));
+                          quizController.con_color.value=Colors.grey.shade300;
                           quizController.playShake.value = false;
                           quizController.inCorrectAnswer.value++;
                         }
@@ -327,6 +338,8 @@ class QuizQuestons extends StatelessWidget {
                       }
                       //! submit
                       if (counter.value == quizController.noOfQuestions) {
+                        quizController.last_incorrectAnswer.value=quizController.inCorrectAnswer.value;
+                        quizController.last_correctAnswer.value=quizController.correctAnswer.value;
                         quizController.sendQuiz();
                         mainController.inQuiz.value = false;
                         navController.index.value = 1;
@@ -344,6 +357,8 @@ class QuizQuestons extends StatelessWidget {
                         History.historyList = [];
                         quizController.getQuizesHistoryWithAvgAndTotal();
                         quizController.thereIsNoScore.value = false;
+                        quizController.correctAnswer.value=0;
+                        quizController.inCorrectAnswer.value=0;
                       }
                     },
                     child: PurpleContainer(
@@ -370,6 +385,6 @@ class QuizQuestons extends StatelessWidget {
           )
         ],
       ),
-    );
+      ) );
   }
 }

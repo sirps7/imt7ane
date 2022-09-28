@@ -4,14 +4,20 @@ import 'package:amti7ane_unicoding/models/networking/quiz.dart';
 import 'package:amti7ane_unicoding/models/solution_model.dart';
 import 'package:flutter/material.dart';
 
+import '../utlites/dialogWarning.dart';
+
 class QuizSolutions extends StatelessWidget {
   const QuizSolutions({super.key});
   static String subjectName = '';
   static String lectureName = '';
 
   @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
+  Widget build(BuildContext context) => WillPopScope(
+      onWillPop: () async {
+        final shouldPop = await showWarning(context);
+        return shouldPop ?? false;
+      },
+      child: SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Container(
         padding: const EdgeInsets.all(20),
@@ -72,6 +78,6 @@ class QuizSolutions extends StatelessWidget {
           ],
         ),
       ),
-    );
+      ) );
   }
-}
+

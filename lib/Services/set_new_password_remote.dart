@@ -22,7 +22,6 @@ class NewPasswordServices{
     isloading.value=false;
     if(response.statusCode == 200){
       sc.value=200;
-      var jsonString = response.body;
       return response.statusCode;
     }
     if(response.statusCode==400){
