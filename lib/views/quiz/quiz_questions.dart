@@ -101,7 +101,7 @@ class QuizQuestons extends StatelessWidget {
                     myText: 'score'.tr,
                     mysize: 20,
                     // family: MyFont.poppinsMedium,
-                     family: 'fonts'.tr,
+                     family: 'fontsmedium'.tr,
                   ),
                   GetX<QuizController>(builder: (quizController) {
                     return MyText(

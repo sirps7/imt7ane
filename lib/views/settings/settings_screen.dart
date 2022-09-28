@@ -99,7 +99,7 @@ class SettingsScreen extends StatelessWidget {
                     mysize: 15,
                     mycolor: Colors.grey,
                     // family: 'PoppinsMedium',
-                     family: 'fonts'.tr,
+                     family: 'fontsmedium'.tr,
                   ),
                   const SizedBox(
                     height: 20,
@@ -163,7 +163,7 @@ class SettingsScreen extends StatelessWidget {
                     mysize: 15,
                     mycolor: Colors.grey,
                     // family: 'PoppinsMedium',
-                     family: 'fonts'.tr,
+                     family: 'fontsmedium'.tr,
                   ),
                   const SizedBox(
                     height: 20,
@@ -239,7 +239,7 @@ class SettingsScreen extends StatelessWidget {
                                   mysize: 20,
                                   mycolor: Colors.white,
                                   // family: MyFont.poppinsMedium,
-                            family: 'fonts'.tr,
+                            family: 'fontsmedium'.tr,
                                 )
                               : const MyLoading(mycolor: Colors.white),
                         );

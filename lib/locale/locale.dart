@@ -34,9 +34,9 @@ class MyLocale implements Translations{
       'exit exam':'هل تريد مغادره الامتحان؟ (سوف تعتبر باقي الاسئله خاطئه)',
       'timeout':'لقد انتهى وقت الامتحان!! اضغط على الزر في الاسفل لمعرفه نتيجتك',
       'yes':'نعم',
-      'OK':'موافق',
+      'ok':'موافق',
       'no':'لا',
-      'fonts':'SFMarwa',
+
       'title_signup_screen':'اكد حسابك',
       'body_signup_screen':'لقد قمت بالتسجيل بنجاح ، لقد أرسلنا رابط تأكيد إلى بريدك الإلكتروني',
       /////////////////////
@@ -73,10 +73,15 @@ class MyLocale implements Translations{
       'score':'نتيجة',
       'next':'التالي',
 
-      'save':'حفظ'
+      'save':'حفظ',
 
 
+      ///////////////////////////FONTS///////////////////////////////
+      'fonts':'SFMarwa',
+      'fontsbold':'SFMarwabold',
+      'fontsmedium':'SFMarwaMedium',
 
+      ///////////////////////////////////////////////////////////////
 
 
 
@@ -116,7 +121,7 @@ class MyLocale implements Translations{
       'OK':'OK',
 
       'no':'No',
-      'fonts':'Poppins',
+
       'title_signup_screen':'Confirm your account',
       'body_signup_screen':'you have successfully signed up, we have send a confirmation link to your email',
 
@@ -156,7 +161,16 @@ class MyLocale implements Translations{
       'score':'Score',
       'next':'Next',
 
-      'save':'Save'
+      'save':'Save',
+
+      ///////////////////////////FONTS///////////////////////////////
+      'fonts':'Poppins',
+      'fontsbold':'Poppinsbold',
+      'fontsmedium':'PoppinsMedium',
+      ///////////////////////////////////////////////////////////////
+
+
+
     },
   };
 

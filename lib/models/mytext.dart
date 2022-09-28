@@ -1,6 +1,6 @@
 import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 class MyText extends StatelessWidget {
   const MyText({
     super.key,
@@ -8,7 +8,7 @@ class MyText extends StatelessWidget {
     required this.mysize,
     this.mycolor,
     this.isbold = false,
-    this.family = 'Poppins',
+    this.family = 'fonts',
     this.height = 0,
     this.lines = 2,
     this.align = TextAlign.center,
@@ -42,7 +42,7 @@ class MyText extends StatelessWidget {
         fontWeight: isbold ? FontWeight.w400 : FontWeight.normal,
         fontSize: mysize,
         color: mycolor,
-        fontFamily: family,
+        fontFamily: family.tr,
         height: height,
       ),
       maxLines: lines,

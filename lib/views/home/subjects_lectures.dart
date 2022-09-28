@@ -58,7 +58,7 @@ class SubjectLectures extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: const Image(
-                        image: AssetImage('assets/images/lecturs_image.png'),
+                        image: AssetImage('assets/images/img_2.png'),
                         fit: BoxFit.cover,
                       ),
                     ),

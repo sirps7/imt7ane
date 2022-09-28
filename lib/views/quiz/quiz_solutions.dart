@@ -3,7 +3,7 @@ import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/networking/quiz.dart';
 import 'package:amti7ane_unicoding/models/solution_model.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../utlites/dialogWarning.dart';
 
 class QuizSolutions extends StatelessWidget {
@@ -43,10 +43,10 @@ class QuizSolutions extends StatelessWidget {
                 ],
               ),
             ),
-            const MyText(
-              myText: 'Solutions',
+             MyText(
+              myText: 'solutions'.tr,
               mysize: 30,
-              family: MyFont.poppinsMedium,
+              family: 'fontsmedium',
             ),
             const SizedBox(
               height: 20,

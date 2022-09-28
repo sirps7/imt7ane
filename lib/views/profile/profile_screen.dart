@@ -67,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
                             myText: 'avg_score'.tr,
                             mysize: 17,
                             // family: 'Poppinsbold',
-                             family: 'fonts'.tr,
+                             family: 'fontsbold'.tr,
                           ),
                           GetX<QuizController>(builder: (quizController) {
                             return MyText(
@@ -100,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
                             myText: 'total_quizzes'.tr,
                             mysize: 17,
                             // family: 'Poppinsbold',
-                             family: 'fonts'.tr,
+                             family: 'fontsbold'.tr,
                           ),
                           GetX<QuizController>(builder: (quizController) {
                             return Expanded(
