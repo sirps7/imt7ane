@@ -88,13 +88,14 @@ class MainController extends GetxController {
   Widget? whichLeading() {
     if (navController.index.value == 0) {
       if (insub.value == true &&
-          navController.buttomNavIcons[navController.index.value] == 'home'.tr) {
+          navController.buttomNavIcons[navController.index.value] ==
+              'home'.tr) {
         return IconButton(
           onPressed: () {
             insub.value = false;
             Quizes.quizesList = [];
           },
-          icon:const  Icon(
+          icon: const Icon(
             Icons.keyboard_arrow_left,
             color: Colors.white,
             size: 40,
@@ -106,7 +107,8 @@ class MainController extends GetxController {
     }
     if (navController.index.value == 1) {
       if ((inQuiz.value || showSolutions.value) &&
-          navController.buttomNavIcons[navController.index.value] == 'quiz'.tr) {
+          navController.buttomNavIcons[navController.index.value] ==
+              'quiz'.tr) {
         return IconButton(
           onPressed: () {
             if (inQuiz.value) {
@@ -114,17 +116,19 @@ class MainController extends GetxController {
                 backgroundColor: MyColor.mainColor,
                 barrierDismissible: false,
                 radius: 10,
-                titlePadding: const EdgeInsets.only(top: 10,bottom: 0,right: 15),
+                titlePadding:
+                    const EdgeInsets.only(top: 10, bottom: 0, right: 15),
                 title: 'exit exam'.tr,
-                titleStyle: TextStyle(color: Colors.white,fontFamily: MyFont.poppins),
+                titleStyle: const TextStyle(
+                    color: Colors.white, fontFamily: MyFont.poppins),
                 confirm: Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      primary: Colors.white,
+                      foregroundColor: Colors.white,
                     ),
                     onPressed: () {
-                      quizController.dialogTC.value='exit'.tr;
+                      quizController.dialogTC.value = 'exit'.tr;
                       inQuiz.value = false;
                       navController.index.value = 0;
                       quizController.resetQuestion();
@@ -136,7 +140,7 @@ class MainController extends GetxController {
                       NetQuiz.quizquestions = [];
                       Get.back();
                     },
-                    child:  MyText(
+                    child: MyText(
                       myText: 'yes'.tr,
                       mysize: 20,
                       mycolor: Colors.white,
@@ -148,8 +152,7 @@ class MainController extends GetxController {
                     onPressed: () {
                       Get.back();
                     },
-
-                    child:  MyText(
+                    child: MyText(
                       myText: 'no'.tr,
                       mysize: 20,
                       family: MyFont.poppinsMedium,
@@ -176,7 +179,8 @@ class MainController extends GetxController {
 
   Widget whichTitle() {
     return Padding(
-      padding: navController.buttomNavIcons[navController.index.value] == 'home'.tr
+      padding: navController.buttomNavIcons[navController.index.value] ==
+              'home'.tr
           ? insub.value
               ? const EdgeInsets.only(right: 56)
               : EdgeInsets.zero
