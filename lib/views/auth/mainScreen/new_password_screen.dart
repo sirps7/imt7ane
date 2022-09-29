@@ -66,7 +66,6 @@ class _NewPassowrdScreen extends State<NewPassowrdScreen> {
   @override
   Widget build(BuildContext context) => WillPopScope(
         onWillPop: () async {
-          print('Back Button pressed!');
           final shouldPop = await showWarning(context);
           return shouldPop ?? false;
         },

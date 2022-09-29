@@ -68,7 +68,6 @@ class MyLocale implements Translations{
       'choose_any_of_the_following':':اختر أي مما يلي',
       'solutions':'حلول',
       'question':'سؤال',
-
       'timer':'الوقت',
       'score':'نتيجة',
       'next':'التالي',
@@ -123,12 +122,9 @@ class MyLocale implements Translations{
       'timeout':'Quiz time is over!!, press the buttom below to view your score',
       'yes':'Yes',
       'OK':'OK',
-
       'no':'No',
-
       'title_signup_screen':'Confirm your account',
       'body_signup_screen':'you have successfully signed up, we have send a confirmation link to your email',
-
       /////////////////////
       ////////////////////
       //////////////////////

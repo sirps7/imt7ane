@@ -67,7 +67,6 @@ class MyStage extends StatelessWidget {
                               .toList(),
                           onChanged: (value) {
                             dropController.selectedItem2.value = value!;
-                            print(dropController.selectedItem2.value);
                           },
                         );
                       }),

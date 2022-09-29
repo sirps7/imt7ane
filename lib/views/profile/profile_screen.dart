@@ -103,13 +103,11 @@ class ProfileScreen extends StatelessWidget {
                              family: 'fontsbold'.tr,
                           ),
                           GetX<QuizController>(builder: (quizController) {
-                            return Expanded(
-                              child: MyText(
-                                myText: '${quizController.total.value}',
-                                mysize: 40,
-                                family: 'Poppinsbold',
-                                overFlow: TextOverflow.clip,
-                              ),
+                            return MyText(
+                              myText: '${quizController.total.value}',
+                              mysize: 40,
+                              family: 'Poppinsbold',
+                              overFlow: TextOverflow.clip,
                             );
                           }),
                         ],

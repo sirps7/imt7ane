@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+
 //this is a comment
 bool show = true;
 late SharedPreferences sharepref;
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MyLocaleController c =Get.put(MyLocaleController());
+    MyLocaleController c = Get.put(MyLocaleController());
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentScope = FocusScope.of(context);
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
               minWidth: 410,
               defaultScale: true,
               breakpoints: [
-                const ResponsiveBreakpoint.resize(410 , name: MOBILE),
+                const ResponsiveBreakpoint.resize(410, name: MOBILE),
                 const ResponsiveBreakpoint.autoScale(650, name: TABLET),
                 const ResponsiveBreakpoint.autoScale(900, name: TABLET),
                 const ResponsiveBreakpoint.resize(1200, name: DESKTOP),
@@ -73,14 +74,13 @@ class MyApp extends StatelessWidget {
           translations: MyLocale(),
           home: show
               ? LogoMain(
-            showw: show,
-          )
+                  showw: show,
+                )
               :
-          // VerificationScreen()
-          LogoMain2(
-            showw: show,
-          )
-      ),
+              // VerificationScreen()
+              LogoMain2(
+                  showw: show,
+                )),
     );
   }
 }

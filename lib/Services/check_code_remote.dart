@@ -17,7 +17,6 @@ class code_Services{
       headers: {'Content-Type': 'application/json; charset=UTF-8'},
       body:json.encode(data),
     );
-    print(response.statusCode);
     isloading.value=false;
     if(response.statusCode == 200){
       sc.value=200;
@@ -26,7 +25,6 @@ class code_Services{
     if(response.statusCode==400){
       sc.value=400;
       ed.value='code is incorrect';
-      print(ed.value);
     }
       if(response.statusCode==403){
         sc.value=403;
