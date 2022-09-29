@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_shake_animated/flutter_shake_animated.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
 import '../utlites/dialogWarning.dart';
 
@@ -33,6 +34,8 @@ class QuizQuestons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Box saveScoreLocal = Hive.box<dynamic>('lastQuizScore');
+    Box saveQuestionsLocal = Hive.box<dynamic>('lastQuestions');
     final player = AudioCache();
     MainController mainController = Get.find();
     ScrollController scrollController = ScrollController();
@@ -340,10 +343,29 @@ class QuizQuestons extends StatelessWidget {
                           }
                           //! submit
                           if (counter.value == quizController.noOfQuestions) {
+                            quizController.saveLastQuizScore();
                             quizController.last_incorrectAnswer.value =
                                 quizController.inCorrectAnswer.value;
                             quizController.last_correctAnswer.value =
                                 quizController.correctAnswer.value;
+                            saveScoreLocal.put(
+                              'last_incorrectAnswer',
+                              quizController.last_incorrectAnswer.value,
+                            );
+                            saveScoreLocal.put(
+                              'last_correctAnswer',
+                              quizController.last_correctAnswer.value,
+                            );
+                            saveScoreLocal.put(
+                              'last_score',
+                              quizController.lastQuizscore,
+                            );
+                            saveScoreLocal.put('last_lecture', lecture);
+                            saveScoreLocal.put('last_subName', subName);
+                            saveQuestionsLocal.put(
+                              'last_questions',
+                              NetQuiz.quizquestions,
+                            );
                             quizController.sendQuiz();
                             mainController.inQuiz.value = false;
                             navController.index.value = 1;
@@ -353,14 +375,13 @@ class QuizQuestons extends StatelessWidget {
                             quizController.circleNumber.value = 0;
                             quizController.circles = [];
                             quizController.currentQuestionIndecator.value = 1;
-                            quizController.saveLastQuizScore();
+
                             QuizSolutions.lectureName = lecture;
                             QuizSolutions.subjectName = subName;
                             QuizScore.lecture = lecture;
                             QuizScore.subName = subName;
                             History.historyList = [];
                             quizController.getQuizesHistoryWithAvgAndTotal();
-                            quizController.thereIsNoScore.value = false;
                             quizController.correctAnswer.value = 0;
                             quizController.inCorrectAnswer.value = 0;
                           }

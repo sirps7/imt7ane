@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+part 'quiz.g.dart';
 
 class NetQuiz {
-  static List<Map<int, QuizQuastion>> quizquestions = [];
+  static List<dynamic> quizquestions = [];
   static fromJson(Map json) {
     for (int i = 0; i < json['q_num']; i++) {
       quizquestions.add(
@@ -27,7 +29,8 @@ class NetQuiz {
   }
 }
 
-class QuizQuastion {
+@HiveType(typeId: 0, adapterName: 'QuizQuastionAdapter')
+class QuizQuastion extends HiveObject {
   QuizQuastion({
     required this.isProblem,
     this.image = '',
@@ -35,21 +38,31 @@ class QuizQuastion {
     required this.questionNo,
     required this.choices,
   });
+  @HiveField(0)
   final RxString selectedChioce = ''.obs;
+  @HiveField(1)
   final bool isProblem;
+  @HiveField(2)
   final String? image;
+  @HiveField(3)
   final String questionBody;
+  @HiveField(4)
   final int questionNo;
+  @HiveField(5)
   final List choices;
 }
 
-class QuizChoice {
+@HiveType(typeId: 1, adapterName: 'QuizChoiceAdapter')
+class QuizChoice extends HiveObject {
   QuizChoice({
     required this.questionNo,
     required this.choiceBody,
     required this.isCorrect,
   });
+  @HiveField(0)
   final int questionNo;
+  @HiveField(1)
   final String choiceBody;
+  @HiveField(2)
   final bool isCorrect;
 }

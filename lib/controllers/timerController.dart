@@ -41,9 +41,9 @@ class TimerController extends GetxController {
         barrierDismissible: false,
         radius: 10,
         backgroundColor: MyColor.mainColor,
-        titlePadding: const EdgeInsets.only(top: 10,bottom: 0,right: 15),
+        titlePadding: const EdgeInsets.only(top: 10, bottom: 0, right: 15),
         title: 'timeout'.tr,
-        titleStyle: TextStyle(color: Colors.white,fontFamily: MyFont.poppins),
+        titleStyle: TextStyle(color: Colors.white, fontFamily: MyFont.poppins),
         confirm: Padding(
           padding: const EdgeInsets.only(left: 20),
           child: TextButton(
@@ -67,10 +67,9 @@ class TimerController extends GetxController {
               QuizScore.subName = QuizQuestons.subName;
               History.historyList = [];
               quizController.getQuizesHistoryWithAvgAndTotal();
-              quizController.thereIsNoScore.value = false;
               Get.back();
             },
-            child:  MyText(
+            child: MyText(
               myText: 'OK'.tr,
               mysize: 20,
               mycolor: Colors.white,

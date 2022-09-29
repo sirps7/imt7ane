@@ -4,9 +4,14 @@ import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/networking/quiz.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz_history.dart';
+import 'package:amti7ane_unicoding/views/quiz/quiz_questions.dart';
+import 'package:amti7ane_unicoding/views/quiz/quiz_score_page.dart';
+import 'package:amti7ane_unicoding/views/quiz/quiz_solutions.dart';
 import 'package:amti7ane_unicoding/views/utlites/dialogWarning.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
 import '../controllers/controller_main.dart';
 import 'networking/deffult_quizes.dart';
@@ -20,6 +25,8 @@ class ButtomNav extends StatelessWidget {
   final TimerController timerController = Get.find();
   @override
   Widget build(BuildContext context) {
+    Box saveScoreLocal = Hive.box<dynamic>('lastQuizScore');
+    Box saveQuestionsLocal = Hive.box<dynamic>('lastQuestions');
     return GetX<BottomNavigationController>(builder: (mycontroller) {
       return BottomNavigationBar(
         selectedLabelStyle: TextStyle(fontFamily: 'fonts'.tr),
@@ -47,6 +54,38 @@ class ButtomNav extends StatelessWidget {
                     foregroundColor: Colors.white,
                   ),
                   onPressed: () {
+                    quizController.saveLastQuizScore();
+                    quizController.last_incorrectAnswer.value =
+                        quizController.inCorrectAnswer.value;
+                    quizController.last_correctAnswer.value =
+                        quizController.correctAnswer.value;
+                    saveScoreLocal.put(
+                      'last_incorrectAnswer',
+                      quizController.last_incorrectAnswer.value,
+                    );
+                    saveScoreLocal.put(
+                      'last_correctAnswer',
+                      quizController.last_correctAnswer.value,
+                    );
+                    saveScoreLocal.put(
+                      'last_score',
+                      quizController.lastQuizscore,
+                    );
+                    saveScoreLocal.put('last_lecture', QuizQuestons.lecture);
+                    saveScoreLocal.put('last_subName', QuizQuestons.subName);
+                    saveQuestionsLocal.put(
+                      'last_questions',
+                      NetQuiz.quizquestions,
+                    );
+                    quizController.sendQuiz();
+                    QuizSolutions.lectureName = QuizQuestons.lecture;
+                    QuizSolutions.subjectName = QuizQuestons.subName;
+                    QuizScore.lecture = QuizQuestons.lecture;
+                    QuizScore.subName = QuizQuestons.subName;
+                    History.historyList = [];
+                    quizController.getQuizesHistoryWithAvgAndTotal();
+                    quizController.correctAnswer.value = 0;
+                    quizController.inCorrectAnswer.value = 0;
                     quizController.dialogTC.value = 'exit'.tr;
                     mainController.inQuiz.value = false;
                     mycontroller.index.value = 0;

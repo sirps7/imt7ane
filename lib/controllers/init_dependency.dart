@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 class InitDep implements Bindings {
   @override
-  void dependencies() {
+  void dependencies() async {
     Get.lazyPut(() => SubjectsControllers());
     Get.lazyPut(() => BottomNavigationController());
     Get.lazyPut(() => MainController());

@@ -1,21 +1,39 @@
+import 'dart:io';
+
 import 'package:amti7ane_unicoding/controllers/jsonControllers/Initalize.dart';
+import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
 import 'package:amti7ane_unicoding/locale/locale.dart';
 import 'package:amti7ane_unicoding/locale/locale_Controller.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/controllers/init_dependency.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz.dart';
+
 import 'package:amti7ane_unicoding/views/opening/logoMain.dart';
 import 'package:amti7ane_unicoding/views/opening/logoMain2.dart';
+import 'package:amti7ane_unicoding/views/quiz/quiz_solutions.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:path_provider/path_provider.dart';
 
 //this is a comment
 bool show = true;
 late SharedPreferences sharepref;
+
+QuizController quizController = Get.find();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Directory dir = await getApplicationDocumentsDirectory();
+  Hive.init(dir.path);
+  Hive.registerAdapter(QuizQuastionAdapter());
+  Hive.registerAdapter(QuizChoiceAdapter());
+  await Hive.openBox<dynamic>('lastQuizScore');
+  await Hive.openBox<dynamic>('lastQuestions');
+
   sharepref = await SharedPreferences.getInstance();
   UsersBinding().dependencies();
   final prefs = await SharedPreferences.getInstance();
@@ -37,6 +55,7 @@ class MyApp extends StatelessWidget {
         }
       },
       child: GetMaterialApp(
+          initialBinding: InitDep(),
           textDirection: TextDirection.ltr,
           builder: (context, child) => ResponsiveWrapper.builder(
               BouncingScrollWrapper.builder(context, child!),
@@ -51,7 +70,6 @@ class MyApp extends StatelessWidget {
                 const ResponsiveBreakpoint.autoScale(2460, name: "4K"),
               ],
               background: Container(color: const Color(0xFFF5F5F5))),
-          initialBinding: InitDep(),
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
               scaffoldBackgroundColor: Colors.white,

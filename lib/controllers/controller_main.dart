@@ -9,7 +9,7 @@ import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_quizes.dart';
 import 'package:amti7ane_unicoding/models/networking/quiz.dart';
-import 'package:amti7ane_unicoding/models/purple_container.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz_history.dart';
 import 'package:amti7ane_unicoding/views/home/home_screen.dart';
 import 'package:amti7ane_unicoding/views/home/subjects_lectures.dart';
 import 'package:amti7ane_unicoding/views/profile/profile_screen.dart';
@@ -19,6 +19,7 @@ import 'package:amti7ane_unicoding/views/quiz/quiz_solutions.dart';
 import 'package:amti7ane_unicoding/views/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
 class MainController extends GetxController {
   RxBool insub = false.obs;
@@ -30,6 +31,8 @@ class MainController extends GetxController {
   QuizController quizController = Get.find();
   TimerController timerController = Get.find();
   DropdownButtonController dropdownButtonController = Get.find();
+  Box saveScoreLocal = Hive.box<dynamic>('lastQuizScore');
+  Box saveQuestionsLocal = Hive.box<dynamic>('lastQuestions');
 
   List screens = [
     [
@@ -138,6 +141,40 @@ class MainController extends GetxController {
                       quizController.circles = [];
                       quizController.currentQuestionIndecator.value = 1;
                       NetQuiz.quizquestions = [];
+
+                      quizController.saveLastQuizScore();
+                      quizController.last_incorrectAnswer.value =
+                          quizController.inCorrectAnswer.value;
+                      quizController.last_correctAnswer.value =
+                          quizController.correctAnswer.value;
+                      saveScoreLocal.put(
+                        'last_incorrectAnswer',
+                        quizController.last_incorrectAnswer.value,
+                      );
+                      saveScoreLocal.put(
+                        'last_correctAnswer',
+                        quizController.last_correctAnswer.value,
+                      );
+                      saveScoreLocal.put(
+                        'last_score',
+                        quizController.lastQuizscore,
+                      );
+                      saveScoreLocal.put('last_lecture', QuizQuestons.lecture);
+                      saveScoreLocal.put('last_subName', QuizQuestons.subName);
+                      saveQuestionsLocal.put(
+                        'last_questions',
+                        NetQuiz.quizquestions,
+                      );
+                      quizController.sendQuiz();
+                      QuizSolutions.lectureName = QuizQuestons.lecture;
+                      QuizSolutions.subjectName = QuizQuestons.subName;
+                      QuizScore.lecture = QuizQuestons.lecture;
+                      QuizScore.subName = QuizQuestons.subName;
+                      History.historyList = [];
+                      quizController.getQuizesHistoryWithAvgAndTotal();
+                      quizController.correctAnswer.value = 0;
+                      quizController.inCorrectAnswer.value = 0;
+
                       Get.back();
                     },
                     child: MyText(
