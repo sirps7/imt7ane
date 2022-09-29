@@ -16,12 +16,9 @@ class ver_email_Services{
     );
     isloading.value=false;
 
-    print(response.statusCode);
     if(response.statusCode == 202){
       sc.value=202;
 
-      // var jsonString = response.body;
-      // print(jsonString);
     }
     else if (response.statusCode==404){
       sc.value=404;

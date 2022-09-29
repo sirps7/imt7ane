@@ -328,7 +328,7 @@ class QuizQuestons extends StatelessWidget {
                               quizController.score += 5;
                               quizController.correctAnswer.value++;
                             } else {
-                              player.play('sounds/Error.mp3');
+                              player.play('sounds/Error.mp3',volume: 1.5);
                               quizController.con_color.value = Colors.redAccent;
 
                               quizController.playShake.value = true;
