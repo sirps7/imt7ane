@@ -1,9 +1,10 @@
 import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart';
+import 'package:amti7ane_unicoding/controllers/controller_main.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/controller_main.dart';
+
 import 'networking/deffult_quizes.dart';
 
 class ButtomNav extends StatelessWidget {

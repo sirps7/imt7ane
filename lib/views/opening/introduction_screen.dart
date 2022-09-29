@@ -2,6 +2,7 @@ import 'package:amti7ane_unicoding/views/auth/mainScreen/login_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroScreen extends StatelessWidget {
@@ -9,8 +10,8 @@ class IntroScreen extends StatelessWidget {
 
   final List<PageViewModel> pages = [
     PageViewModel(
-      title: 'first page',
-      body: 'Description',
+      title: 'titelOn1'.tr,
+      body: 'descripOn1'.tr,
       image: Image.asset('assets/images/introScreen1.png'),
       decoration: const PageDecoration(
         bodyTextStyle: TextStyle(fontSize: 15, color: Color(0xff979797)),
@@ -18,8 +19,8 @@ class IntroScreen extends StatelessWidget {
       ),
     ),
     PageViewModel(
-      title: 'secound page',
-      body: 'Description',
+      title: 'titelOn2'.tr,
+      body: 'descripOn2'.tr,
       image: Center(
         child: Image.asset('assets/images/introScreen2.png'),
       ),
@@ -29,8 +30,8 @@ class IntroScreen extends StatelessWidget {
       ),
     ),
     PageViewModel(
-      title: 'three page',
-      body: 'Description',
+      title: 'titelOn3'.tr,
+      body: 'descripOn3'.tr,
       image: Center(
         child: Image.asset('assets/images/introScreen3.png'),
       ),

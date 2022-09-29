@@ -230,14 +230,14 @@ class SettingsScreen extends StatelessWidget {
                       child:
                           GetX<SettingController>(builder: (settingController) {
                         return PurpleContainer(
-                          color: const Color.fromARGB(255, 129, 133, 241),
+                          color: const Color(0xffF8D838),
                           H: 50,
                           W: 120,
                           child: settingController.updateProfileDone.value
                               ?  MyText(
                                   myText: 'save'.tr,
                                   mysize: 20,
-                                  mycolor: Colors.white,
+                                  mycolor: MyColor.mainColor,
                                   // family: MyFont.poppinsMedium,
                             family: 'fontsmedium'.tr,
                                 )
