@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:amti7ane_unicoding/models/networking/server_variable.dart';
 import 'package:amti7ane_unicoding/models/networking/stages.dart';
 import 'package:get/get.dart' hide Response;
@@ -7,16 +5,11 @@ import 'package:dio/dio.dart';
 
 class DropdownButtonController extends GetxController {
   RxBool getstagesDone = false.obs;
-  List<String> ganderList = ['Male', 'Female'];
-  RxString selectedItem1 = 'Male'.obs;
-  Dio dio = Dio();
-
   RxList<String> stageList = <String>[].obs;
-  RxString selectedItem = 'اول ابتدائي'.obs;
-  RxString settingSelectedItem = 'ثاني ابتدائي'.obs;
-
+  RxString selectedItem = ''.obs;
+  RxString settingSelectedItem = ''.obs;
   Future<void> getStages() async {
-    Response response = await dio.get(
+    Response response = await Server.dio.get(
       Server.baseUrl + Server.getStagesPath,
       options: Server.token,
     );

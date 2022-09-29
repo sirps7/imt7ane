@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:amti7ane_unicoding/controllers/jsonControllers/Initalize.dart';
 import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
 import 'package:amti7ane_unicoding/locale/locale.dart';
@@ -7,11 +6,8 @@ import 'package:amti7ane_unicoding/locale/locale_Controller.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/controllers/init_dependency.dart';
 import 'package:amti7ane_unicoding/models/networking/quiz.dart';
-
 import 'package:amti7ane_unicoding/views/opening/logoMain.dart';
 import 'package:amti7ane_unicoding/views/opening/logoMain2.dart';
-import 'package:amti7ane_unicoding/views/quiz/quiz_solutions.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -33,6 +29,7 @@ void main() async {
   Hive.registerAdapter(QuizChoiceAdapter());
   await Hive.openBox<dynamic>('lastQuizScore');
   await Hive.openBox<dynamic>('lastQuestions');
+  await Hive.openBox<dynamic>('auth');
 
   sharepref = await SharedPreferences.getInstance();
   UsersBinding().dependencies();

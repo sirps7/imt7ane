@@ -3,6 +3,7 @@ import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart'
 import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
 import 'package:amti7ane_unicoding/controllers/ahmedController/email_Controller.dart';
 import 'package:amti7ane_unicoding/controllers/setting_controller.dart';
+import 'package:amti7ane_unicoding/controllers/subjects_controllers.dart';
 import 'package:amti7ane_unicoding/locale/locale_Controller.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/models/loading.dart';
@@ -22,6 +23,7 @@ class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
   final SettingController settingController = Get.find();
   final BottomNavigationController bottomNavigationController = Get.find();
+  final SubjectsControllers subjectsControllers = Get.find();
   final DropdownButtonController dropController = Get.find();
   final TextEditingController mycontroller = TextEditingController();
   final from = Get.find<MyControllerAuth>();
@@ -231,6 +233,9 @@ class SettingsScreen extends StatelessWidget {
                                   dropController.settingSelectedItem.value]!,
                               dropController.settingSelectedItem.value,
                             );
+                            dropController.selectedItem.value =
+                                dropController.settingSelectedItem.value;
+                            subjectsControllers.getSubjectsWithStageId();
                           },
                           child: GetX<SettingController>(
                               builder: (settingController) {

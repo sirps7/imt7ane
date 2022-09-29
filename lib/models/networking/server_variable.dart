@@ -14,12 +14,12 @@ class Server {
   static String sendQuizpath = '/api/quizLog/post_quiz_history';
   static String getQuizesHistoryPath = '/api/quizLog/get_quizzes_history';
   static String getAvgAndTotalPath = '/api/quizLog/get_avg_n_total';
+  static late String userToken;
 
   static Options token = Options(
     responseType: ResponseType.json,
     headers: {
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMiIsInVzZXJfZW1haWwiOiJ1c2VyMTJAZ21haWwuY29tLmNvbSJ9.rFsBS1TFHDRfJg2TW8ocqlD_KVTJwlaxrMUmMhpBQBI',
+      'Authorization': 'Bearer $userToken',
       'accept': 'application/json;charset=utf-8',
     },
   );

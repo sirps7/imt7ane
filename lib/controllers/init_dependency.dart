@@ -20,7 +20,6 @@ class InitDep implements Bindings {
     Get.lazyPut(() => TimerController());
     Get.lazyPut(() => SettingController());
     Get.lazyPut(() => DropdownButtonController());
-    Get.lazyPut(() => DropdownButtonController());
     Get.lazyPut(() => ProfileController());
   }
 }
