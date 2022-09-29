@@ -1,4 +1,6 @@
 import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart';
+import 'package:amti7ane_unicoding/controllers/controller_main.dart';
+
 import 'package:amti7ane_unicoding/controllers/timerController.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/models/myFonts.dart';
@@ -13,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-import '../controllers/controller_main.dart';
+
 import 'networking/deffult_quizes.dart';
 
 class ButtomNav extends StatelessWidget {
@@ -51,7 +53,7 @@ class ButtomNav extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 20),
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
+                    primary: Colors.white,
                   ),
                   onPressed: () {
                     quizController.saveLastQuizScore();

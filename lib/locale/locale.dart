@@ -68,7 +68,6 @@ class MyLocale implements Translations{
       'choose_any_of_the_following':':اختر أي مما يلي',
       'solutions':'حلول',
       'question':'سؤال',
-
       'timer':'الوقت',
       'score':'نتيجة',
       'next':'التالي',
@@ -82,8 +81,12 @@ class MyLocale implements Translations{
       'fontsmedium':'SFMarwaMedium',
 
       ///////////////////////////////////////////////////////////////
-
-
+      'titelOn1':'تعليم',
+      'descripOn1':'يتضمن تطبيق امتحاني اختبارات في جميع المواد الدراسية ولكافة المراحل',
+      'titelOn2':'ميزات',
+      'descripOn2':'من مميزات التطبيق خزن اختباراتك ومعرفة نقاط ضعفك',
+      'titelOn3':'اخيرا',
+      'descripOn3':'يساعدك تطبيق امتحاني على اختبار نفسك وتجاوز صعوبات المواد الدراسيه',
 
 
     },
@@ -119,12 +122,9 @@ class MyLocale implements Translations{
       'timeout':'Quiz time is over!!, press the buttom below to view your score',
       'yes':'Yes',
       'OK':'OK',
-
       'no':'No',
-
       'title_signup_screen':'Confirm your account',
       'body_signup_screen':'you have successfully signed up, we have send a confirmation link to your email',
-
       /////////////////////
       ////////////////////
       //////////////////////
@@ -168,6 +168,13 @@ class MyLocale implements Translations{
       'fontsbold':'Poppinsbold',
       'fontsmedium':'PoppinsMedium',
       ///////////////////////////////////////////////////////////////
+
+      'titelOn1':'Education',
+      'descripOn1':'Amtihane application includes tests in all subjects for all levels',
+      'titelOn2':'Advantages',
+      'descripOn2':'One of the features of the application is to store your tests and know your weaknesses',
+      'titelOn3':'Finally',
+      'descripOn3':'Amtihane application helps you to test yourself and overcome the difficulties of study subjects',
 
 
 

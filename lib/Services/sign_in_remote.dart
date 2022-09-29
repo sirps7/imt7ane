@@ -17,7 +17,6 @@ class SignInRemote{
     if(response.statusCode == 200){
       sc.value=200;
       var jsonString = response.body;
-      print(jsonString);
       return User.fromJson(jsonString);
     }
     else if (response.statusCode==404){

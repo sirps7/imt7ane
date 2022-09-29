@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                               (item) => DropdownMenuItem(
                                 value: item,
                                 child: MyText(
-                                  family: 'fonts'.tr,
+                                  family: 'SFMarwa',
                                   myText: item,
                                   mysize: 20,
                                   mycolor: Colors.white,

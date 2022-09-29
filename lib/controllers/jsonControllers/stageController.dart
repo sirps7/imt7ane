@@ -20,7 +20,6 @@ class StageController extends GetxController{
   Future<void> AddStages()  async {
     try {
       var Stage = await RemoteServices.get_stage();
-      print(Stage);
       if (Stage != null) {
         stage.value = Stage as List<Stages>;
       }
