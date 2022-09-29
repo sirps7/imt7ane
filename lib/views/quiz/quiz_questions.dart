@@ -71,6 +71,7 @@ class QuizQuestons extends StatelessWidget {
                               '${timerController.hours}:${timerController.minutes}:${timerController.seconds}',
                           mysize: 18,
                           family: MyFont.poppinsMedium,
+                          mycolor: timerController.lessMin.value?Colors.redAccent:Colors.black,
                         );
                       })
                     ],
@@ -97,17 +98,28 @@ class QuizQuestons extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      MyText(
-                        myText: 'score'.tr,
-                        mysize: 20,
-                        // family: MyFont.poppinsMedium,
-                        family: 'fontsmedium'.tr,
+                      Padding(
+                        padding: const EdgeInsets.only(top:20.0),
+                        child: MyText(
+                          myText: 'score'.tr,
+                          mysize: 20,
+                          // family: MyFont.poppinsMedium,
+                          family: 'fontsmedium'.tr,
+                        ),
                       ),
                       GetX<QuizController>(builder: (quizController) {
-                        return MyText(
-                          myText: '${quizController.score.value}',
-                          mysize: 18,
-                          family: MyFont.poppinsMedium,
+                        return Container(
+                      height: 60,
+                      child: Stack(
+                        children: [
+                          MyText(
+                            myText: '${quizController.score.value}',
+                            mysize: 18,
+                            family: MyFont.poppinsMedium,
+                          ),
+                          Visibility(visible: quizController.Correctvisiblity.value,child: Padding( padding: EdgeInsets.only(top: quizController.fadedCorrectPoints.value),child: MyText(myText: '+5', mysize: 18,family:MyFont.poppinsMedium,mycolor: Colors.black.withOpacity(quizController.fadedCorrectColorOpt.value),)))
+                        ],
+                      ),
                         );
                       })
                     ],
@@ -299,8 +311,18 @@ class QuizQuestons extends StatelessWidget {
                               player.play('sounds/Correct.mp3');
                               quizController.con_color.value =
                                   Colors.greenAccent;
-                              await Future.delayed(
-                                  const Duration(milliseconds: 500));
+                              int i =0;
+                          quizController.Correctvisiblity.value=true;
+                          while (i <500){
+                            await Future.delayed(
+                                const Duration(milliseconds: 25));
+                            quizController.fadedCorrectPoints.value-=2;
+                            quizController.fadedCorrectColorOpt.value-=0.05;
+                            i+=25;
+                          }
+                          quizController.fadedCorrectColorOpt.value=1.0;
+                          quizController.Correctvisiblity.value=false;
+                          quizController.fadedCorrectPoints.value=40;
                               quizController.con_color.value =
                                   Colors.grey.shade300;
                               quizController.score += 5;
@@ -345,6 +367,7 @@ class QuizQuestons extends StatelessWidget {
                             quizController.last_correctAnswer.value =
                                 quizController.correctAnswer.value;
                             quizController.sendQuiz();
+                            mainController.showSolutions.value = false;
                             mainController.inQuiz.value = false;
                             navController.index.value = 1;
                             quizController.resetQuestion();

@@ -31,8 +31,10 @@ class QuizController extends GetxController {
   bool deffult = true;
   int quizSubjectNO = 0;
   int quizId = 0;
+  RxBool Correctvisiblity=false.obs;
+  RxDouble fadedCorrectColorOpt=(1.0).obs;
   bool firstTime = true;
-
+  RxDouble fadedCorrectPoints=(40.0).obs;
   RxInt currentQuestionIndecator = 1.obs;
   RxBool getDeffultQuizesDone = false.obs;
   RxBool getQuizDone = false.obs;

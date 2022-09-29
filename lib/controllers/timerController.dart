@@ -19,6 +19,7 @@ class TimerController extends GetxController {
   static int givenSeconds = 00;
   Timer? timer;
   bool firstTime = true;
+  RxBool lessMin=false.obs;
 
   static Duration duration = Duration(hours: givenHours, minutes: givenMinutes);
   static String towDigit(int n) => n.toString().padLeft(2, '0');
@@ -30,6 +31,13 @@ class TimerController extends GetxController {
     const addenTime = 1;
     int secound = duration.inSeconds - addenTime;
     duration = Duration(seconds: secound);
+    if(duration.inMinutes==0){
+      lessMin.value=true;
+    }
+    if(duration.inMinutes>0){
+      lessMin.value=false;
+    }
+
 
     if (duration.inSeconds < 0) {
       QuizController quizController = Get.find();
@@ -51,8 +59,13 @@ class TimerController extends GetxController {
               primary: Colors.white,
             ),
             onPressed: () {
+              quizController.last_incorrectAnswer.value =
+                  quizController.inCorrectAnswer.value;
+              quizController.last_correctAnswer.value =
+                  quizController.correctAnswer.value;
               quizController.sendQuiz();
               mainController.inQuiz.value = false;
+              mainController.showSolutions.value = false;
               navController.index.value = 1;
               quizController.resetQuestion();
               timerController.stopTimer();
@@ -68,6 +81,8 @@ class TimerController extends GetxController {
               History.historyList = [];
               quizController.getQuizesHistoryWithAvgAndTotal();
               quizController.thereIsNoScore.value = false;
+              quizController.correctAnswer.value = 0;
+              quizController.inCorrectAnswer.value = 0;
               Get.back();
             },
             child:  MyText(
