@@ -128,7 +128,7 @@ class MainController extends GetxController {
                   padding: const EdgeInsets.only(left: 20),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
+                      primary: Colors.white,
                     ),
                     onPressed: () {
                       quizController.dialogTC.value = 'exit'.tr;
