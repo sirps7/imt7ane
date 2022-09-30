@@ -1,4 +1,5 @@
 import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
+
 import 'package:amti7ane_unicoding/controllers/choiceController.dart';
 import 'package:amti7ane_unicoding/models/networking/deffult_quizes.dart';
 import 'package:amti7ane_unicoding/models/networking/quiz.dart';
@@ -156,7 +157,5 @@ class QuizController extends GetxController {
     StudentHistory.fromJson(historyResponse.data);
     total.value = avgTotalResponse.data['total'];
     avg.value = avgTotalResponse.data['avg'];
-    print(total.value);
-    print(Server.token.headers);
   }
 }

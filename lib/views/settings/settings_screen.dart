@@ -10,6 +10,7 @@ import 'package:amti7ane_unicoding/models/loading.dart';
 import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/networking/profileInfo.dart';
+import 'package:amti7ane_unicoding/models/networking/quiz.dart';
 import 'package:amti7ane_unicoding/models/networking/stages.dart';
 import 'package:amti7ane_unicoding/models/purple_container.dart';
 import 'package:amti7ane_unicoding/models/settings_button.dart';
@@ -21,6 +22,7 @@ import 'package:hive/hive.dart';
 import '../../models/networking/quiz_history.dart';
 import '../utlites/dialogWarning.dart';
 import 'package:amti7ane_unicoding/models/quiz_history.dart';
+
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
   final SettingController settingController = Get.find();
@@ -267,7 +269,7 @@ class SettingsScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 30.0,
+                  height: 20.0,
                 ),
                 //! settings secound button
                 SettingsButton(
@@ -287,7 +289,7 @@ class SettingsScreen extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                if (controller.language.value != 'EN') {
+                                if (controller.language.value != 'en') {
                                   controller.tooglelanguage();
                                   controllerLang.changelang('en');
                                 }
@@ -299,7 +301,7 @@ class SettingsScreen extends StatelessWidget {
                                 child: MyText(
                                   myText: 'EN',
                                   mysize: 20,
-                                  mycolor: controller.language.value == 'AR'
+                                  mycolor: controller.language.value == 'ar'
                                       ? Colors.white
                                       : Colors.yellow,
                                 ),
@@ -307,7 +309,7 @@ class SettingsScreen extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                if (controller.language.value != 'AR') {
+                                if (controller.language.value != 'ar') {
                                   controller.tooglelanguage();
                                   controllerLang.changelang('ar');
                                 }
@@ -319,7 +321,7 @@ class SettingsScreen extends StatelessWidget {
                                 child: MyText(
                                   myText: 'AR',
                                   mysize: 20,
-                                  mycolor: controller.language.value == 'EN'
+                                  mycolor: controller.language.value == 'en'
                                       ? Colors.white
                                       : Colors.yellow,
                                 ),
@@ -335,7 +337,7 @@ class SettingsScreen extends StatelessWidget {
                 //! settings third button
                 GestureDetector(
                   onTap: () {
-                    StudentHistory.historyList=[];
+                    StudentHistory.historyList = [];
                     RemoteServices.ed.value = '';
                     from.emailInController.clear();
                     from.passwordInController.clear();
@@ -343,8 +345,9 @@ class SettingsScreen extends StatelessWidget {
                     Hive.box('lastQuizScore').clear();
                     Hive.box('lastQuestions').clear();
                     signoutC.deleteDependencies();
-                    c.isiniilized=false;
+                    c.isiniilized = false;
                     Get.offAll(LoginScreen());
+                    NetQuiz.quizquestions = [];
                   },
                   child: PurpleContainer(
                     H: 40,

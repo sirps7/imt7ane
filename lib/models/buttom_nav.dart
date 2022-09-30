@@ -15,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-
 import 'networking/deffult_quizes.dart';
 
 class ButtomNav extends StatelessWidget {
@@ -131,10 +130,11 @@ class ButtomNav extends StatelessWidget {
             icon: Image(
                 image: const AssetImage(
                     'assets/images/buttom_icons/home_icon.png'),
-                color: mycontroller.buttomNavIcons[mycontroller.index.value] ==
-                        'home'.tr
-                    ? MyColor.mainColor
-                    : Colors.grey,
+                color:
+                    mycontroller.englishTitleList[mycontroller.index.value] ==
+                            'home'.tr
+                        ? MyColor.mainColor
+                        : Colors.grey,
                 fit: BoxFit.cover,
                 height: mycontroller.max),
             label: 'home'.tr,
@@ -143,7 +143,7 @@ class ButtomNav extends StatelessWidget {
             icon: Image(
               image:
                   const AssetImage('assets/images/buttom_icons/quiz_icon.png'),
-              color: mycontroller.buttomNavIcons[mycontroller.index.value] ==
+              color: mycontroller.englishTitleList[mycontroller.index.value] ==
                       'quiz'.tr
                   ? MyColor.mainColor
                   : Colors.grey,
@@ -156,7 +156,7 @@ class ButtomNav extends StatelessWidget {
             icon: Image(
               image: const AssetImage(
                   'assets/images/buttom_icons/profile_icon.png'),
-              color: mycontroller.buttomNavIcons[mycontroller.index.value] ==
+              color: mycontroller.englishTitleList[mycontroller.index.value] ==
                       'profile'.tr
                   ? MyColor.mainColor
                   : Colors.grey,
@@ -169,7 +169,7 @@ class ButtomNav extends StatelessWidget {
             icon: Image(
               image: const AssetImage(
                   'assets/images/buttom_icons/sittings_icon.png'),
-              color: mycontroller.buttomNavIcons[mycontroller.index.value] ==
+              color: mycontroller.englishTitleList[mycontroller.index.value] ==
                       'settings'.tr
                   ? MyColor.mainColor
                   : Colors.grey,

@@ -104,7 +104,7 @@ class QuizScore extends StatelessWidget {
                             W: 200,
                             child: MyText(
                               myText:
-                                  'Your Score ${quizController.lastQuizscore}',
+                                  '${'your_score'.tr}  ${quizController.lastQuizscore}',
                               mysize: 25,
                               family: 'fonts'.tr,
                               mycolor: Colors.white,
