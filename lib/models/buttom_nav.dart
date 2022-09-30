@@ -130,11 +130,10 @@ class ButtomNav extends StatelessWidget {
             icon: Image(
                 image: const AssetImage(
                     'assets/images/buttom_icons/home_icon.png'),
-                color:
-                    mycontroller.englishTitleList[mycontroller.index.value] ==
-                            'home'.tr
-                        ? MyColor.mainColor
-                        : Colors.grey,
+                color: mycontroller.titleLanguage()[mycontroller.index.value] ==
+                        mycontroller.titleCondtionText('home')
+                    ? MyColor.mainColor
+                    : Colors.grey,
                 fit: BoxFit.cover,
                 height: mycontroller.max),
             label: 'home'.tr,
@@ -143,8 +142,8 @@ class ButtomNav extends StatelessWidget {
             icon: Image(
               image:
                   const AssetImage('assets/images/buttom_icons/quiz_icon.png'),
-              color: mycontroller.englishTitleList[mycontroller.index.value] ==
-                      'quiz'.tr
+              color: mycontroller.titleLanguage()[mycontroller.index.value] ==
+                      mycontroller.titleCondtionText('quiz')
                   ? MyColor.mainColor
                   : Colors.grey,
               fit: BoxFit.cover,
@@ -156,8 +155,8 @@ class ButtomNav extends StatelessWidget {
             icon: Image(
               image: const AssetImage(
                   'assets/images/buttom_icons/profile_icon.png'),
-              color: mycontroller.englishTitleList[mycontroller.index.value] ==
-                      'profile'.tr
+              color: mycontroller.titleLanguage()[mycontroller.index.value] ==
+                      mycontroller.titleCondtionText('profile')
                   ? MyColor.mainColor
                   : Colors.grey,
               height: mycontroller.max,
@@ -169,8 +168,8 @@ class ButtomNav extends StatelessWidget {
             icon: Image(
               image: const AssetImage(
                   'assets/images/buttom_icons/sittings_icon.png'),
-              color: mycontroller.englishTitleList[mycontroller.index.value] ==
-                      'settings'.tr
+              color: mycontroller.titleLanguage()[mycontroller.index.value] ==
+                      mycontroller.titleCondtionText('settings')
                   ? MyColor.mainColor
                   : Colors.grey,
               fit: BoxFit.cover,
