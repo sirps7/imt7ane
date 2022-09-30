@@ -7,7 +7,8 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 class SignInController extends GetxController {
-  late User user;
+  static late User user;
+  static bool notinilizedUser=false;
   Box auth = Hive.box<dynamic>('auth');
   DropdownButtonController dropdownButtonController =
       Get.put(DropdownButtonController());
@@ -17,6 +18,7 @@ class SignInController extends GetxController {
       var USER = await SignInRemote.sign_in(data);
       if (USER != null) {
         user = USER;
+        notinilizedUser=true;
         auth.put('token', user.token.access);
         Server.userToken = user.token.access;
         auth.put('stage', user.profileOut.stage.stages);

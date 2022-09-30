@@ -124,7 +124,6 @@ class _SingUpScreenState extends State<SingUpScreen> {
                           child:Text('signupp'.tr,
                         style: TextStyle(color: Colors.white, fontSize: 25,fontFamily: 'fonts'.tr),
                       ), onPressed: () async {
-
                         if (formKey.currentState!.validate()) {
                           // login(from.emailController.text.toString(), from.passwordController.text.toString());
                           var json=
@@ -133,9 +132,10 @@ class _SingUpScreenState extends State<SingUpScreen> {
                             "email": from.emailController.text,
                             "password1": from.passwordController.text,
                             "password2": from.passwordReController.text,
-                            "gender": dropC.selectedItem1.value,
+                            "gender": dropC.getGender(),
                             "stage": stageC.find_stage(dropC.selectedItem2.value)
                           };
+                          print(json);
                           await RemoteServices.sign_up(json);
                           if(RemoteServices.sc==202){
                             from.emailController.clear();

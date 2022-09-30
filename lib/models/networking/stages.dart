@@ -11,4 +11,13 @@ class Stages {
       dropdownButtonController.stageList.add(Map['stage']);
     }
   }
+  // static void getOld(){
+  //   for (var a in stagesMap) {
+  //     a.keys.forEach((v) =>
+  //         dropdownButtonController.stageList.add(v));
+  //   }
+  //   print(dropdownButtonController.stageList);
+
+  // }
+
 }

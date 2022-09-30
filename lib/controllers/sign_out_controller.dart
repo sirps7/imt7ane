@@ -9,22 +9,16 @@ import 'package:amti7ane_unicoding/controllers/subjects_controllers.dart';
 import 'package:amti7ane_unicoding/controllers/timerController.dart';
 import 'package:get/get.dart';
 
-import '../locale/locale_Controller.dart';
-MyLocaleController c = Get.find();
-
-class InitDep implements Bindings {
-  @override
-  void dependencies() async {
-    Get.lazyPut(() => SubjectsControllers());
-    Get.lazyPut(() => BottomNavigationController());
-    Get.lazyPut(() => MainController());
-    Get.lazyPut(() => QuizController());
-    Get.lazyPut(() => ChoiceController());
-    Get.lazyPut(() => TimerController());
-    Get.lazyPut(() => SettingController());
-    Get.lazyPut(() => DropdownButtonController());
-    Get.lazyPut(() => ProfileController());
-    c.isiniilized=true;
-
+class signoutC{
+  static void deleteDependencies() async {
+    Get.delete<SubjectsControllers>();
+    Get.delete<SubjectsControllers>();
+    Get.delete<MainController>();
+    Get.delete<QuizController>();
+    Get.delete<ChoiceController>();
+    Get.delete<TimerController>();
+    Get.delete<SettingController>();
+    Get.delete<DropdownButtonController>();
+    Get.delete<ProfileController>();
   }
 }

@@ -15,8 +15,18 @@ class DropdownButtonController_Ahmed extends GetxController {
   List<String> stageList = [''];
   RxString selectedItem2 = 'اول ابتدائي'.obs;
 
+  String getGender(){
+    if (selectedItem1.value=='male'.tr){
+      return 'Male';
+    }
+    else{
+      return 'Female';
+    }
+
+  }
   @override
   void onInit() {
+
     stageList=stagecontroller.stage.value.map((e) => e.stage).toList();
     super.onInit();
   }

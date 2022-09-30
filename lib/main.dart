@@ -20,7 +20,6 @@ import 'package:path_provider/path_provider.dart';
 bool show = true;
 late SharedPreferences sharepref;
 
-QuizController quizController = Get.find();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Directory dir = await getApplicationDocumentsDirectory();
@@ -43,7 +42,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MyLocaleController c = Get.put(MyLocaleController());
+    // MyLocaleController c = Get.put(MyLocaleController());
+    MyLocaleController c = Get.find();
+
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentScope = FocusScope.of(context);
@@ -52,8 +53,10 @@ class MyApp extends StatelessWidget {
         }
       },
       child: GetMaterialApp(
-          initialBinding: InitDep(),
-          textDirection: TextDirection.ltr,
+          // initialBinding: c.isiniilized? null:InitDep(),
+      // initialBinding:InitDep(),
+
+      textDirection: TextDirection.ltr,
           builder: (context, child) => ResponsiveWrapper.builder(
               BouncingScrollWrapper.builder(context, child!),
               maxWidth: 1200,

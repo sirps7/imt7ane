@@ -15,12 +15,16 @@ import 'package:get/get.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 
+import '../../../controllers/init_dependency.dart';
+import '../../../locale/locale_Controller.dart';
+
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
   final formKey = GlobalKey<FormState>();
   final from = Get.find<MyControllerAuth>();
   final userC = Get.find<SignInController>();
+  MyLocaleController c = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +98,7 @@ class LoginScreen extends StatelessWidget {
                                           from.passwordInController.text);
 
                                       SignInRemote.ed.value = '';
-                                      Get.offAll(const MainScreen());
+                                      Get.offAll(const MainScreen(),binding: InitDep());
                                     }
                                   }
                                 },

@@ -134,7 +134,9 @@ class MainController extends GetxController {
                       quizController.dialogTC.value = 'exit'.tr;
                       inQuiz.value = false;
                       navController.index.value = 0;
+                      quizController.sendQuiz();
                       quizController.resetQuestion();
+                      quizController.saveLastQuizScore();
                       timerController.stopTimer();
                       timerController.firstTime = true;
                       quizController.circleNumber.value = 0;

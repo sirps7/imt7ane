@@ -4,6 +4,7 @@ class Subjects {
   static List<Subject> deffultsubjects = [];
 
   static void fromJson(List json) {
+    if (deffultsubjects.isEmpty){
     for (var e in json) {
       deffultsubjects.add(
         Subject(
@@ -15,7 +16,7 @@ class Subjects {
         ),
       );
     }
-  }
+  }}
 }
 
 class Subject {

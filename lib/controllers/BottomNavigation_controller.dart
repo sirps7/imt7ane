@@ -4,7 +4,7 @@ class BottomNavigationController extends GetxController {
   RxInt index = 0.obs;
   double max = 37;
   double min = 28;
-  RxString genderSelectedItem = 'Male'.obs;
+  RxString genderSelectedItem = ''.obs;
 
   List<String> buttomNavIcons = [
     'home'.tr,

@@ -16,7 +16,8 @@ import 'package:amti7ane_unicoding/models/settings_button.dart';
 import 'package:amti7ane_unicoding/views/auth/mainScreen/login_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:amti7ane_unicoding/controllers/sign_out_controller.dart';
+import 'package:hive/hive.dart';
 import '../utlites/dialogWarning.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -28,6 +29,7 @@ class SettingsScreen extends StatelessWidget {
   final TextEditingController mycontroller = TextEditingController();
   final from = Get.find<MyControllerAuth>();
   final MyLocaleController controllerLang = Get.find();
+  MyLocaleController c = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,10 @@ class SettingsScreen extends StatelessWidget {
       mycontroller.text = ProfileInfo.studentName!;
       settingController.takeTheNameFromDb = false;
     }
+    Box auth = Hive.box<dynamic>('auth');
+    Box question = Hive.box<dynamic>('lastQuestions');
+    Box score = Hive.box<dynamic>('lastQuizScore');
+
     return WillPopScope(
         onWillPop: () async {
           final shouldPop = await showWarning(context);
@@ -331,6 +337,12 @@ class SettingsScreen extends StatelessWidget {
                     RemoteServices.ed.value = '';
                     from.emailInController.clear();
                     from.passwordInController.clear();
+                    auth.delete('email');
+                    auth.delete('password');
+                    Hive.box('lastQuizScore').clear();
+                    Hive.box('lastQuestions').clear();
+                    signoutC.deleteDependencies();
+                    c.isiniilized=false;
                     Get.offAll(LoginScreen());
                   },
                   child: PurpleContainer(
