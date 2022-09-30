@@ -135,7 +135,6 @@ class _SingUpScreenState extends State<SingUpScreen> {
                             "gender": dropC.getGender(),
                             "stage": stageC.find_stage(dropC.selectedItem2.value)
                           };
-                          print(json);
                           await RemoteServices.sign_up(json);
                           if(RemoteServices.sc==202){
                             from.emailController.clear();

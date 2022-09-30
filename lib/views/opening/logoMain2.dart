@@ -34,9 +34,7 @@ class _LogoMain2State extends State<LogoMain2> {
       try{
       await userC.sign_in_user(json);}
       catch(e){
-        print('error');
       }
-      print(SignInRemote.sc);
       if (SignInRemote.sc == 200) {
         Get.offAll(const MainScreen(),binding: InitDep());
       }

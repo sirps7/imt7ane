@@ -22,8 +22,12 @@ class SignInController extends GetxController {
         auth.put('token', user.token.access);
         Server.setToken(user.token.access);
         auth.put('stage', user.profileOut.stage.stages);
+        if(user.profileOut.stage.id>=10){
+          dropdownButtonController.selectedItem.value=user.profileOut.stage.stages.split(' ')[0]+' '+user.profileOut.stage.type;
+        }
+        else{
         dropdownButtonController.selectedItem.value =
-            user.profileOut.stage.stages;
+            user.profileOut.stage.stages;}
       }
     } finally {}
   }
