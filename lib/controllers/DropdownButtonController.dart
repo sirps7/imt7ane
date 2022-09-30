@@ -10,11 +10,12 @@ import 'jsonControllers/userController.dart';
 class DropdownButtonController extends GetxController {
   @override
   void onInit() {
-    if(SignInController.notinilizedUser==true){
-    selectedItem.value=SignInController.user.profileOut.stage.stages;
+    if (SignInController.notinilizedUser == true) {
+      selectedItem.value = SignInController.user.profileOut.stage.stages;
     }
     super.onInit();
   }
+
   RxBool getstagesDone = false.obs;
   RxList<String> stageList = <String>[].obs;
   RxString selectedItem = ''.obs;
@@ -24,13 +25,12 @@ class DropdownButtonController extends GetxController {
       Server.baseUrl + Server.getStagesPath,
       options: Server.token,
     );
-    if (Stages.stagesMap.isEmpty){
-    Stages.fromJson(response.data);}
-    else{
+    if (Stages.stagesMap.isEmpty) {
+      Stages.fromJson(response.data);
+    } else {
       for (var a in Stages.stagesMap) {
-            a.keys.forEach((v) =>
-                stageList.add(v));
-          }
+        a.keys.forEach((v) => stageList.add(v));
+      }
     }
 
     // print(stageList);

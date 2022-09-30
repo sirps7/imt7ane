@@ -74,7 +74,9 @@ class QuizQuestons extends StatelessWidget {
                               '${timerController.hours}:${timerController.minutes}:${timerController.seconds}',
                           mysize: 18,
                           family: MyFont.poppinsMedium,
-                          mycolor: timerController.lessMin.value?Colors.redAccent:Colors.black,
+                          mycolor: timerController.lessMin.value
+                              ? Colors.redAccent
+                              : Colors.black,
                         );
                       })
                     ],
@@ -102,7 +104,7 @@ class QuizQuestons extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top:20.0),
+                        padding: const EdgeInsets.only(top: 20.0),
                         child: MyText(
                           myText: 'score'.tr,
                           mysize: 20,
@@ -112,17 +114,31 @@ class QuizQuestons extends StatelessWidget {
                       ),
                       GetX<QuizController>(builder: (quizController) {
                         return Container(
-                      height: 60,
-                      child: Stack(
-                        children: [
-                          MyText(
-                            myText: '${quizController.score.value}',
-                            mysize: 18,
-                            family: MyFont.poppinsMedium,
+                          height: 60,
+                          child: Stack(
+                            children: [
+                              MyText(
+                                myText: '${quizController.score.value}',
+                                mysize: 18,
+                                family: MyFont.poppinsMedium,
+                              ),
+                              Visibility(
+                                  visible:
+                                      quizController.Correctvisiblity.value,
+                                  child: Padding(
+                                      padding: EdgeInsets.only(
+                                          top: quizController
+                                              .fadedCorrectPoints.value),
+                                      child: MyText(
+                                        myText: '+5',
+                                        mysize: 18,
+                                        family: MyFont.poppinsMedium,
+                                        mycolor: Colors.black.withOpacity(
+                                            quizController
+                                                .fadedCorrectColorOpt.value),
+                                      )))
+                            ],
                           ),
-                          Visibility(visible: quizController.Correctvisiblity.value,child: Padding( padding: EdgeInsets.only(top: quizController.fadedCorrectPoints.value),child: MyText(myText: '+5', mysize: 18,family:MyFont.poppinsMedium,mycolor: Colors.black.withOpacity(quizController.fadedCorrectColorOpt.value),)))
-                        ],
-                      ),
                         );
                       })
                     ],
@@ -314,24 +330,25 @@ class QuizQuestons extends StatelessWidget {
                               player.play('sounds/Correct.mp3');
                               quizController.con_color.value =
                                   Colors.greenAccent;
-                              int i =0;
-                          quizController.Correctvisiblity.value=true;
-                          while (i <500){
-                            await Future.delayed(
-                                const Duration(milliseconds: 25));
-                            quizController.fadedCorrectPoints.value-=2;
-                            quizController.fadedCorrectColorOpt.value-=0.05;
-                            i+=25;
-                          }
-                          quizController.fadedCorrectColorOpt.value=1.0;
-                          quizController.Correctvisiblity.value=false;
-                          quizController.fadedCorrectPoints.value=40;
+                              int i = 0;
+                              quizController.Correctvisiblity.value = true;
+                              while (i < 500) {
+                                await Future.delayed(
+                                    const Duration(milliseconds: 25));
+                                quizController.fadedCorrectPoints.value -= 2;
+                                quizController.fadedCorrectColorOpt.value -=
+                                    0.05;
+                                i += 25;
+                              }
+                              quizController.fadedCorrectColorOpt.value = 1.0;
+                              quizController.Correctvisiblity.value = false;
+                              quizController.fadedCorrectPoints.value = 40;
                               quizController.con_color.value =
                                   Colors.grey.shade300;
                               quizController.score += 5;
                               quizController.correctAnswer.value++;
                             } else {
-                              player.play('sounds/Error.mp3',volume: 1.5);
+                              player.play('sounds/Error.mp3', volume: 1.5);
                               quizController.con_color.value = Colors.redAccent;
 
                               quizController.playShake.value = true;
@@ -365,7 +382,6 @@ class QuizQuestons extends StatelessWidget {
                           }
                           //! submit
                           if (counter.value == quizController.noOfQuestions) {
-                            quizController.saveLastQuizScore();
                             quizController.last_incorrectAnswer.value =
                                 quizController.inCorrectAnswer.value;
                             quizController.last_correctAnswer.value =
@@ -407,6 +423,7 @@ class QuizQuestons extends StatelessWidget {
                             quizController.getQuizesHistoryWithAvgAndTotal();
                             quizController.correctAnswer.value = 0;
                             quizController.inCorrectAnswer.value = 0;
+                            quizController.saveLastQuizScore();
                           }
                         },
                         child: PurpleContainer(

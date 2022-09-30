@@ -1,4 +1,3 @@
-
 import 'package:amti7ane_unicoding/views/auth/mainScreen/login_Screen.dart';
 import 'package:amti7ane_unicoding/views/opening/introduction_screen.dart';
 
@@ -12,12 +11,14 @@ import '../../Services/sign_in_remote.dart';
 import '../../controllers/init_dependency.dart';
 import '../../controllers/jsonControllers/userController.dart';
 import '../main/main_screen.dart';
+
 class LogoMain2 extends StatefulWidget {
   const LogoMain2({Key? key, required this.showw}) : super(key: key);
   final bool showw;
   @override
   State<LogoMain2> createState() => _LogoMain2State();
 }
+
 final userC = Get.find<SignInController>();
 
 class _LogoMain2State extends State<LogoMain2> {
@@ -25,29 +26,27 @@ class _LogoMain2State extends State<LogoMain2> {
   void initState() {
     Future.delayed(Duration(seconds: 5), () async {
       Box auth = Hive.box<dynamic>('auth');
-      var e=auth.get('email');
-      var p=auth.get('password');
-      Map json={
-        "email": e,
-        "password": p
-      };
-      try{
-      await userC.sign_in_user(json);}
-      catch(e){
+      var e = auth.get('email');
+      var p = auth.get('password');
+      Map json = {"email": e, "password": p};
+      try {
+        await userC.sign_in_user(json);
+      } catch (e) {
       }
       if (SignInRemote.sc == 200) {
-        Get.offAll(const MainScreen(),binding: InitDep());
+        Get.offAll(const MainScreen(), binding: InitDep());
       }
       // else if (SignInRemote.sc==404){
       //
       // }
-      else{
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-              widget.showw ? IntroScreen() :  LoginScreen()));
-    }});
+      else {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    widget.showw ? IntroScreen() : LoginScreen()));
+      }
+    });
   }
 
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart';
 import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
 import 'package:amti7ane_unicoding/controllers/quiz_controller.dart';
+import 'package:amti7ane_unicoding/controllers/setting_controller.dart';
 import 'package:amti7ane_unicoding/controllers/subjects_controllers.dart';
 import 'package:amti7ane_unicoding/controllers/timerController.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
@@ -27,6 +28,7 @@ class MainController extends GetxController {
   RxBool showSolutions = false.obs;
 
   BottomNavigationController navController = Get.find();
+  SettingController settingController = Get.find();
   SubjectsControllers subjectsControllers = Get.find();
   QuizController quizController = Get.find();
   TimerController timerController = Get.find();
@@ -91,8 +93,8 @@ class MainController extends GetxController {
   Widget? whichLeading() {
     if (navController.index.value == 0) {
       if (insub.value == true &&
-          navController.buttomNavIcons[navController.index.value] ==
-              'home'.tr) {
+          navController.titleLanguage()[navController.index.value] ==
+              navController.titleCondtionText('home')) {
         return IconButton(
           onPressed: () {
             insub.value = false;
@@ -110,8 +112,8 @@ class MainController extends GetxController {
     }
     if (navController.index.value == 1) {
       if ((inQuiz.value || showSolutions.value) &&
-          navController.buttomNavIcons[navController.index.value] ==
-              'quiz'.tr) {
+          navController.titleLanguage()[navController.index.value] ==
+              navController.titleCondtionText('quiz')) {
         return IconButton(
           onPressed: () {
             if (inQuiz.value) {
@@ -218,19 +220,20 @@ class MainController extends GetxController {
 
   Widget whichTitle() {
     return Padding(
-      padding: navController.buttomNavIcons[navController.index.value] ==
-              'home'.tr
+      padding: navController.titleLanguage()[navController.index.value] ==
+              navController.titleCondtionText('home')
           ? insub.value
               ? const EdgeInsets.only(right: 56)
               : EdgeInsets.zero
-          : navController.buttomNavIcons[navController.index.value] == 'quiz'.tr
+          : navController.titleLanguage()[navController.index.value] ==
+                  navController.titleCondtionText('quiz')
               ? showSolutions.value || inQuiz.value
                   ? const EdgeInsets.only(right: 56)
                   : EdgeInsets.zero
               : EdgeInsets.zero,
       child: Center(
         child: MyText(
-          myText: navController.buttomNavIcons[navController.index.value],
+          myText: navController.titleLanguage()[navController.index.value],
           mysize: 35,
           family: 'fonts'.tr,
         ),

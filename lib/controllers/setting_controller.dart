@@ -1,5 +1,6 @@
 import 'package:amti7ane_unicoding/controllers/BottomNavigation_controller.dart';
 import 'package:amti7ane_unicoding/controllers/DropdownButtonController.dart';
+import 'package:amti7ane_unicoding/locale/locale_Controller.dart';
 import 'package:amti7ane_unicoding/models/colors.dart';
 import 'package:amti7ane_unicoding/models/mytext.dart';
 import 'package:amti7ane_unicoding/models/networking/profileInfo.dart';
@@ -13,9 +14,11 @@ class SettingController extends GetxController {
   RxBool profilebutton = false.obs;
   RxBool updateProfileDone = true.obs;
   RxBool languagebutton = false.obs;
-  RxString language = 'EN'.obs;
   BottomNavigationController buttomNavController = Get.find();
   DropdownButtonController dropdownButtonController = Get.find();
+  MyLocaleController myLocaleController = Get.find();
+  RxString language = ''.obs;
+
   void toogleprofile() {
     profilebutton.value = !profilebutton.value;
   }
@@ -25,10 +28,10 @@ class SettingController extends GetxController {
   }
 
   void tooglelanguage() {
-    if (language.value == 'EN') {
-      language.value = 'AR';
+    if (language.value == 'en') {
+      language.value = 'ar';
     } else {
-      language.value = 'EN';
+      language.value = 'en';
     }
   }
 
@@ -38,6 +41,7 @@ class SettingController extends GetxController {
     await getProgileInfo();
     buttomNavController.genderSelectedItem.value = ProfileInfo.studentGender!;
     dropdownButtonController.settingSelectedItem.value = ProfileInfo.stageNsme!;
+    language.value = myLocaleController.intiallang.toString();
     super.onInit();
   }
 

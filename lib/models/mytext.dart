@@ -1,6 +1,7 @@
 import 'package:amti7ane_unicoding/models/myFonts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 class MyText extends StatelessWidget {
   const MyText({
     super.key,
