@@ -21,6 +21,7 @@ class SignInController extends GetxController {
         notinilizedUser=true;
         auth.put('token', user.token.access);
         Server.userToken = user.token.access;
+        print(Server.userToken);
         auth.put('stage', user.profileOut.stage.stages);
         dropdownButtonController.selectedItem.value =
             user.profileOut.stage.stages;

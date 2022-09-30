@@ -156,5 +156,7 @@ class QuizController extends GetxController {
     History.fromJson(historyResponse.data);
     total.value = avgTotalResponse.data['total'];
     avg.value = avgTotalResponse.data['avg'];
+    print(total.value);
+    print(Server.userToken);
   }
 }

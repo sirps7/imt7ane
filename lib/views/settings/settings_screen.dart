@@ -337,8 +337,7 @@ class SettingsScreen extends StatelessWidget {
                     RemoteServices.ed.value = '';
                     from.emailInController.clear();
                     from.passwordInController.clear();
-                    auth.delete('email');
-                    auth.delete('password');
+                    Hive.box('auth').clear();
                     Hive.box('lastQuizScore').clear();
                     Hive.box('lastQuestions').clear();
                     signoutC.deleteDependencies();
