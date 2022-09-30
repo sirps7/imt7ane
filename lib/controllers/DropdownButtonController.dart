@@ -12,7 +12,6 @@ class DropdownButtonController extends GetxController {
   void onInit() {
     print(SignInController.notinilizedUser);
     if(SignInController.notinilizedUser==true){
-      Server.userToken=SignInController.user.token.access;
     selectedItem.value=SignInController.user.profileOut.stage.stages;
     print(selectedItem.value);}
     super.onInit();

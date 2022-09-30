@@ -403,7 +403,7 @@ class QuizQuestons extends StatelessWidget {
                             QuizSolutions.subjectName = subName;
                             QuizScore.lecture = lecture;
                             QuizScore.subName = subName;
-                            History.historyList = [];
+                            StudentHistory.historyList = [];
                             quizController.getQuizesHistoryWithAvgAndTotal();
                             quizController.correctAnswer.value = 0;
                             quizController.inCorrectAnswer.value = 0;

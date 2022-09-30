@@ -1,7 +1,7 @@
 import 'package:amti7ane_unicoding/models/quiz_history.dart';
 import 'package:intl/intl.dart';
 
-class History {
+class StudentHistory {
   static List<QuizHistory> historyList = [];
 
   static void fromJson(List json) {

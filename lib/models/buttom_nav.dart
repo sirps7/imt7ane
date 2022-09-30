@@ -84,7 +84,7 @@ class ButtomNav extends StatelessWidget {
                     QuizSolutions.subjectName = QuizQuestons.subName;
                     QuizScore.lecture = QuizQuestons.lecture;
                     QuizScore.subName = QuizQuestons.subName;
-                    History.historyList = [];
+                    StudentHistory.historyList = [];
                     quizController.getQuizesHistoryWithAvgAndTotal();
                     quizController.correctAnswer.value = 0;
                     quizController.inCorrectAnswer.value = 0;

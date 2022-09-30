@@ -131,14 +131,14 @@ class ProfileScreen extends StatelessWidget {
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: History.historyList.length,
+                  itemCount: StudentHistory.historyList.length,
                   separatorBuilder: (BuildContext context, int index) {
                     return const SizedBox(
                       height: 30,
                     );
                   },
                   itemBuilder: (BuildContext context, int index) {
-                    return History.historyList[index];
+                    return StudentHistory.historyList[index];
                   },
                 ),
               ],

@@ -153,10 +153,10 @@ class QuizController extends GetxController {
     );
     Response avgTotalResponse = await Server.dio
         .get(Server.baseUrl + Server.getAvgAndTotalPath, options: Server.token);
-    History.fromJson(historyResponse.data);
+    StudentHistory.fromJson(historyResponse.data);
     total.value = avgTotalResponse.data['total'];
     avg.value = avgTotalResponse.data['avg'];
     print(total.value);
-    print(Server.userToken);
+    print(Server.token.headers);
   }
 }

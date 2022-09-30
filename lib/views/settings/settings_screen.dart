@@ -18,8 +18,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:amti7ane_unicoding/controllers/sign_out_controller.dart';
 import 'package:hive/hive.dart';
+import '../../models/networking/quiz_history.dart';
 import '../utlites/dialogWarning.dart';
-
+import 'package:amti7ane_unicoding/models/quiz_history.dart';
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
   final SettingController settingController = Get.find();
@@ -334,6 +335,7 @@ class SettingsScreen extends StatelessWidget {
                 //! settings third button
                 GestureDetector(
                   onTap: () {
+                    StudentHistory.historyList=[];
                     RemoteServices.ed.value = '';
                     from.emailInController.clear();
                     from.passwordInController.clear();
