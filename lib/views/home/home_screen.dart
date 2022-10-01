@@ -113,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                                           subject: e.name,
                                           subNo: e.id,
                                           firstText: e.name,
-                                          secondText: e.quizCount.toString(),
+                                          secondText: (e.quizCount-1).toString(),
                                           subjectIcon: AssetImage(
                                             subController.subImage
                                                     .containsKey(e.name)
