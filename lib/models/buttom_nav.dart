@@ -131,7 +131,7 @@ class ButtomNav extends StatelessWidget {
                 image: const AssetImage(
                     'assets/images/buttom_icons/home_icon.png'),
                 color: mycontroller.titleLanguage()[mycontroller.index.value] ==
-                        mycontroller.titleCondtionText('home')
+                        mycontroller.titleCondtionText('Home')
                     ? MyColor.mainColor
                     : Colors.grey,
                 fit: BoxFit.cover,
@@ -143,7 +143,7 @@ class ButtomNav extends StatelessWidget {
               image:
                   const AssetImage('assets/images/buttom_icons/quiz_icon.png'),
               color: mycontroller.titleLanguage()[mycontroller.index.value] ==
-                      mycontroller.titleCondtionText('quiz')
+                      mycontroller.titleCondtionText('Quiz')
                   ? MyColor.mainColor
                   : Colors.grey,
               fit: BoxFit.cover,
@@ -156,7 +156,7 @@ class ButtomNav extends StatelessWidget {
               image: const AssetImage(
                   'assets/images/buttom_icons/profile_icon.png'),
               color: mycontroller.titleLanguage()[mycontroller.index.value] ==
-                      mycontroller.titleCondtionText('profile')
+                      mycontroller.titleCondtionText('Profile')
                   ? MyColor.mainColor
                   : Colors.grey,
               height: mycontroller.max,
@@ -169,7 +169,7 @@ class ButtomNav extends StatelessWidget {
               image: const AssetImage(
                   'assets/images/buttom_icons/sittings_icon.png'),
               color: mycontroller.titleLanguage()[mycontroller.index.value] ==
-                      mycontroller.titleCondtionText('settings')
+                      mycontroller.titleCondtionText('Settings')
                   ? MyColor.mainColor
                   : Colors.grey,
               fit: BoxFit.cover,

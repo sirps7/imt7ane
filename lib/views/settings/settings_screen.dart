@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:amti7ane_unicoding/controllers/sign_out_controller.dart';
 import 'package:hive/hive.dart';
+import '../../models/networking/deffult_subjects.dart';
 import '../../models/networking/quiz_history.dart';
 import '../utlites/dialogWarning.dart';
 import 'package:amti7ane_unicoding/models/quiz_history.dart';
@@ -32,6 +33,8 @@ class SettingsScreen extends StatelessWidget {
   final TextEditingController mycontroller = TextEditingController();
   final from = Get.find<MyControllerAuth>();
   final MyLocaleController controllerLang = Get.find();
+  static DropdownButtonController dropdownButtonController = Get.find();
+
   MyLocaleController c = Get.find();
 
   @override
@@ -336,7 +339,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 //! settings third button
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     StudentHistory.historyList = [];
                     RemoteServices.ed.value = '';
                     from.emailInController.clear();
@@ -344,10 +347,18 @@ class SettingsScreen extends StatelessWidget {
                     Hive.box('auth').clear();
                     Hive.box('lastQuizScore').clear();
                     Hive.box('lastQuestions').clear();
-                    signoutC.deleteDependencies();
+                    subjectsControllers.getSubjectsDone.value = false;
+                    dropController.getstagesDone.value = false;
+                    Subjects.deffultsubjects = [];
+                    dropdownButtonController.stageList.value=[];
+                    dropController.stageList.value = [];
                     c.isiniilized = false;
                     Get.offAll(LoginScreen());
+                    await Future.delayed(
+                        const Duration(milliseconds: 100));
                     NetQuiz.quizquestions = [];
+                    signoutC.deleteDependencies();
+
                   },
                   child: PurpleContainer(
                     H: 40,

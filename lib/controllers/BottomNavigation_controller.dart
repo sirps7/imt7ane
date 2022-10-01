@@ -11,8 +11,18 @@ class BottomNavigationController extends GetxController {
     SettingController settingController = Get.find();
     if (settingController.language.value == 'en') {
       return englishTitleList;
-    } else {
+    } else if(settingController.language.value == 'ar') {
       return arabicTitleList;
+    }
+    else{
+      if((Get.deviceLocale!.toString())=='en_US'){
+        settingController.language.value='en';
+      return englishTitleList;}
+      else{
+        settingController.language.value='ar';
+
+        return arabicTitleList;
+      }
     }
   }
 
@@ -21,11 +31,11 @@ class BottomNavigationController extends GetxController {
     if (settingController.language.value == 'en') {
       return a;
     } else {
-      if (a == 'home') {
+      if (a == 'Home') {
         return 'الرئيسية';
-      } else if (a == 'quiz') {
+      } else if (a == 'Quiz') {
         return 'اختبار';
-      } else if (a == 'profile') {
+      } else if (a == 'Profile') {
         return 'الملف الشخصي';
       } else {
         return 'الإعدادات';
@@ -34,10 +44,10 @@ class BottomNavigationController extends GetxController {
   }
 
   List<String> englishTitleList = [
-    'home',
-    'quiz',
-    'profile',
-    'settings',
+    'Home',
+    'Quiz',
+    'Profile',
+    'Settings',
   ];
   List<String> arabicTitleList = [
     'الرئيسية',

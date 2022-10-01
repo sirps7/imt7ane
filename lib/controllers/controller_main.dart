@@ -94,7 +94,7 @@ class MainController extends GetxController {
     if (navController.index.value == 0) {
       if (insub.value == true &&
           navController.titleLanguage()[navController.index.value] ==
-              navController.titleCondtionText('home')) {
+              navController.titleCondtionText('Home')) {
         return IconButton(
           onPressed: () {
             insub.value = false;
@@ -113,7 +113,7 @@ class MainController extends GetxController {
     if (navController.index.value == 1) {
       if ((inQuiz.value || showSolutions.value) &&
           navController.titleLanguage()[navController.index.value] ==
-              navController.titleCondtionText('quiz')) {
+              navController.titleCondtionText('Quiz')) {
         return IconButton(
           onPressed: () {
             if (inQuiz.value) {

@@ -25,15 +25,16 @@ class DropdownButtonController extends GetxController {
       Server.baseUrl + Server.getStagesPath,
       options: Server.token,
     );
-    if (Stages.stagesMap.isEmpty) {
-      Stages.fromJson(response.data);
-    } else {
-      for (var a in Stages.stagesMap) {
-        a.keys.forEach((v) => stageList.add(v));
-      }
-    }
+    bool emptystage=Stages.stagesMap.isEmpty;
+    // if(!emptystage){
+    //   print(emptystage);
+    //   for (var a in Stages.stagesMap) {
+    //     print('in else');
+    //     a.keys.forEach((v) => stageList.add(v));
+    //   } }
 
-    // print(stageList);
+    if(getstagesDone.value==false)
+      Stages.fromJson(response.data);
     getstagesDone.value = true;
   }
 }

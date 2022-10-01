@@ -5,9 +5,14 @@ import 'package:get/get.dart';
 
 class MyLocaleController extends GetxController {
   bool isiniilized = false;
-  Locale intiallang = sharepref.getString('lang') == null
-      ? Get.deviceLocale!
-      : Locale(sharepref.getString('lang')!);
+  late Locale intiallang;
+  @override
+  void onInit() {
+     intiallang = sharepref.getString('lang') == null
+        ? Get.deviceLocale!
+        : Locale(sharepref.getString('lang')!);
+    super.onInit();
+  }
 
 //en_US   device
   void changelang(String codelang) {

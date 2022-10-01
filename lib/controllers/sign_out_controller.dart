@@ -17,8 +17,9 @@ class signoutC{
     Get.delete<QuizController>();
     Get.delete<ChoiceController>();
     Get.delete<TimerController>();
-    Get.delete<SettingController>();
-    Get.delete<DropdownButtonController>();
+    // Get.delete<DropdownButtonController>();
     Get.delete<ProfileController>();
+    Get.delete<SettingController>();
+
   }
 }
